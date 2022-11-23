@@ -1,0 +1,2749 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Ecommerce Api",
+        "version": "0.1"
+    },
+    "paths": {
+        "/api/admin/list_merchants": {
+            "get": {
+                "tags": [
+                    "SystemAdmin"
+                ],
+                "summary": "system merchants or sshops",
+                "description": "Returns system merchants",
+                "operationId": "listMerchants",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "path",
+                        "description": "data limit for pagination",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "path",
+                        "description": "page number ",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "approved",
+                        "in": "path",
+                        "description": "filter merchants by approved or not takes true or false",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "true"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/admin/approve/merchant/{id}": {
+            "put": {
+                "tags": [
+                    "SystemAdmin"
+                ],
+                "summary": "approve merchants or shops",
+                "description": "Returns success response ",
+                "operationId": "approveMerchant",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "path",
+                        "description": "data limit for pagination",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/admin/merchant": {
+            "post": {
+                "tags": [
+                    "SystemAdmin"
+                ],
+                "summary": "create new merchant",
+                "description": "Returns merchant data",
+                "operationId": "createMerchant",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateMerchantByAdmin"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/admin": {
+            "post": {
+                "tags": [
+                    "SystemAdmin"
+                ],
+                "summary": "register new admin",
+                "description": "Returns admin data and token",
+                "operationId": "registerAdmin",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminRegister"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        },
+        "/api/admin/login": {
+            "post": {
+                "tags": [
+                    "SystemAdmin"
+                ],
+                "summary": "admin login",
+                "description": "Returns admin data and token",
+                "operationId": "adminLogin",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminLogin"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        },
+        "/api/admin/category": {
+            "get": {
+                "tags": [
+                    "SystemAdmin"
+                ],
+                "summary": "system categories",
+                "description": "Returns system categories",
+                "operationId": "CategoryIndex",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "SystemAdmin"
+                ],
+                "summary": "create new category",
+                "description": "Returns category data",
+                "operationId": "createCategory",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateCategory"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/admin/category/{id}": {
+            "get": {
+                "tags": [
+                    "SystemAdmin"
+                ],
+                "summary": "get category",
+                "description": "Returns single category  data",
+                "operationId": "getCategory",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "category id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "SystemAdmin"
+                ],
+                "summary": "update category",
+                "description": "Returns success ",
+                "operationId": "UpdateCategory",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "category id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateCategory"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "SystemAdmin"
+                ],
+                "summary": "Delete category",
+                "description": "Deletes a record and returns successfully",
+                "operationId": "deleteCategory",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "category id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/category": {
+            "get": {
+                "tags": [
+                    "category"
+                ],
+                "summary": "system categories",
+                "description": "Returns system categories",
+                "operationId": "CategoryIndexHome",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/api/category/{id}": {
+            "get": {
+                "tags": [
+                    "category"
+                ],
+                "summary": "get category",
+                "description": "Returns single category  data",
+                "operationId": "getCategoryIdHome",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "category id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/api/merchant/register": {
+            "post": {
+                "tags": [
+                    "merchants"
+                ],
+                "summary": "register new merchant",
+                "description": "Returns merchant data and token",
+                "operationId": "registerMerchant",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MerchantRegister"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        },
+        "/api/merchant/login": {
+            "post": {
+                "tags": [
+                    "merchants"
+                ],
+                "summary": "merchant user",
+                "description": "Returns user data and token",
+                "operationId": "merchantLogin",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MerchantLogin"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        },
+        "/api/merchant/change_password": {
+            "put": {
+                "tags": [
+                    "merchants"
+                ],
+                "summary": "merchant change password",
+                "description": "change password",
+                "operationId": "MerchantChangePassword",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MerchantChangePassword"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/merchant/profile": {
+            "get": {
+                "tags": [
+                    "merchants"
+                ],
+                "summary": "merchant profile ",
+                "description": "Returns merchant data",
+                "operationId": "myProfile",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "merchants"
+                ],
+                "summary": "Update merchant",
+                "description": "Returns success response ",
+                "operationId": "Update merchant",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MerchantUpdate"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/merchant/category": {
+            "get": {
+                "tags": [
+                    "merchantCategory"
+                ],
+                "summary": "merchant categories",
+                "description": "Returns merchant categories",
+                "operationId": "MerchantCategoryList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "merchantCategory"
+                ],
+                "summary": "create new merchant category",
+                "description": "Returns category data",
+                "operationId": "MerchantCreateCategory",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateMerchantCategory"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/merchant/category/{id}": {
+            "get": {
+                "tags": [
+                    "merchantCategory"
+                ],
+                "summary": "get category",
+                "description": "Returns single category  data",
+                "operationId": "getMerchantCategory",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "category id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "merchantCategory"
+                ],
+                "summary": "update merchant category",
+                "description": "Returns category data",
+                "operationId": "MerchantUpdateCategory",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "category id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateMerchantCategory"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "merchantCategory"
+                ],
+                "summary": "Delete category",
+                "description": "Deletes a record and returns successfully",
+                "operationId": "deleteMerchantCategory",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "category id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/merchant/product": {
+            "get": {
+                "tags": [
+                    "merchantProducts"
+                ],
+                "summary": "merchant products",
+                "description": "Returns merchant products",
+                "operationId": "MerchantProductList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "merchantProducts"
+                ],
+                "summary": "create new merchant product",
+                "description": "Returns product data",
+                "operationId": "MerchantCreateProduct",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateProduct"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/merchant/Product/{id}": {
+            "get": {
+                "tags": [
+                    "merchantProducts"
+                ],
+                "summary": "get Product",
+                "description": "Returns single Product  data",
+                "operationId": "getMerchantProduct",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "product id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/merchant/product/{id}": {
+            "put": {
+                "tags": [
+                    "merchantProducts"
+                ],
+                "summary": "update merchant product",
+                "description": "Returns success response",
+                "operationId": "MerchantUpdateProduct",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "product id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateProduct"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "merchantProducts"
+                ],
+                "summary": "Delete product",
+                "description": "Deletes a record and returns successfully",
+                "operationId": "deleteMerchantProduct",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "product id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/merchant/product_variant": {
+            "post": {
+                "tags": [
+                    "merchantProducts"
+                ],
+                "summary": "create new merchant product variant",
+                "description": "Returns product variant  data",
+                "operationId": "createProductVariant",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ProductVariant"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/merchant/product/{id}/product_variants": {
+            "get": {
+                "tags": [
+                    "merchantProducts"
+                ],
+                "summary": "product variants ",
+                "description": "get product variants  ",
+                "operationId": "getProductVariants",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "product id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/merchant/product_variant_values": {
+            "get": {
+                "tags": [
+                    "merchantProducts"
+                ],
+                "summary": "product variant values ",
+                "description": "get product variants  ",
+                "operationId": "getProductVariantValues",
+                "parameters": [
+                    {
+                        "name": "product_id",
+                        "in": "query",
+                        "description": "product id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "variant_id",
+                        "in": "query",
+                        "description": "variant id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/user/register": {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "register new user",
+                "description": "Returns user data and token",
+                "operationId": "registeruser",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserRegister"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        },
+        "/api/user/login": {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Login user",
+                "description": "Returns user data and token",
+                "operationId": "userLogin",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserLogin"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        },
+        "/api/user/change_password": {
+            "put": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "user change password",
+                "description": "change password",
+                "operationId": "changePassword",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserChangePassword"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/user/edit": {
+            "put": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Update new user",
+                "description": "Returns user data and token",
+                "operationId": "Update user",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserUpdate"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/user/deactivate": {
+            "delete": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Delete User",
+                "description": "Deletes a record and returns successfully",
+                "operationId": "deleteAccount",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/product/{id}": {
+            "get": {
+                "tags": [
+                    "home"
+                ],
+                "summary": "get single product",
+                "description": "Returns single product  data",
+                "operationId": "getProduct",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "product id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/api/shops": {
+            "get": {
+                "tags": [
+                    "home"
+                ],
+                "summary": "get shops",
+                "description": "Returns  shops  data",
+                "operationId": "getShops",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit pagination",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page number ",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/api/category_shops": {
+            "get": {
+                "tags": [
+                    "home"
+                ],
+                "summary": "get shops by category",
+                "description": "Returns shops  data",
+                "operationId": "getShopsByCategories",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit pagination",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page number ",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "category_id",
+                        "in": "query",
+                        "description": "category field ",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/api/shop/{id}/products": {
+            "get": {
+                "tags": [
+                    "home"
+                ],
+                "summary": "get shops products",
+                "description": "Returns products for shop",
+                "operationId": "getShopProducts",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit pagination",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page number ",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "shop id field ",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/api/shop/{id}": {
+            "get": {
+                "tags": [
+                    "home"
+                ],
+                "summary": "get single shop data ",
+                "description": "Returns shop  data",
+                "operationId": "homeGetShopData",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "shop id field ",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/api/user/address": {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "user address store ",
+                "description": "Returns user Address data",
+                "operationId": "CreateUserAddress",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateUserAddress"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/user/address/{id}": {
+            "put": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "user address update ",
+                "description": "Returns user Address data",
+                "operationId": "updateUserAddress",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "address id field ",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateUserAddress"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/user/addresses": {
+            "get": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "user Addresses ",
+                "description": "Returns user address data",
+                "operationId": "UserAddresses",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/user/cart": {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "add product to user cart ",
+                "description": "adds product to user cart with quantity ",
+                "operationId": "addProductToCart",
+                "parameters": [
+                    {
+                        "name": "product_id",
+                        "in": "query",
+                        "description": "inputs product id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "merchant_id",
+                        "in": "query",
+                        "description": "merchant id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "quantity",
+                        "in": "query",
+                        "description": "product quantity to add",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/user/cart/remove_product/{id}": {
+            "delete": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "remove product from user cart ",
+                "description": "removes product from user cart",
+                "operationId": "removeProductFromCart",
+                "parameters": [
+                    {
+                        "name": "product_id",
+                        "in": "query",
+                        "description": "inputs product id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/user/favorite": {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "add product to user favorite ",
+                "description": "adds product to user favorite ",
+                "operationId": "addProductToFavorite",
+                "parameters": [
+                    {
+                        "name": "product_id",
+                        "in": "query",
+                        "description": "inputs product id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "merchant_id",
+                        "in": "query",
+                        "description": "merchant id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/user/favorite/{id}": {
+            "delete": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "remove product from user favorite ",
+                "description": "removes product from user favorite",
+                "operationId": "removeProductFromFavorite",
+                "parameters": [
+                    {
+                        "name": "product_id",
+                        "in": "query",
+                        "description": "inputs product id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "AdminLogin": {
+                "title": " admin sign in request",
+                "description": "Some simple request login admin",
+                "properties": {
+                    "email": {
+                        "title": "email",
+                        "description": "email",
+                        "type": "string",
+                        "format": "string",
+                        "example": "admin@test.com"
+                    },
+                    "password": {
+                        "title": "password",
+                        "description": "select password",
+                        "type": "string",
+                        "format": "string",
+                        "example": 12345678
+                    }
+                },
+                "type": "object"
+            },
+            "AdminRegister": {
+                "title": " admin Register request",
+                "description": "Some simple request Register admin",
+                "properties": {
+                    "name": {
+                        "title": "name",
+                        "description": "admin name text field",
+                        "type": "object",
+                        "format": "string",
+                        "example": {
+                            "en": "name",
+                            "ar": "سياسيا1"
+                        }
+                    },
+                    "email": {
+                        "title": "email",
+                        "description": "email",
+                        "type": "string",
+                        "format": "string",
+                        "example": "admin@test.com"
+                    },
+                    "password": {
+                        "title": "password",
+                        "description": "select password",
+                        "type": "string",
+                        "format": "password",
+                        "example": 12345678
+                    }
+                },
+                "type": "object"
+            },
+            "CreateCategory": {
+                "title": " create category request",
+                "description": "Some simple request create category",
+                "properties": {
+                    "name": {
+                        "title": "name",
+                        "description": "category name  text field",
+                        "type": "object",
+                        "format": "string",
+                        "example": {
+                            "en": "categoryExample",
+                            "ar": "سياسيا1"
+                        }
+                    },
+                    "category_id": {
+                        "description": "category ID , nullable, when its available it means that this is record is subcategory for the inserted id ",
+                        "type": "object",
+                        "format": "integer",
+                        "example": 2
+                    }
+                },
+                "type": "object"
+            },
+            "CreateMerchantByAdmin": {
+                "title": " Merchant create request",
+                "description": "Some simple request create Merchant",
+                "properties": {
+                    "shop_name": {
+                        "title": "shop_name",
+                        "description": "shop name text field",
+                        "type": "object",
+                        "format": "string",
+                        "example": {
+                            "en": "shopname1",
+                            "ar": "سياسيا1"
+                        }
+                    },
+                    "description": {
+                        "title": "description",
+                        "description": "Some text field",
+                        "type": "object",
+                        "format": "string",
+                        "example": {
+                            "en": "qqq",
+                            "ar": "سياسيا"
+                        }
+                    },
+                    "category_id": {
+                        "description": "category ID",
+                        "type": "object",
+                        "format": "array",
+                        "example": [
+                            2,
+                            3
+                        ]
+                    },
+                    "email": {
+                        "title": "email",
+                        "description": "email",
+                        "type": "string",
+                        "format": "string",
+                        "example": "usertest2@test.com"
+                    },
+                    "password": {
+                        "title": "password",
+                        "description": "select password",
+                        "type": "string",
+                        "format": "password",
+                        "example": 12345678
+                    },
+                    "mobile": {
+                        "title": "mobile",
+                        "description": "user mobile",
+                        "type": "string",
+                        "format": "string",
+                        "example": 1011233344
+                    },
+                    "country_id": {
+                        "title": "country_id",
+                        "description": "country id",
+                        "type": "string",
+                        "format": "integer",
+                        "example": "1"
+                    },
+                    "country_code": {
+                        "title": "country_code",
+                        "description": "country code ",
+                        "type": "string",
+                        "format": "string",
+                        "example": "+966"
+                    }
+                },
+                "type": "object"
+            },
+            "CreateMerchantCategory": {
+                "title": " create merchant category request",
+                "description": "Some simple request create merchant category",
+                "properties": {
+                    "name": {
+                        "title": "name",
+                        "description": "category name  text field",
+                        "type": "object",
+                        "format": "string",
+                        "example": {
+                            "en": "categoryExample",
+                            "ar": "سياسيا1"
+                        }
+                    },
+                    "merchant_category_id": {
+                        "description": "category ID , nullable, when its available it means that this is record is subcategory for the inserted id ",
+                        "type": "object",
+                        "format": "integer",
+                        "example": 2
+                    }
+                },
+                "type": "object"
+            },
+            "CreateProduct": {
+                "title": " create merchant product request",
+                "description": "Some simple request create merchant product",
+                "properties": {
+                    "name": {
+                        "title": "name",
+                        "description": "product name text field",
+                        "type": "object",
+                        "format": "string",
+                        "example": {
+                            "en": "productName",
+                            "ar": "سياسيا1"
+                        }
+                    },
+                    "description": {
+                        "title": "description",
+                        "description": "Some text field",
+                        "type": "object",
+                        "format": "string",
+                        "example": {
+                            "en": "description",
+                            "ar": "سياسيا"
+                        }
+                    },
+                    "stock_quantity": {
+                        "title": "stock_quantity",
+                        "description": "stock_quantity",
+                        "type": "string",
+                        "format": "integer",
+                        "example": 10
+                    },
+                    "weight": {
+                        "title": "weight",
+                        "description": "weight",
+                        "type": "string",
+                        "format": "integer",
+                        "example": 10
+                    },
+                    "tags": {
+                        "description": "tags",
+                        "type": "object",
+                        "format": "array",
+                        "example": [
+                            "tag1",
+                            "tag2"
+                        ]
+                    },
+                    "merchant_category_id": {
+                        "description": "category ID",
+                        "type": "object",
+                        "format": "integer",
+                        "example": 2
+                    },
+                    "order": {
+                        "description": "order",
+                        "type": "object",
+                        "format": "integer",
+                        "example": 1
+                    },
+                    "price": {
+                        "description": "price",
+                        "type": "object",
+                        "format": "integer",
+                        "example": 15
+                    }
+                },
+                "type": "object"
+            },
+            "CreateUserAddress": {
+                "title": " user address request",
+                "description": "Some simple request Create user address",
+                "properties": {
+                    "address": {
+                        "title": "address",
+                        "description": "address text field",
+                        "type": "object",
+                        "format": "string",
+                        "example": "address details"
+                    },
+                    "street": {
+                        "title": "street",
+                        "description": "street text field",
+                        "type": "object",
+                        "format": "string",
+                        "example": "street_details"
+                    },
+                    "nearest_landmark": {
+                        "title": "nearest_landmark",
+                        "description": "nearest_landmark field",
+                        "type": "string",
+                        "format": "string",
+                        "example": "nearest_landmark details "
+                    },
+                    "notes": {
+                        "title": "notes",
+                        "description": "notes field",
+                        "type": "string",
+                        "format": "string",
+                        "example": "notes details "
+                    },
+                    "longitude": {
+                        "title": "longitude",
+                        "description": "longitude ",
+                        "type": "string",
+                        "format": "float",
+                        "example": 30.445
+                    },
+                    "latitude": {
+                        "title": "latitude",
+                        "description": "latitude ",
+                        "type": "string",
+                        "format": "float",
+                        "example": 30.145
+                    },
+                    "mobile": {
+                        "title": "mobile",
+                        "description": "mobile",
+                        "type": "string",
+                        "format": "integer",
+                        "example": 1066558412
+                    },
+                    "is_default": {
+                        "title": "is_default",
+                        "description": "is_default",
+                        "type": "string",
+                        "format": "integer",
+                        "example": 1
+                    }
+                },
+                "type": "object"
+            },
+            "MerchantChangePassword": {
+                "title": " merchant change password",
+                "description": "Some simple request change password merchant",
+                "properties": {
+                    "current_password": {
+                        "title": "current_password",
+                        "description": "current_password",
+                        "type": "string",
+                        "format": "string",
+                        "example": "12345678"
+                    },
+                    "password": {
+                        "title": "password",
+                        "description": "enter password",
+                        "type": "string",
+                        "format": "string",
+                        "example": 123456789
+                    },
+                    "password_confirmation": {
+                        "title": "password_confirmation",
+                        "description": "password_confirmation",
+                        "type": "string",
+                        "format": "string",
+                        "example": 123456789
+                    }
+                },
+                "type": "object"
+            },
+            "MerchantLogin": {
+                "title": " merchant sign in request",
+                "description": "Some simple request login merchant",
+                "properties": {
+                    "email": {
+                        "title": "email",
+                        "description": "email",
+                        "type": "string",
+                        "format": "string",
+                        "example": "usertest@test.com"
+                    },
+                    "password": {
+                        "title": "password",
+                        "description": "select password",
+                        "type": "string",
+                        "format": "string",
+                        "example": 12345678
+                    }
+                },
+                "type": "object"
+            },
+            "MerchantRegister": {
+                "title": " Merchant Register request",
+                "description": "Some simple request Register Merchant",
+                "properties": {
+                    "shop_name": {
+                        "title": "shop_name",
+                        "description": "shop name text field",
+                        "type": "object",
+                        "format": "string",
+                        "example": {
+                            "en": "shopname1",
+                            "ar": "سياسيا1"
+                        }
+                    },
+                    "description": {
+                        "title": "description",
+                        "description": "Some text field",
+                        "type": "object",
+                        "format": "string",
+                        "example": {
+                            "en": "qqq",
+                            "ar": "سياسيا"
+                        }
+                    },
+                    "category_id": {
+                        "description": "category ID",
+                        "type": "object",
+                        "format": "array",
+                        "example": [
+                            2,
+                            3
+                        ]
+                    },
+                    "email": {
+                        "title": "email",
+                        "description": "email",
+                        "type": "string",
+                        "format": "string",
+                        "example": "usertest@test.com"
+                    },
+                    "password": {
+                        "title": "password",
+                        "description": "select password",
+                        "type": "string",
+                        "format": "password",
+                        "example": 12345678
+                    },
+                    "mobile": {
+                        "title": "mobile",
+                        "description": "user mobile",
+                        "type": "string",
+                        "format": "string",
+                        "example": 1011223344
+                    },
+                    "country_id": {
+                        "title": "country_id",
+                        "description": "country id",
+                        "type": "string",
+                        "format": "integer",
+                        "example": "1"
+                    },
+                    "country_code": {
+                        "title": "country_code",
+                        "description": "country code ",
+                        "type": "string",
+                        "format": "string",
+                        "example": "+966"
+                    }
+                },
+                "type": "object"
+            },
+            "MerchantUpdate": {
+                "title": " merchant update request",
+                "description": "update merchant profile ",
+                "properties": {
+                    "shop_name": {
+                        "title": "description",
+                        "description": "Some text field",
+                        "type": "object",
+                        "format": "string",
+                        "example": {
+                            "en": "shopname2updated",
+                            "ar": "سياسياتحديث1"
+                        }
+                    },
+                    "description": {
+                        "title": "description",
+                        "description": "Some text field",
+                        "type": "object",
+                        "format": "string",
+                        "example": {
+                            "en": "description updated ",
+                            "ar": "سياسيا"
+                        }
+                    },
+                    "email": {
+                        "title": "email",
+                        "description": "email",
+                        "type": "string",
+                        "format": "string",
+                        "example": "usertest4@test.com"
+                    },
+                    "mobile": {
+                        "title": "mobile",
+                        "description": "merchant mobile",
+                        "type": "string",
+                        "format": "string",
+                        "example": 1011223144
+                    },
+                    "category_id": {
+                        "description": "category ID",
+                        "type": "object",
+                        "format": "array",
+                        "example": [
+                            4,
+                            3
+                        ]
+                    }
+                },
+                "type": "object"
+            },
+            "ProductVariant": {
+                "title": " create merchant product variant request",
+                "description": "Some simple request create merchant product variant ",
+                "type": "object"
+            },
+            "UpdateCategory": {
+                "title": " update category request",
+                "description": "Some simple request update  category",
+                "properties": {
+                    "name": {
+                        "title": "name",
+                        "description": "category name  text field",
+                        "type": "object",
+                        "format": "string",
+                        "example": {
+                            "en": "categoryExampleUpdate",
+                            "ar": "سياسيا1"
+                        }
+                    },
+                    "category_id": {
+                        "description": "category ID , nullable, when its available it means that this is record is subcategory for the inserted id ",
+                        "type": "object",
+                        "format": "integer",
+                        "example": 2
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateMerchantCategory": {
+                "title": " update merchant category request",
+                "description": "Some simple request update merchant category",
+                "properties": {
+                    "name": {
+                        "title": "name",
+                        "description": "category name  text field",
+                        "type": "object",
+                        "format": "string",
+                        "example": {
+                            "en": "categoryExampleUpdate",
+                            "ar": "سياسيا1"
+                        }
+                    },
+                    "merchant_category_id": {
+                        "description": "category ID , nullable, when its available it means that this is record is subcategory for the inserted id ",
+                        "type": "object",
+                        "format": "integer",
+                        "example": 2
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateProduct": {
+                "title": " update merchant product request",
+                "description": "Some simple request update merchant product",
+                "properties": {
+                    "name": {
+                        "title": "name",
+                        "description": "product name text field",
+                        "type": "object",
+                        "format": "string",
+                        "example": {
+                            "en": "productNameUpdated",
+                            "ar": "سياسيا1"
+                        }
+                    },
+                    "description": {
+                        "title": "description",
+                        "description": "Some text field",
+                        "type": "object",
+                        "format": "string",
+                        "example": {
+                            "en": "description",
+                            "ar": "سياسيا"
+                        }
+                    },
+                    "stock_quantity": {
+                        "title": "stock_quantity",
+                        "description": "stock_quantity",
+                        "type": "string",
+                        "format": "integer",
+                        "example": 10
+                    },
+                    "weight": {
+                        "title": "weight",
+                        "description": "weight",
+                        "type": "string",
+                        "format": "integer",
+                        "example": 10
+                    },
+                    "tags": {
+                        "description": "tags",
+                        "type": "object",
+                        "format": "array",
+                        "example": [
+                            "tag1",
+                            "tag2"
+                        ]
+                    },
+                    "merchant_category_id": {
+                        "description": "category ID",
+                        "type": "object",
+                        "format": "integer",
+                        "example": 2
+                    },
+                    "order": {
+                        "description": "order",
+                        "type": "object",
+                        "format": "integer",
+                        "example": 1
+                    },
+                    "price": {
+                        "description": "price",
+                        "type": "object",
+                        "format": "integer",
+                        "example": 15
+                    },
+                    "deleted_tags": {
+                        "description": "deleted tags",
+                        "type": "object",
+                        "format": "array",
+                        "example": [
+                            "tag1",
+                            "tag2"
+                        ]
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateUserAddress": {
+                "title": " user address request",
+                "description": "Some simple request update user address",
+                "properties": {
+                    "address": {
+                        "title": "address",
+                        "description": "address text field",
+                        "type": "object",
+                        "format": "string",
+                        "example": "address details"
+                    },
+                    "street": {
+                        "title": "street",
+                        "description": "street text field",
+                        "type": "object",
+                        "format": "string",
+                        "example": "street_details"
+                    },
+                    "nearest_landmark": {
+                        "title": "nearest_landmark",
+                        "description": "nearest_landmark field",
+                        "type": "string",
+                        "format": "string",
+                        "example": "nearest_landmark details "
+                    },
+                    "notes": {
+                        "title": "notes",
+                        "description": "notes field",
+                        "type": "string",
+                        "format": "string",
+                        "example": "notes details "
+                    },
+                    "longitude": {
+                        "title": "longitude",
+                        "description": "longitude ",
+                        "type": "string",
+                        "format": "float",
+                        "example": 30.445
+                    },
+                    "latitude": {
+                        "title": "latitude",
+                        "description": "latitude ",
+                        "type": "string",
+                        "format": "float",
+                        "example": 30.145
+                    },
+                    "mobile": {
+                        "title": "mobile",
+                        "description": "mobile",
+                        "type": "string",
+                        "format": "integer",
+                        "example": 1066558412
+                    },
+                    "is_default": {
+                        "title": "is_default",
+                        "description": "is_default",
+                        "type": "string",
+                        "format": "integer",
+                        "example": 1
+                    }
+                },
+                "type": "object"
+            },
+            "UserChangePassword": {
+                "title": " user change password request",
+                "description": "Some simple request change password user",
+                "properties": {
+                    "current_password": {
+                        "title": "current_password",
+                        "description": "current_password",
+                        "type": "string",
+                        "format": "string",
+                        "example": "12345678"
+                    },
+                    "password": {
+                        "title": "password",
+                        "description": "enter password",
+                        "type": "string",
+                        "format": "string",
+                        "example": 123456789
+                    },
+                    "password_confirmation": {
+                        "title": "password_confirmation",
+                        "description": "password_confirmation",
+                        "type": "string",
+                        "format": "string",
+                        "example": 123456789
+                    }
+                },
+                "type": "object"
+            },
+            "UserLogin": {
+                "title": " user sign in request",
+                "description": "Some simple request login user",
+                "properties": {
+                    "email": {
+                        "title": "email",
+                        "description": "email",
+                        "type": "string",
+                        "format": "string",
+                        "example": "usertest@test.com"
+                    },
+                    "password": {
+                        "title": "password",
+                        "description": "select password",
+                        "type": "string",
+                        "format": "string",
+                        "example": 12345678
+                    }
+                },
+                "type": "object"
+            },
+            "UserRegister": {
+                "title": " User Register request",
+                "description": "Some simple request Register User",
+                "properties": {
+                    "full_name": {
+                        "title": "full_name",
+                        "description": "Some text field",
+                        "type": "string",
+                        "format": "string",
+                        "example": "user"
+                    },
+                    "email": {
+                        "title": "email",
+                        "description": "email",
+                        "type": "string",
+                        "format": "string",
+                        "example": "usertest@test.com"
+                    },
+                    "password": {
+                        "title": "password",
+                        "description": "select password",
+                        "type": "string",
+                        "format": "password",
+                        "example": 12345678
+                    },
+                    "mobile": {
+                        "title": "mobile",
+                        "description": "user mobile",
+                        "type": "string",
+                        "format": "string",
+                        "example": 1011223344
+                    },
+                    "gender": {
+                        "title": "gender",
+                        "description": "user gender",
+                        "type": "string",
+                        "format": "male or female",
+                        "example": "male"
+                    },
+                    "country_code": {
+                        "title": "country_code",
+                        "description": "country code ",
+                        "type": "string",
+                        "format": "string",
+                        "example": "+966"
+                    }
+                },
+                "type": "object"
+            },
+            "UserUpdate": {
+                "title": " User update request",
+                "description": "Some simple request update User",
+                "properties": {
+                    "full_name": {
+                        "title": "full_name",
+                        "description": "Some text field",
+                        "type": "string",
+                        "format": "string",
+                        "example": "user"
+                    },
+                    "last_name": {
+                        "title": "last_name",
+                        "description": "Some text field",
+                        "type": "string",
+                        "format": "string",
+                        "example": "test"
+                    },
+                    "email": {
+                        "title": "email",
+                        "description": "email",
+                        "type": "string",
+                        "format": "string",
+                        "example": "usertest@test.com"
+                    },
+                    "mobile": {
+                        "title": "mobile",
+                        "description": "user mobile",
+                        "type": "string",
+                        "format": "string",
+                        "example": 1011223344
+                    },
+                    "gender": {
+                        "title": "gender",
+                        "description": "user gender",
+                        "type": "string",
+                        "format": "male or female",
+                        "example": "male"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "Bearer": {
+                "type": "http",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    }
+}
