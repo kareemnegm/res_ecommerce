@@ -68,3 +68,4 @@ Route::group(['prefix' => 'merchant', 'namespace' => 'Merchant'], function () {
 
 Route::get('/category', 'Category\CategoryController@index');
 Route::get('/category/{id}', 'Category\CategoryController@show');
+Route::apiResource('/country', 'CountryController');
