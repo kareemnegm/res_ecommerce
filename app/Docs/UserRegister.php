@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Docs;
+
 /**
  * @OA\Schema(
  *     description="Some simple request Register User",
@@ -86,4 +87,40 @@ class  UserRegister
      * @var string
      */
     public $country_code;
+
+    /**
+     * @OA\Property(
+     *     title="id_number",
+     *     description="id number based on country  ",
+     *     format="integer",
+     *     example=12345678910
+     * )
+     *
+     * @var string
+     */
+    public $id_number;
+
+    /**
+     * @OA\Property(
+     *     title="date_of_birth",
+     *     description="date of birth",
+     *     format="string",
+     *     example="1998-01-27"
+     * )
+     *
+     * @var string
+     */
+    public $date_of_birth;
+
+    /**
+     * @OA\Property(
+     *     title="country_id",
+     *     description="country id ",
+     *     format="integer",
+     *     example=1
+     * )
+     *
+     * @var string
+     */
+    public $country_id;
 }

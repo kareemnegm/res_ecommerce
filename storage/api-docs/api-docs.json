@@ -2750,6 +2750,27 @@
                         "type": "string",
                         "format": "string",
                         "example": "+966"
+                    },
+                    "id_number": {
+                        "title": "id_number",
+                        "description": "id number based on country  ",
+                        "type": "string",
+                        "format": "integer",
+                        "example": 12345678910
+                    },
+                    "date_of_birth": {
+                        "title": "date_of_birth",
+                        "description": "date of birth",
+                        "type": "string",
+                        "format": "string",
+                        "example": "1998-01-27"
+                    },
+                    "country_id": {
+                        "title": "country_id",
+                        "description": "country id ",
+                        "type": "string",
+                        "format": "integer",
+                        "example": 1
                     }
                 },
                 "type": "object"
