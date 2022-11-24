@@ -20,9 +20,9 @@ use App\Repositories\Merchant\AuthRepository as MerchantAuthRepository;
 use App\Repositories\Merchant\MerchantCategoryRepository;
 use App\Repositories\Merchant\ProductRepository as MerchantProductRepository;
 use App\Repositories\User\AuthRepository as UserAuthRepository;
-use App\Repositories\user\ProductRepository as UserProductRepository;
-use App\Repositories\user\ShopRepository;
-use App\Repositories\user\UserRepository;
+use App\Repositories\User\ProductRepository as UserProductRepository;
+use App\Repositories\User\ShopRepository;
+use App\Repositories\User\UserRepository;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
