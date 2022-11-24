@@ -2214,6 +2214,12 @@
                         "format": "integer",
                         "example": 2
                     },
+                    "is_published": {
+                        "description": "is published in 1 , 0",
+                        "type": "object",
+                        "format": "integer",
+                        "example": 1
+                    },
                     "order": {
                         "description": "order",
                         "type": "object",
@@ -2565,6 +2571,12 @@
                         "type": "object",
                         "format": "integer",
                         "example": 2
+                    },
+                    "is_published": {
+                        "description": "is published in 1 , 0",
+                        "type": "object",
+                        "format": "integer",
+                        "example": 1
                     },
                     "order": {
                         "description": "order",
