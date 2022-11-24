@@ -59,4 +59,10 @@ class UserRepository implements UserInterface
         $favorite = Favorite::where('user_id', $data['user_id'])->where('product_id', $data['product_id'])->firstOrFail();
         $favorite->delete();
     }
+
+
+    public function myCart($userId)
+    {
+        return UserCart::where('user_id', $userId)->first();
+    }
 }

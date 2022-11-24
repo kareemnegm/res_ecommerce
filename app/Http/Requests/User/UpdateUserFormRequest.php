@@ -3,6 +3,8 @@
 namespace App\Http\Requests\User;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Rules\UserIdNumberValidatorRule;
+use Illuminate\Http\Request;
 
 class UpdateUserFormRequest extends BaseFormRequest
 {
@@ -21,14 +23,14 @@ class UpdateUserFormRequest extends BaseFormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(Request $request)
     {
         return [
-            'first_name' => 'nullable|unique:users,first_name,'.auth('user')->user()->id,
-            'last_name' => 'nullable|unique:users,last_name,'.auth('user')->user()->id,
+            'full_name' => 'required|string|unique:users,full_name,'.auth('user')->user()->id,
             'email' => 'nullable|email|unique:users,email,'.auth('user')->user()->id,
             'gender' => 'nullable|in:male,female',
             'mobile' => 'nullable',
+            'date_of_birth' =>'required|date_format:Y-m-d|before:today',
         ];
     }
 }

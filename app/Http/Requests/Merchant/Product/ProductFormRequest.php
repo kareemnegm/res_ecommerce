@@ -41,6 +41,7 @@ class ProductFormRequest extends BaseFormRequest
             'product_images.*'=>'image|mimes:jpeg,png,jpg,gif,svg|max:20000',
             'weight' => 'nullable|numeric',
             'order' => 'nullable|numeric',
+            "is_published"=>'required|in:1,0',
             'merchant_category_id' => 'required|exists:merchant_categories,id,merchant_id,'.$auth,
 
         ];

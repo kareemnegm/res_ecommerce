@@ -9,6 +9,8 @@ use App\Http\Requests\User\RemoveFavoriteProductFormRequest;
 use App\Http\Requests\User\RemoveProductCartFormRequest;
 use App\Http\Requests\User\UserAddressFormRequest;
 use App\Http\Requests\User\UserAddressUpdateFormRequest;
+use App\Http\Resources\User\CartProductResource;
+use App\Http\Resources\User\CartResource;
 use App\Http\Resources\User\UserAddressResource;
 use App\Interfaces\User\UserInterface;
 use Illuminate\Http\Request;

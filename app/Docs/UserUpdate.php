@@ -23,17 +23,6 @@ class  UserUpdate
      */
     public $full_name;
 
-    /**
-     * @OA\Property(
-     *     title="last_name",
-     *     description="Some text field",
-     *     format="string",
-     *     example="test"
-     * )
-     *
-     * @var string
-     */
-    public $last_name;
 
     /**
      * @OA\Property(
@@ -76,6 +65,20 @@ class  UserUpdate
      * @var string
      */
     public $gender;
+
+
+
+    /**
+     * @OA\Property(
+     *     title="date_of_birth",
+     *     description="date of birth",
+     *     format="string",
+     *     example="1998-01-27"
+     * )
+     *
+     * @var string
+     */
+    public $date_of_birth;
 
 
 }

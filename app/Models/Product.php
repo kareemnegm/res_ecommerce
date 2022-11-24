@@ -51,6 +51,7 @@ class Product extends Model implements HasMedia
         return $this->hasMany(ProductCombination::class);
     }
 
+  
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumb')
@@ -67,5 +68,4 @@ class Product extends Model implements HasMedia
     {
         return $query->where('is_published', 1);
     }
-
 }

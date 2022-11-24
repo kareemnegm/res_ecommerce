@@ -2783,13 +2783,6 @@
                         "format": "string",
                         "example": "user"
                     },
-                    "last_name": {
-                        "title": "last_name",
-                        "description": "Some text field",
-                        "type": "string",
-                        "format": "string",
-                        "example": "test"
-                    },
                     "email": {
                         "title": "email",
                         "description": "email",
@@ -2810,6 +2803,13 @@
                         "type": "string",
                         "format": "male or female",
                         "example": "male"
+                    },
+                    "date_of_birth": {
+                        "title": "date_of_birth",
+                        "description": "date of birth",
+                        "type": "string",
+                        "format": "string",
+                        "example": "1998-01-27"
                     }
                 },
                 "type": "object"
