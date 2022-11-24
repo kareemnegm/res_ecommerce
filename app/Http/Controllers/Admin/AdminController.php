@@ -94,8 +94,8 @@ class AdminController extends Controller
      *      security={{"Bearer": {}}},
      *     @OA\MediaType(mediaType="application/json"),
      *  @OA\Parameter(
-     *          name="limit",
-     *          description="data limit for pagination",
+     *          name="id",
+     *          description="merchant id",
      *          required=true,
      *          in="path",
      *          @OA\Schema(

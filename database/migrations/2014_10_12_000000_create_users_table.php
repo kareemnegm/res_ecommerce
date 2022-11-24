@@ -22,7 +22,7 @@ return new class extends Migration
             $table->date('date_of_birth');
             $table->integer('country_code')->default('+966');
             $table->integer('mobile')->unique();
-            $table->string('id_number')->unique();
+            $table->bigInteger('id_number')->unique();
             $table->string('password');
             $table->unsignedBigInteger('country_id');
             $table->foreign('country_id')->references('id')->on('countries');

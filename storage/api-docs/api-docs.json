@@ -74,9 +74,9 @@
                 "operationId": "approveMerchant",
                 "parameters": [
                     {
-                        "name": "limit",
+                        "name": "id",
                         "in": "path",
-                        "description": "data limit for pagination",
+                        "description": "merchant id",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -146,7 +146,7 @@
                 ]
             }
         },
-        "/api/admin": {
+        "/api/admin/register": {
             "post": {
                 "tags": [
                     "SystemAdmin"
@@ -2025,10 +2025,7 @@
                         "description": "admin name text field",
                         "type": "object",
                         "format": "string",
-                        "example": {
-                            "en": "name",
-                            "ar": "سياسيا1"
-                        }
+                        "example": "admin"
                     },
                     "email": {
                         "title": "email",

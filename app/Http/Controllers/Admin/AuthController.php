@@ -23,7 +23,7 @@ class AuthController extends Controller
     /**
      * @OA\Post(
      *
-     *      path="/api/admin",
+     *      path="/api/admin/register",
      *      operationId="registerAdmin",
      *      tags={"SystemAdmin"},
      *      summary="register new admin",
