@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\user;
+namespace App\Repositories\User;
 
 use App\Interfaces\User\UserInterface;
 use App\Models\Favorite;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\user;
+namespace App\Repositories\User;
 
 use App\Http\Requests\User\CategoryIdRequest;
 use App\Interfaces\User\ShopInterface;
