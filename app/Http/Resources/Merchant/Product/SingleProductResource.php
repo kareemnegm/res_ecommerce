@@ -31,7 +31,8 @@ class SingleProductResource extends JsonResource
             'category' => new MerchantCategoryResource($this->merchantCategory),
             'tags' => TagsResource::collection($this->tags),
             'product_images' => ImageResource::collection($this->getMedia('product_images')) ?? null,
-            'order' => $this->order
+            'order' => $this->order,
+            'variant'=> ProductVariantWithValues::collection($this->variant)
 
         ];
     }

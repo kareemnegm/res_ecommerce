@@ -25,6 +25,8 @@ class ProductRepository implements ProductInterface
         }
     }
 
+
+
     public function index($request)
     {
         return  Product::where('merchant_id', $request)->get();
@@ -62,7 +64,7 @@ class ProductRepository implements ProductInterface
 
     public function show($auth, $id)
     {
-        return Product::where('id', $id)->where('merchant_id', $auth)->firstOrFail();
+        return Product::where('id', $id)->where('merchant_id', $auth)->with('variant.value')->firstOrFail();
     }
 
 
@@ -86,29 +88,29 @@ class ProductRepository implements ProductInterface
         }
     }
 
-    public function productVariantCombination($variantValueData)
-    {
-        $productVariantsValues = VariantValue::whereIn('id', $variantValueData['variant_value'])->pluck('name');
-        $product = Product::where('id', $variantValueData['product_id'])->pluck('name');
-        $skuData = $product->merge($productVariantsValues);
-        $sku = '';
-        //to be moved to a helper function
-        foreach ($skuData as $value) {
-            $sku = $sku . mb_substr($value, 0, 1);
-        }
-        $sku = strtoupper($sku);
-        $productCombinationCount = ProductCombination::count();
-        $sku = $sku . str_pad($productCombinationCount + 1, 4, "0", STR_PAD_LEFT);
-        $combination['combination_string'] = $productVariantsValues->implode('-');
-        $combination['sku'] = $sku;
-        $combination['product_id'] = $variantValueData['product_id'];
-        $combinationExists = ProductCombination::where('combination_string', $combination['combination_string'])->where('product_id', $combination['product_id'])->first();
-        $skuCom = isset($combinationExists) ? $combinationExists->sku : $combination['sku'];
-        $combination['sku'] = $skuCom;
-        $productCombination = ProductCombination::updateOrCreate(['product_id' => $combination['product_id'], 'sku' => $combination['sku']], $combination);
-        $productCombination->productStock()->UpdateOrCreate(['product_combination_id' => $productCombination->id, 'stock' => $variantValueData['stock'], 'price' => $variantValueData['price']], $variantValueData);
-        return $productCombination;
-    }
+    // public function productVariantCombination($variantValueData)
+    // {
+    //     $productVariantsValues = VariantValue::whereIn('id', $variantValueData['variant_value'])->pluck('name');
+    //     $product = Product::where('id', $variantValueData['product_id'])->pluck('name');
+    //     $skuData = $product->merge($productVariantsValues);
+    //     $sku = '';
+    //     //to be moved to a helper function
+    //     foreach ($skuData as $value) {
+    //         $sku = $sku . mb_substr($value, 0, 1);
+    //     }
+    //     $sku = strtoupper($sku);
+    //     $productCombinationCount = ProductCombination::count();
+    //     $sku = $sku . str_pad($productCombinationCount + 1, 4, "0", STR_PAD_LEFT);
+    //     $combination['combination_string'] = $productVariantsValues->implode('-');
+    //     $combination['sku'] = $sku;
+    //     $combination['product_id'] = $variantValueData['product_id'];
+    //     $combinationExists = ProductCombination::where('combination_string', $combination['combination_string'])->where('product_id', $combination['product_id'])->first();
+    //     $skuCom = isset($combinationExists) ? $combinationExists->sku : $combination['sku'];
+    //     $combination['sku'] = $skuCom;
+    //     $productCombination = ProductCombination::updateOrCreate(['product_id' => $combination['product_id'], 'sku' => $combination['sku']], $combination);
+    //     $productCombination->productStock()->UpdateOrCreate(['product_combination_id' => $productCombination->id, 'stock' => $variantValueData['stock'], 'price' => $variantValueData['price']], $variantValueData);
+    //     return $productCombination;
+    // }
 
 
     public function getProductVariants($product_id)
@@ -127,17 +129,17 @@ class ProductRepository implements ProductInterface
 
 
 
-    public function getProductVariantCombinations($product_id, $merchant_id)
-    {
-        $product = Product::where('id', $product_id)->where('merchant_id', $merchant_id)->firstOrFail();
-        return $product->ProductCombination;
-    }
+    // public function getProductVariantCombinations($product_id, $merchant_id)
+    // {
+    //     $product = Product::where('id', $product_id)->where('merchant_id', $merchant_id)->firstOrFail();
+    //     return $product->ProductCombination;
+    // }
 
 
 
-    public function updateProductVariantCombinations($variantCombinationData)
-    {
-        $data = Arr::except($variantCombinationData, ['product_id']);
-        productStock::where('product_combination_id', $variantCombinationData['product_combination_id'])->update($data);
-    }
+    // public function updateProductVariantCombinations($variantCombinationData)
+    // {
+    //     $data = Arr::except($variantCombinationData, ['product_id']);
+    //     productStock::where('product_combination_id', $variantCombinationData['product_combination_id'])->update($data);
+    // }
 }

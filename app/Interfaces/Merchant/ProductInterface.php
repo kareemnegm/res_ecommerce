@@ -17,15 +17,15 @@ interface ProductInterface
      * variants
      *
      */
-    public function CreateProductVariant(array $variantData,$product);
+    public function CreateProductVariant(array $variantData, $product);
 
     public function getProductVariants($product_id);
     public function getProductVariantValues($variant_id);
 
-    public function productVariantCombination($variantValueData);
+    // public function productVariantCombination($variantValueData);
 
-    public function getProductVariantCombinations($product_id,$merchant_id);
+    // public function getProductVariantCombinations($product_id,$merchant_id);
 
-    public function updateProductVariantCombinations($variantCombinationData);
+    // public function updateProductVariantCombinations($variantCombinationData);
 
 }
