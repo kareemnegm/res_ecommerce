@@ -24,6 +24,8 @@ use Illuminate\Support\Facades\Route;
 Route::post('/register', 'AuthController@register')->withoutMiddleware('auth:admin');
 Route::post('/login', 'AuthController@login')->withoutMiddleware('auth:admin');
 Route::apiResource('/category', 'Category\CategoryController');
+Route::apiResource('/payment_method', 'PaymentMethod\PaymentMethodController')->except(['update']);
+Route::put('/payment_method/{id}', 'PaymentMethod\PaymentMethodController@update');
 Route::get('/list_merchants', 'AdminController@listMerchants');
 Route::put('/approve/merchant/{id}', 'AdminController@approveMerchant');
 Route::post('/merchant', 'AdminController@createMerchant');

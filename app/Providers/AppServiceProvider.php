@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Interfaces\Admin\AdminInterface;
 use App\Interfaces\Admin\AuthInterface as AdminAuthInterface;
 use App\Interfaces\Admin\Category\CategoryInterface;
+use App\Interfaces\Admin\PaymentMethod\PaymentMethodInterface;
 use App\Interfaces\Merchant\AuthInterface as MerchantAuthInterface;
 use App\Interfaces\Merchant\MerchantCategoryInterface;
 use App\Interfaces\Merchant\ProductInterface as MerchantProductInterface;
@@ -16,6 +17,7 @@ use App\Interfaces\User\UserInterface;
 use App\Models\Admin;
 use App\Repositories\Admin\AdminRepository;
 use App\Repositories\Admin\AuthRepository as AdminAuthRepository;
+use App\Repositories\Admin\PaymentMethod\PaymentMethodRepository;
 use App\Repositories\Merchant\AuthRepository as MerchantAuthRepository;
 use App\Repositories\Merchant\MerchantCategoryRepository;
 use App\Repositories\Merchant\ProductRepository as MerchantProductRepository;
@@ -44,6 +46,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(UserProductInterface::class, UserProductRepository::class);
         $this->app->bind(AdminAuthInterface::class, AdminAuthRepository::class);
         $this->app->bind(AdminInterface::class, AdminRepository::class);
+        $this->app->bind(PaymentMethodInterface::class, PaymentMethodRepository::class);
     }
 
     /**

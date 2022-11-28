@@ -8,6 +8,7 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -105,7 +106,16 @@ class Handler extends ExceptionHandler
             ], 429);
         }
 
-        if (!\Auth::check()) {
+        // if (!\Auth::check()) {
+        //     dd(\Auth::user());
+        //     return response()->json([
+        //        'code' => 401,
+        //         'status' => 'Failed',
+        //         'message' => 'Unauthenticated.'
+        //     ], 401);
+        // }
+
+        if ($exception instanceof RouteNotFoundException && !\Auth::check()) {
             return response()->json([
                 'code' => 401,
                 'status' => 'Failed',
@@ -113,9 +123,11 @@ class Handler extends ExceptionHandler
             ], 401);
         }
 
+
         $statusCode = 500;
-        $response = ($statusCode == 500) ? ['code'=>500,'status'=>'Failed','message'=>'internal server error','error'=>$exception->getMessage()] : $exception->getMessage();
+        $response = ($statusCode == 500) ? ['code' => 500, 'status' => 'Failed', 'message' => 'internal server error', 'error' => $exception->getMessage()] : $exception->getMessage();
         return response()->json($response, 500);
+
 
         return parent::render($request, $exception);
     }
