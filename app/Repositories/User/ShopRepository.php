@@ -43,8 +43,25 @@ class ShopRepository implements ShopInterface
     }
 
 
-    public function shopCategories($id){
-        $shop=Merchant::where('id',$id)->approved()->firstOrFail();
+    public function shopCategories($id)
+    {
+        $shop = Merchant::where('id', $id)->approved()->firstOrFail();
         return $shop->merchantCategory()->parentOnly()->get();
+    }
+
+
+
+    public function searchProductInShop($search, $id)
+    {
+        $products = Product::active()->where('name', 'like', '%' . $search['search'] . '%')->where('merchant_id', $id);
+
+
+        if (isset($search->sortBy) && isset($search->filter)) {
+            $collection = $products->orderBy($search->filter, $search->sortBy)->get();
+        } else {
+            $collection = $products->orderBy('order', 'ASC')->get();
+        }
+
+        return $collection;
     }
 }

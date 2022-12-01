@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('merchant_id')->index();
             $table->unsignedBigInteger('payment_method_id')->index();
             $table->foreign('merchant_id')->references('id')->on('merchants')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreign('payment_method_id')->references('id')->on('merchants')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('payment_method_id')->references('id')->on('payment_methods')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

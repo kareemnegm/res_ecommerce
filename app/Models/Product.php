@@ -27,7 +27,8 @@ class Product extends Model implements HasMedia
         'merchant_id',
         'is_published'
     ];
-    protected $appends = ['Tags'];
+    protected $appends = ['Tags','cart_product_variant'];
+
 
     public $translatable = ['name', 'description'];
 
@@ -51,7 +52,7 @@ class Product extends Model implements HasMedia
         return $this->hasMany(ProductCombination::class);
     }
 
-  
+
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumb')
@@ -67,5 +68,10 @@ class Product extends Model implements HasMedia
     public function scopeActive($query)
     {
         return $query->where('is_published', 1);
+    }
+
+    public function getCartProductVariantAttribute()
+    {
+        return json_decode($this->pivot->product_variant_details);
     }
 }

@@ -59,4 +59,10 @@ class User extends Authenticatable
         return $this->belongsTo(Country::class);
     }
 
+    public function product()
+    {
+        return $this->belongsToMany(Product::class, 'user_carts')->withPivot('id','quantity','product_variant_details');
+    }
+
+   
 }

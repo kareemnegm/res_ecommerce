@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 
 class PaymentMethodController extends Controller
 {
+
+    
     public function PaymentMethods(Request $request)
     {
         return $this->paginateCollection(PaymentMethodResource::collection(PaymentMethod::active()->get()), $request->limit, 'payment_methods');

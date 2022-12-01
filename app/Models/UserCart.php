@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class UserCart extends Model
 {
@@ -12,8 +13,10 @@ class UserCart extends Model
         'user_id',
         'product_id',
         'merchant_id',
-        'quantity'
+        'quantity',
+        'product_variant_details'
     ];
+    protected $casts = ['product_variant_details' => 'array'];
 
     public function user()
     {
@@ -30,4 +33,7 @@ class UserCart extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+  
+
 }

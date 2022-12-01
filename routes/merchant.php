@@ -31,3 +31,7 @@ Route::get('product/{id}/product_variants','ProductController@getProductVariant'
 Route::put('/change_password', 'AuthController@ChangePassword');
 Route::get('/profile', 'AuthController@myProfile');
 Route::put('/profile', 'AuthController@update');
+
+
+Route::post('/payment_method', 'ShopController@assignPaymentMethod');
+Route::get('/payment_method', 'ShopController@retrievePaymentMethods');

@@ -56,4 +56,6 @@ class ProductController extends Controller
     {
         return $this->dataResponse(['product' => new ProductResource($this->ProductRepository->getProduct($id))], 'success', 200);
     }
+
+
 }

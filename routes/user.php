@@ -25,6 +25,7 @@ Route::get('/addresses', 'UserController@myAddresses');
 
 
 Route::post('/cart', 'UserController@addProductsToCart');
+Route::post('/place_order', 'OrderController@placeOrder');
 Route::get('/cart', 'UserController@myCart');
 Route::delete('/cart/remove_product/{id}', 'UserController@removeProductFromCart');
 Route::post('/favorite', 'UserController@addProductToFavorite');

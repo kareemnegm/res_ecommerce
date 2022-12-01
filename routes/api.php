@@ -45,6 +45,7 @@ Route::group(['namespace' => 'User'], function () {
      * searching
      */
     Route::get('/search/shop', 'ShopController@searchShop');
+    Route::get('/product_search/shop/{id}', 'ShopController@searchProductInShop');
 });
 
 

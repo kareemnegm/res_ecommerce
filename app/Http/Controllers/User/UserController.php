@@ -9,7 +9,6 @@ use App\Http\Requests\User\RemoveFavoriteProductFormRequest;
 use App\Http\Requests\User\RemoveProductCartFormRequest;
 use App\Http\Requests\User\UserAddressFormRequest;
 use App\Http\Requests\User\UserAddressUpdateFormRequest;
-use App\Http\Resources\User\CartProductResource;
 use App\Http\Resources\User\CartResource;
 use App\Http\Resources\User\UserAddressResource;
 use App\Interfaces\User\UserInterface;
@@ -362,5 +361,39 @@ class UserController extends Controller
         $data['user_id'] = $this->auth;
         $this->UserRepository->removeProductFromFavorite($data);
         return $this->successResponse('product removed successful', 200);
+    }
+
+     /**
+     * @OA\Get(
+     *      path="/api/user/cart",
+     *      operationId="UserCart",
+     *      tags={"users"},
+     *      summary="user cart  ",
+     *      security={{"Bearer": {}}},
+     *      description="Returns user cart products",
+     *     @OA\MediaType(mediaType="application/json"),
+
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad Request"
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     * )
+     */
+    public function myCart(Request $request)
+    {
+        $cart = auth('user')->user()->product;
+        return $this->paginateCollection(CartResource::collection($cart), $request->limit, 'cart_products');
     }
 }

@@ -28,7 +28,7 @@ class PaymentMethod extends Model implements HasMedia
 
     public function merchants()
     {
-        return $this->belongsToMany(Merchant::class);
+        return $this->belongsToMany(Merchant::class,'merchant_payment_methods');
     }
 
     public function ScopeActive($query){
