@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\User\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,7 +29,7 @@ Route::middleware('language')->group(function(){
     Route::get('product_variant_values', 'ProductController@getProductVariantValues');
     Route::get('product/{id}/product_variants', 'ProductController@getProductVariant');
 
-    Route::put('/change_password', 'AuthController@ChangePassword');
+    Route::put('/change_password', [AuthController::class,'ChangePassword']);
     Route::get('/profile', 'AuthController@myProfile');
     Route::put('/profile', 'AuthController@update');
 

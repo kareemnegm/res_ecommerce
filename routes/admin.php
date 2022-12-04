@@ -21,13 +21,16 @@ use Illuminate\Support\Facades\Route;
  *
  * merchant
  */
-Route::middleware('language')->group(function(){
+Route::middleware(['language'])->group(function(){
     Route::post('/register', [AuthController::class, 'register'])->withoutMiddleware('auth:api');
     Route::post('/login', [AuthController::class, 'login'])->withoutMiddleware('auth:api');
-    Route::apiResource('/category', 'Category\CategoryController');
-    Route::apiResource('/payment_method', 'PaymentMethod\PaymentMethodController')->except(['update'])->middleware(['can:payment-methods-resource']);
-    Route::put('/payment_method/{id}', 'PaymentMethod\PaymentMethodController@update')->middleware(['can:payment-method-update']);
-    Route::get('/list_merchants', 'AdminController@listMerchants')->middleware(['can:list-merchants']);
-    Route::put('/approve/merchant/{id}', 'AdminController@approveMerchant')->middleware(['can:approve-merchants']);
-    Route::post('/merchant', 'AdminController@createMerchant')->middleware(['can:create-merchant']);
+    Route::group(['middleware' => ['role:admin']], function () {
+        Route::apiResource('/category', 'Category\CategoryController');
+        Route::apiResource('/payment_method', 'PaymentMethod\PaymentMethodController')->except(['update']);
+        Route::put('/payment_method/{id}', 'PaymentMethod\PaymentMethodController@update');
+        Route::get('/list_merchants', 'AdminController@listMerchants');
+        Route::put('/approve/merchant/{id}', 'AdminController@approveMerchant');
+        Route::post('/merchant', 'AdminController@createMerchant');
+});
+   
 });

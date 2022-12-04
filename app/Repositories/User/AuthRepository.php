@@ -89,7 +89,7 @@ class AuthRepository extends BaseRepository implements AuthInterface
 
     public function ChangePassword(Collection $userData): array
     {
-        $user = auth('user')->user();
+        $user = auth()->user();
         if (!Hash::check($userData->get('current_password'), $user->password)) {
             return $this->failed(400, ['error' => __('auth.current_password')], 1060, 'Wrong Password');
         }
