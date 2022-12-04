@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::table('user_carts', function (Blueprint $table) {
             $table->index('user_id');
             $table->dropUnique('user_merchant_unique_id');
-            $table->json('product_variant_details')->nullable();
+            $table->json('product_variant_details')->nullable()->change();
         });
     }
 

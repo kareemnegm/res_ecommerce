@@ -21,7 +21,7 @@ class UserController extends Controller
     public function __construct(UserInterface $UserRepository)
     {
         $this->UserRepository = $UserRepository;
-        $this->auth = auth('user')->user()->id;
+        $this->auth = auth()->user()->id?? null;
     }
     /**
      * @OA\Post(

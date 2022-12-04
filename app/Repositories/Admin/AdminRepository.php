@@ -2,10 +2,14 @@
 
 namespace App\Repositories\Admin;
 
+use App\Http\Resources\User\UserResource;
 use App\Interfaces\Admin\AdminInterface;
 use App\Models\Merchant;
+use App\Models\User;
+use App\Repositories\BaseRepository;
+use Illuminate\Support\Collection;
 
-class AdminRepository implements AdminInterface
+class AdminRepository extends BaseRepository implements AdminInterface
 {
     /**
      * register user
@@ -31,14 +35,19 @@ class AdminRepository implements AdminInterface
         $merchant->update(['approved' => 1]);
     }
 
-    public function createMerchant(array $data)
+    public function createMerchant(Collection $data)
     {
-        $data['password'] = bcrypt($data['password']);
-        $merchant = Merchant::create($data);
-        if (isset($data['shop_logo'])) {
-            $merchant->saveFiles($data['shop_logo'], 'shop_logo');
-        }
-        $merchant->category()->sync($data['category_id']);
-        return $merchant;
+        $user = new User();
+        $user->setUuid()
+             ->setFullName($data->get('full_name'))
+             ->setIdNumber($data->get('id_number'))
+             ->setEmail($data->get('email'))
+             ->setPassword($data->get('password'))
+             ->setCountryCode($data->get('country_code'))
+             ->setPhoneNumber($data->get('mobile'))
+             ->setCountryID($data->get('country_id'))
+             ->save();
+        $user->assignRole('merchant');
+        return $this->success(201, ['message'=> __('auth.user.created'),'user'=> new UserResource($user)]);
     }
 }

@@ -72,9 +72,8 @@ class AuthController extends Controller
      */
     public function register(RegisterFormRequest $request)
     {
-
-        $user = $this->AuthRepository->register($request->validated());
-        return $this->dataResponse(['user' => new UserResource($user['user']), 'token' => $user['token']], 'success', 201);
+        $result = $this->AuthRepository->register($request->collect());
+        return response()->json($result, $result['status_code']);
     }
 
     /**
@@ -121,14 +120,9 @@ class AuthController extends Controller
      */
     public function login(LoginFormRequest $request)
     {
-        $userData = $request->validated();
-        $user = User::where('email', $userData['email'])->first();
-        if (!$user || !Hash::check($userData['password'], $user->password)) {
-
-            return $this->errorResponse('Credentials not match', 401);
-        }
-        $token = $user->createToken('userToken')->plainTextToken;
-        return $this->dataResponse(['user' => new UserResource($user), 'token' => $token], 'success', 200);
+        $result = $this->AuthRepository->login($request->collect());
+        return response()->json($result, $result['status_code']);
+        
     }
 
     /**
@@ -175,14 +169,8 @@ class AuthController extends Controller
      */
     public function ChangePassword(ChangePasswordFormRequest $request)
     {
-        $user = auth('user')->user();
-
-        if (!Hash::check($request->current_password, $user->password)) {
-            return $this->errorResponseWithMessage('Current password does not match!', 400);
-        }
-        $user->password = bcrypt($request->password);
-        $user->save();
-        return $this->successResponse('password changed success', 200);
+        $result = $this->AuthRepository->ChangePassword($request->collect());
+        return response()->json($result, $result['status_code']);
     }
 
 
@@ -226,11 +214,10 @@ class AuthController extends Controller
      * )
      */
     public function update(UpdateUserFormRequest $request)
-    {
-        $userData = $request->validated();
-        $userData['id'] = auth('user')->user()->id;
-        $this->AuthRepository->updateUser($userData);
-        return $this->successResponse('updated success', 200);
+    { 
+        $result = $this->AuthRepository->updateUser($request->collect()->merge(['id' => auth()->user()->id]));
+        
+        return response()->json($result, $result['status_code']);
     }
 
     /**
@@ -270,8 +257,8 @@ class AuthController extends Controller
      */
     public function destroy()
     {
-        $id = auth('user')->user()->id;
-        $this->AuthRepository->softDelete($id);
-        return $this->successResponse('deleted success', 200);
+        $id = auth()->user()->id;
+        $result = $this->AuthRepository->softDelete($id);
+        return response()->json($result, $result['status_code']);
     }
 }

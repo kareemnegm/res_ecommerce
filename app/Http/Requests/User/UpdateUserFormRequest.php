@@ -27,6 +27,9 @@ class UpdateUserFormRequest extends BaseFormRequest
     {
         return [
             'full_name' => 'required|string|unique:users,full_name,'.auth('user')->user()->id,
+            'id_number' => ['required','numeric','unique:users,id_number,'.auth('user')->user()->id, new UserIdNumberValidatorRule($request)],
+            'country_code' => 'nullable',
+            'country_id' => 'required|exists:countries,id',
             'email' => 'nullable|email|unique:users,email,'.auth('user')->user()->id,
             'gender' => 'nullable|in:male,female',
             'mobile' => 'nullable',

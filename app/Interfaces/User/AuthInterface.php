@@ -2,6 +2,8 @@
 
 namespace App\Interfaces\User;
 
+use Illuminate\Support\Collection;
+
 interface AuthInterface
 {
 
@@ -12,9 +14,13 @@ interface AuthInterface
      * @param [type]
      * @return void
      */
-    public function register($userData);
+    public function register(Collection $userData);
 
-    public function updateUser($userData);
+    public function updateUser(Collection $userData);
+    
+    public function login(Collection $userData);
+    
+    public function ChangePassword(Collection $userData);
 
     public function softDelete($id);
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\FilterMerchantFormRequest;
 use App\Http\Requests\Admin\MerchantIdApprovalFormRequest;
 use App\Http\Requests\Admin\MerchantRegisterFormRequest;
+use App\Http\Requests\User\RegisterFormRequest;
 use App\Http\Resources\Admin\MerchantResource;
 use App\Interfaces\Admin\AdminInterface;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class AdminController extends Controller
     public function __construct(AdminInterface $AdminRepository)
     {
         $this->AdminRepository = $AdminRepository;
-        $this->auth = auth('admin')->user()->id;
+        $this->auth = auth()->user()->id?? null;
     }
 
 
@@ -162,11 +163,10 @@ class AdminController extends Controller
      *      )
      * )
      */
-    public function createMerchant(MerchantRegisterFormRequest $request)
+    public function createMerchant(RegisterFormRequest $request)
     {
-        $data = $request->validated();
-        $data['admin_id'] = $this->auth;
-        $merchant = $this->AdminRepository->createMerchant($data);
-        return $this->dataResponse(['merchant' => new MerchantResource($merchant)], 'created successful', 201);
+        $result = $this->AdminRepository->createMerchant($request->collect());
+
+        return response()->json($result, $result['status_code']);
     }
 }
