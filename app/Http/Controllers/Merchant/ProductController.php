@@ -38,7 +38,7 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-     /**
+    /**
      * @OA\Get(
      *      path="/api/merchant/product",
      *      operationId="MerchantProductList",
@@ -87,7 +87,7 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     /**
+    /**
      * @OA\Post(
      *
      *      path="/api/merchant/product",
@@ -127,9 +127,8 @@ class ProductController extends Controller
     public function store(ProductFormRequest $request)
     {
         $productData = $request->validated();
-        $productData['merchant_id'] = auth('merchant')->user()->id;
-        $this->ProductRepository->create($productData);
-        return $this->successResponse('success', 201);
+        $result = $this->ProductRepository->create($productData);
+        return response()->json($result, $result['status_code']);
     }
 
     /**
@@ -138,7 +137,7 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-      /**
+    /**
      * @OA\Get(
      *      path="/api/merchant/Product/{id}",
      *      operationId="getMerchantProduct",
@@ -189,7 +188,7 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-         /**
+    /**
      * @OA\Put(
      *
      *      path="/api/merchant/product/{id}",
@@ -235,12 +234,11 @@ class ProductController extends Controller
      * )
      */
 
-    public function update(UpdateProductFormRequest $request, $id)
+    public function update(UpdateProductFormRequest $request)
     {
         $productData = $request->validated();
-        $productData['merchant_id'] = auth('merchant')->user()->id;
-        $this->ProductRepository->update($productData, $id);
-        return $this->successResponse('product updated successful', 200);
+        $result=$this->ProductRepository->update($productData);
+        return response()->json($result, $result['status_code']);
     }
 
     /**
@@ -291,7 +289,7 @@ class ProductController extends Controller
         return $this->successResponse('product deleted successful', 200);
     }
 
- /**
+    /**
      * @OA\Post(
      *
      *      path="/api/merchant/product_variant",
@@ -385,7 +383,7 @@ class ProductController extends Controller
         return $this->dataResponse(['product_variants' => ProductVariantResource::collection($variants)], 'success', 200);
     }
 
-/**
+    /**
      * @OA\get(
      *
      *      path="/api/merchant/product_variant_values",

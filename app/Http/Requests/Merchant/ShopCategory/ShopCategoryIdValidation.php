@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Merchant;
+namespace App\Http\Requests\Merchant\ShopCategory;
 
 use App\Http\Requests\BaseFormRequest;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 
-class MerchantCategoryFormRequest extends BaseFormRequest
+class ShopCategoryIdValidation extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +25,9 @@ class MerchantCategoryFormRequest extends BaseFormRequest
      */
     public function rules(Request $request)
     {
-        $auth_id = auth('api')->user()->id;
         return [
-            'shop_id' => 'required|exists:shops,id,user_id,' . $auth_id,
-            'name' => 'required|string|unique:shop_categories,name,' . $request->shop_id,
-            'shop_category_id' => 'nullable|exists:shop_categories,id,shop_id,' . $request->shop_id,
+            'shop_id'=>'required|exists:shops,id,user_id,'.auth('api')->user()->id,
+            'shop_category_id'=>'required|exists:shop_categories,id,shop_id,'.$request->shop_id,
         ];
     }
 }

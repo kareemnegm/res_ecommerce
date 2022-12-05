@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Merchant;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Merchant\RegisterShopFormRequest;
+use App\Http\Requests\Merchant\ShopIdRequestValidation;
 use App\Http\Requests\Merchant\UpdateShopFormRequest;
 use App\Http\Requests\PaymentMethod\MerchantPaymentMethodFormRequest;
 use App\Http\Resources\PaymentMethodResource;
@@ -44,15 +45,14 @@ class ShopController extends Controller
     public function assignPaymentMethod(MerchantPaymentMethodFormRequest $request)
     {
         $data = $request->validated();
-        $data['merchant'] = auth('merchant')->user();
-        $this->ShopRepository->assignShopPaymentMethod($data);
-        return $this->successResponse('success', 200);
+        $result=$this->ShopRepository->assignShopPaymentMethod($data);
+        return response()->json($result, $result['status_code']);
     }
 
 
-    public function retrievePaymentMethods(Request $request)
+    public function retrievePaymentMethods(ShopIdRequestValidation $request,$id)
     {
-        $paymentMethods = $this->ShopRepository->retrievePaymentMethods(auth('merchant')->user());
+        $paymentMethods = $this->ShopRepository->retrievePaymentMethods($id);
         return $this->paginateCollection(PaymentMethodResource::collection($paymentMethods), $request->limit, 'payment_methods');
     }
 }

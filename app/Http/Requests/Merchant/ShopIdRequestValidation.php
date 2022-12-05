@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests\PaymentMethod;
+namespace App\Http\Requests\Merchant;
 
 use App\Http\Requests\BaseFormRequest;
+use Illuminate\Foundation\Http\FormRequest;
 
-class MerchantPaymentMethodFormRequest extends BaseFormRequest
+class ShopIdRequestValidation extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,11 +24,8 @@ class MerchantPaymentMethodFormRequest extends BaseFormRequest
      */
     public function rules()
     {
-        $auth_id = auth('api')->user()->id;
         return [
-            'shop_id' => 'required|exists:shops,id,user_id,' . $auth_id,
-            'payment_method_id' => 'required|array',
-            'payment_method_id.*' => 'exists:payment_methods,id',
+            'id' => 'required|exists:shops,id,user_id,' . auth('api')->user()->id,
         ];
     }
 }

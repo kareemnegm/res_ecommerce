@@ -20,10 +20,8 @@ class SingleProductResource extends JsonResource
         return [
             'id' => $this->id,
             'merchant_id'=>$this->merchant_id,
-            'name_en' => $this->getTranslation('name', 'en'),
-            'name_ar' => $this->getTranslation('name', 'ar'),
-            'description_en' => $this->getTranslation('description', 'en'),
-            'description_ar' => $this->getTranslation('description', 'ar'),
+            'name' => $this->name,
+            'description_en' => $this->description,
             'price' => $this->price,
             'offer_price' => $this->offer_price,
             'stock_quantity' => $this->stock_quantity,

@@ -4,6 +4,7 @@ namespace App\Http\Requests\Merchant;
 
 use App\Http\Requests\BaseFormRequest;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 
 class UpdateMerchantCategoryFormRequest extends BaseFormRequest
 {
@@ -22,14 +23,15 @@ class UpdateMerchantCategoryFormRequest extends BaseFormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(Request $request)
     {
 
+        $auth_id= auth('user')->user()->id;
         return [
-            'name.en' => 'required|string',
-            'name.ar' => 'required|string',
-            'name.*' => 'unique:categories,name,' . $this->route('category'),
-            'merchant_category_id' => 'nullable|exists:merchant_categories,id,merchant_id,' . auth('merchant')->user()->id,
+            'category_id' => 'required|exists,shop_categories,id,shop_id,' . $request->shop_id,
+            'shop_id' => 'required|exists:shops,id,user_id,' .$auth_id,
+            'name' => 'required|string',
+            'shop_category_id' => 'nullable|exists:shop_categories,id,shop_id,' .$auth_id
         ];
     }
 }

@@ -14,11 +14,9 @@ class PaymentMethodResource extends JsonResource
      */
     public function toArray($request)
     {
-        // dd($this);
         return [
             'id' => $this->id,
-            'name_en' => $this->getTranslation('name', 'en'),
-            'name_ar' => $this->getTranslation('name', 'ar'),
+            'name' => $this->name,
             'logo' => new ImageResource($this->getFirstMedia('payment_logo')) ?? null,
             'status' => $this->status,
         ];

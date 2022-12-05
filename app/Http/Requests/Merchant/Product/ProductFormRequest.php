@@ -4,6 +4,7 @@ namespace App\Http\Requests\Merchant\Product;
 
 use App\Http\Requests\BaseFormRequest;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 
 class ProductFormRequest extends BaseFormRequest
 {
@@ -22,15 +23,13 @@ class ProductFormRequest extends BaseFormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(Request $request)
     {
-        $auth=auth('merchant')->user()->id;
+        $auth=auth('api')->user()->id;
         return [
-            'name.en' => 'required|string',
-            'name.ar' => 'required|string',
-            'description.en' => 'nullable|string',
-            'description.ar' => 'nullable|string',
-            'name.*' => 'unique_translation:products,name,'.$auth,
+            'shop_id'=>'required|exists:shops,id,user_id,'.$auth,
+            'name' => 'required|string|unique:products,name,'.$request->shop_id,
+            'description' => 'nullable|string',
             'price' => 'required|numeric',
             'offer_price' => 'nullable|numeric',
             'weight' => 'nullable|numeric',
@@ -42,7 +41,7 @@ class ProductFormRequest extends BaseFormRequest
             'weight' => 'nullable|numeric',
             'order' => 'nullable|numeric',
             "is_published"=>'required|in:1,0',
-            'merchant_category_id' => 'required|exists:merchant_categories,id,merchant_id,'.$auth,
+            'shop_category_id' => 'required|exists:shop_categories,id,shop_id,'.$request->shop_id,
 
         ];
     }

@@ -18,5 +18,24 @@ return [
         'updated' => "shop Updated Successfully",
         'deleted' => "shop Deleted Successfully",
     ],
+    'payment_method' => [
+        'added' => "payment methods added Successfully",
+        'removed' => "payment methods removed Successfully",
+    ],
+
+    'category' => [
+        'created' => "category created Successfully",
+        'updated' => "category Updated Successfully",
+        'deleted' => "category Deleted Successfully",
+        'retrieved' => "category retrieved Successfully",
+
+    ],
+    'product' => [
+        'created' => "product created Successfully",
+        'updated' => "product Updated Successfully",
+        'deleted' => "product Deleted Successfully",
+        'retrieved' => "product retrieved Successfully",
+
+    ],
 
 ];

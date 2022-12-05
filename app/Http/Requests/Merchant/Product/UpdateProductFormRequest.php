@@ -25,14 +25,12 @@ class UpdateProductFormRequest extends BaseFormRequest
      */
     public function rules(Request $request)
     {
-        $auth=auth('merchant')->user()->id;
+        $auth_id = auth('api')->user()->id;
         return [
-            'id' => ['required','exists:products,id',new MerchantProductValidationRule()],
-            'name.en' => 'required|string',
-            'name.ar' => 'required|string',
-            'description.en' => 'nullable|string',
-            'description.ar' => 'nullable|string',
-            'name.*' => 'unique_translation:products,name,'.$request->id,
+            'shop_id' => 'required|exists:shops,id,user_id,' . $auth_id,
+            'product_id' => 'required|exists:products,id,shop_id,' . $request->shop_id,
+            'name' => 'required|string|unique:products,name,'.$request->shop_id,
+            'description' => 'nullable|string',
             'price' => 'required|numeric',
             'offer_price' => 'nullable|numeric',
             'weight' => 'nullable|numeric',
@@ -42,11 +40,11 @@ class UpdateProductFormRequest extends BaseFormRequest
             'deleted_tags' => 'sometimes|required|array',
             'deleted_images' => 'sometimes|required|array',
             'product_images' => 'nullable|array',
-            'product_images.*'=>'image|mimes:jpeg,png,jpg,gif,svg|max:20000',
+            'product_images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:20000',
             'weight' => 'nullable|numeric',
             'order' => 'nullable|numeric',
-            "is_published"=>'required|in:1,0',
-            'merchant_category_id' => 'required|exists:merchant_categories,id,merchant_id,'.$auth,
+            "is_published" => 'required|in:1,0',
+            'shop_category_id' => 'required|exists:shop_categories,id,shop_id,'.$request->shop_id,
 
         ];
     }

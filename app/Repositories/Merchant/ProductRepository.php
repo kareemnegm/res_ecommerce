@@ -2,15 +2,17 @@
 
 namespace App\Repositories\Merchant;
 
+use App\Http\Resources\Merchant\Product\SingleProductResource;
 use App\Interfaces\Merchant\ProductInterface;
 use App\Models\Product;
 use App\Models\ProductCombination;
 use App\Models\productStock;
 use App\Models\ProductVariant;
 use App\Models\VariantValue;
+use App\Repositories\BaseRepository;
 use Illuminate\Support\Arr;
 
-class ProductRepository implements ProductInterface
+class ProductRepository extends BaseRepository implements ProductInterface
 {
     public function create($ProductData)
     {
@@ -23,6 +25,9 @@ class ProductRepository implements ProductInterface
         if (isset($ProductData['product_images']) && !empty($ProductData['product_images'])) {
             $product->saveFiles($ProductData['product_images'], 'product_images');
         }
+
+        return $this->success(201, ['message' => __('shop.product.created'), 'product' => new SingleProductResource($product)]);
+
     }
 
 
@@ -34,9 +39,9 @@ class ProductRepository implements ProductInterface
 
 
 
-    public function update($ProductData, $id)
+    public function update(array $ProductData)
     {
-        $product = Product::where('id', $id)->where('merchant_id', $ProductData['merchant_id'])->firstOrFail();
+        $product = Product::where('id', $ProductData['product_id'])->where('shop_id', $ProductData['shop_id'])->firstOrFail();
         $product->update($ProductData);
 
         $product->attachTags($ProductData['tags']);
@@ -58,6 +63,8 @@ class ProductRepository implements ProductInterface
                 $product->Media()->where('id', $productImage)->delete();
             }
         }
+        return $this->success(201, ['message' => __('shop.product.updated'), 'product' => new SingleProductResource($product)]);
+
     }
 
 

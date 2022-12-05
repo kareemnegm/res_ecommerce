@@ -15,13 +15,15 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::middleware('language')->group(function () {
-    Route::apiResource('/category', 'MerchantCategoryController');
+    Route::post('/category', 'MerchantCategoryController@store')->middleware(['can:create-category']);
+    Route::get('/category', 'MerchantCategoryController@show');
+    Route::put('/category', 'MerchantCategoryController@update');
     Route::post('/shop', 'ShopController@createShop')->middleware(['can:create-shop']);
     Route::put('/shop/{id}', 'ShopController@updateShop')->middleware(['can:update-shop']);
-    Route::post('/product', 'ProductController@store')->middleware(['can:property-show']);
+    Route::post('/product', 'ProductController@store')->middleware(['can:add-product']);
     Route::get('/product', 'ProductController@index');
     Route::get('/product/{id}', 'ProductController@show')->middleware(['can:update-product']);
-    Route::put('/product/{id}', 'ProductController@update');
+    Route::put('/product', 'ProductController@update');
     Route::delete('/product/{id}', 'ProductController@destroy')->middleware(['can:remove-product']);
     Route::post('product_variant', 'ProductController@productVariants')->middleware(['can:store-variant']);
     // Route::post('product_variant_combination','ProductController@productVariantCombination');
@@ -35,6 +37,6 @@ Route::middleware('language')->group(function () {
     Route::put('/profile', 'AuthController@update');
 
 
-    Route::post('/payment_method', 'ShopController@assignPaymentMethod');
-    Route::get('/payment_method', 'ShopController@retrievePaymentMethods');
+    Route::post('/payment_method', 'ShopController@assignPaymentMethod')->middleware(['can:add-paymentMethod']);
+    Route::get('/payment_method/shop/{id}', 'ShopController@retrievePaymentMethods');
 });

@@ -59,15 +59,15 @@ class ShopRepository extends BaseRepository implements ShopInterface
             ->setPhoneNumber($shopData['mobile'])
             ->setCountryId($shopData['country_id'])
             ->save();
-            if (isset($shopData['shop_logo'])) {
+        if (isset($shopData['shop_logo'])) {
 
-                if ($shop->getMedia('shop_logo')) {
+            if ($shop->getMedia('shop_logo')) {
 
-                    $shop->clearMediaCollectionExcept('shop_logo');
-                }
-
-                $shop->saveFiles($shopData['shop_logo'], 'shop_logo');
+                $shop->clearMediaCollectionExcept('shop_logo');
             }
+
+            $shop->saveFiles($shopData['shop_logo'], 'shop_logo');
+        }
         $shop->category()->sync($shopData['category_id']);
         return $this->success(200, ['message' => __('shop.shop.updated'), 'shop' => new ShopResource($shop)]);
     }
@@ -83,7 +83,12 @@ class ShopRepository extends BaseRepository implements ShopInterface
 
     public function assignShopPaymentMethod($paymentMethodData)
     {
-        $paymentMethodData['merchant']->merchantPaymentMethods()->syncWithoutDetaching($paymentMethodData['payment_method_id']);
+
+        $shop = Shop::find($paymentMethodData['shop_id']);
+
+
+        $shop->shopPaymentMethods()->syncWithoutDetaching($paymentMethodData['payment_method_id']);
+        return $this->success(200, ['message' => __('shop.payment_method.added')]);
     }
 
 
@@ -96,8 +101,12 @@ class ShopRepository extends BaseRepository implements ShopInterface
      * @return void
      */
 
-    public function retrievePaymentMethods($merchant)
+    public function retrievePaymentMethods($shopId)
     {
-        return $merchant->merchantPaymentMethods;
+        $shop = Shop::find($shopId);
+
+        
+        return $shop->shopPaymentMethods;
+
     }
 }

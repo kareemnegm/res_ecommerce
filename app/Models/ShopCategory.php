@@ -30,7 +30,7 @@ class ShopCategory extends Model
      * @param  string  $name
      * @return self
      */
-    public function setShopName(string $name): self
+    public function setName(string $name): self
     {
         $this->name = $name;
 
@@ -77,7 +77,7 @@ class ShopCategory extends Model
      * @param  string  $shop_id
      * @return self
      */
-    public function setShopCategoryId(string $shop_category_id): self
+    public function setShopCategoryId($shop_category_id): self
     {
         $this->shop_category_id = $shop_category_id;
 
