@@ -11,6 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes, HasRoles;
@@ -171,7 +172,7 @@ class User extends Authenticatable
 
         return $this;
     }
-     /**
+    /**
      * get Date of birth
      *
      * @return string
@@ -186,7 +187,7 @@ class User extends Authenticatable
         $this->date_of_birth = $dob;
         return $this;
     }
-        /**
+    /**
      * get user gender
      *
      * @return string
@@ -227,7 +228,7 @@ class User extends Authenticatable
     {
         $this->country_code = $country_code;
         return $this;
-    } 
+    }
     /**
      * get user country code
      *
@@ -271,8 +272,11 @@ class User extends Authenticatable
 
     public function product()
     {
-        return $this->belongsToMany(Product::class, 'user_carts')->withPivot('id','quantity','product_variant_details');
+        return $this->belongsToMany(Product::class, 'user_carts')->withPivot('id', 'quantity', 'product_variant_details');
     }
 
-   
+    public function shop()
+    {
+        return $this->hasMany(Shop::class);
+    }
 }

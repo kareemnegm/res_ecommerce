@@ -23,10 +23,10 @@ return new class extends Migration
             $table->integer('weight')->nullable();
             $table->integer('order')->default(1);
             $table->boolean('is_published')->default(0);
-            $table->unsignedBigInteger('merchant_id')->index();
-            $table->foreign('merchant_id')->references('id')->on('merchants')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->unsignedBigInteger('merchant_category_id')->index();
-            $table->foreign('merchant_category_id')->references('id')->on('merchant_categories')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->unsignedBigInteger('shop_id')->index();
+            $table->foreign('shop_id')->references('id')->on('shops')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->unsignedBigInteger('shop_category_id')->index();
+            $table->foreign('shop_category_id')->references('id')->on('shop_categories')->cascadeOnDelete()->cascadeOnUpdate();
             $table->softDeletes();
             $table->timestamps();
         });

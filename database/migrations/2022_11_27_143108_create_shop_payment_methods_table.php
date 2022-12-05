@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('merchant_payment_methods', function (Blueprint $table) {
+        Schema::create('shop_payment_methods', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('merchant_id')->index();
+            $table->unsignedBigInteger('shop_id')->index();
             $table->unsignedBigInteger('payment_method_id')->index();
-            $table->foreign('merchant_id')->references('id')->on('merchants')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('shop_id')->references('id')->on('shops')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreign('payment_method_id')->references('id')->on('payment_methods')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });

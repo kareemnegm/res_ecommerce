@@ -23,8 +23,8 @@ class Product extends Model implements HasMedia
         'weight',
         'order',
         'stock_quantity',
-        'merchant_category_id',
-        'merchant_id',
+        'shop_category_id',
+        'shop_id',
         'is_published'
     ];
     protected $appends = ['Tags','cart_product_variant'];
@@ -32,14 +32,14 @@ class Product extends Model implements HasMedia
 
     public $translatable = ['name', 'description'];
 
-    public function merchantCategory()
+    public function shopCategory()
     {
-        return $this->belongsTo(MerchantCategory::class);
+        return $this->belongsTo(ShopCategory::class);
     }
 
-    public function merchant()
+    public function shop()
     {
-        return $this->belongsTo(Merchant::class);
+        return $this->belongsTo(Shop::class);
     }
 
     public function variant()

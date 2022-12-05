@@ -12,7 +12,7 @@ class UserCart extends Model
     protected $fillable = [
         'user_id',
         'product_id',
-        'merchant_id',
+        'shop_id',
         'quantity',
         'product_variant_details'
     ];
@@ -24,16 +24,13 @@ class UserCart extends Model
     }
 
 
-    public function merchant()
+    public function shop()
     {
-        return $this->belongsTo(Merchant::class);
+        return $this->belongsTo(Shop::class);
     }
 
     public function product()
     {
         return $this->belongsTo(Product::class);
     }
-
-  
-
 }

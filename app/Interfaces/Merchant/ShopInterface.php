@@ -2,8 +2,31 @@
 
 namespace App\Interfaces\Merchant;
 
+use Illuminate\Support\Collection;
+
 interface ShopInterface
 {
+
+    /**
+     * create shop  function
+     *
+     * @param [type] $request
+     * @param [type]
+     * @return void
+     */
+
+    public function createShop(array $shopData);
+
+    /**
+     * update shop  function
+     *
+     * @param [type] $request
+     * @param [type]
+     * @return void
+     */
+
+    public function updateShop(array $shopData);
+
 
     /**
      * choose shop payment methods function

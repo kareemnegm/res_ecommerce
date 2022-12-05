@@ -21,6 +21,7 @@ return [
     'user' => [
         'created' => "User created Successfully",
         'updated' => "User Updated Successfully",
+        'deleted' => "User Deleted Successfully",
     ],
 
 ];

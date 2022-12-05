@@ -31,7 +31,12 @@ class RolePermissionSeeder extends Seeder
         ];
 
         $merchantPermissions = [
+            'create-shop',
+            'update-shop',
+            'remove-shop',
             'add-product',
+            'add-paymentMethod',
+            'remove-paymentMethod',
             'update-product',
             'remove-product',
             'store-variant',
@@ -64,19 +69,19 @@ class RolePermissionSeeder extends Seeder
         $roleHasPermission = DB::table('role_has_permissions');
 
         $roleHasPermission
-        ->insert(
-            collect($permissionIdsByName($adminPermissions))->map(fn ($id) => [
-                'role_id' => $admin_role_id,
-                'permission_id' => $id,
-            ])->toArray()
-        );
+            ->insert(
+                collect($permissionIdsByName($adminPermissions))->map(fn ($id) => [
+                    'role_id' => $admin_role_id,
+                    'permission_id' => $id,
+                ])->toArray()
+            );
 
         $roleHasPermission
-        ->insert(
-            collect($permissionIdsByName($merchantPermissions))->map(fn ($id) => [
-                'role_id' => $merchant_role_id,
-                'permission_id' => $id,
-            ])->toArray()
-        );
+            ->insert(
+                collect($permissionIdsByName($merchantPermissions))->map(fn ($id) => [
+                    'role_id' => $merchant_role_id,
+                    'permission_id' => $id,
+                ])->toArray()
+            );
     }
 }
