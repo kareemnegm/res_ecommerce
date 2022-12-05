@@ -3,9 +3,10 @@
 namespace App\Http\Requests\Merchant\Product;
 
 use App\Http\Requests\BaseFormRequest;
-use App\Rules\ProductVairantRule;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 
-class ProductVariantValuesRequest extends BaseFormRequest
+class ShopProductIdFormRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,11 +23,12 @@ class ProductVariantValuesRequest extends BaseFormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(Request $request)
     {
+        $auth_id = auth('api')->user()->id;
         return [
-            'product_id' => ['required', 'exists:products,id'],
-            'variant_id' => 'required|exists:product_variants,id,product_id,' . request()->product_id
+            'shop_id' => 'required|exists:shops,id,user_id,' . $auth_id,
+            'product_id' => 'required|exists:products,id,shop_id,' . $request->shop_id,
         ];
     }
 }

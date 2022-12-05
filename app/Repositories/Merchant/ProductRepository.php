@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Merchant;
 
+use App\Http\Resources\Merchant\Product\ProductVariantResource;
 use App\Http\Resources\Merchant\Product\SingleProductResource;
 use App\Interfaces\Merchant\ProductInterface;
 use App\Models\Product;
@@ -27,14 +28,13 @@ class ProductRepository extends BaseRepository implements ProductInterface
         }
 
         return $this->success(201, ['message' => __('shop.product.created'), 'product' => new SingleProductResource($product)]);
-
     }
 
 
 
-    public function index($request)
+    public function index($shopId)
     {
-        return  Product::where('merchant_id', $request)->get();
+        return  Product::where('shop_id', $shopId)->get();
     }
 
 
@@ -64,21 +64,24 @@ class ProductRepository extends BaseRepository implements ProductInterface
             }
         }
         return $this->success(201, ['message' => __('shop.product.updated'), 'product' => new SingleProductResource($product)]);
-
     }
 
 
 
-    public function show($auth, $id)
+    public function show($id)
     {
-        return Product::where('id', $id)->where('merchant_id', $auth)->with('variant.value')->firstOrFail();
+        $product= Product::where('id', $id)->with('variant.value')->firstOrFail();
+        return $this->success(201, ['message' => __('shop.product.retrieved'), 'product' => new SingleProductResource($product)]);
+
     }
 
 
-    public function deleteProduct($id)
+    public function deleteProduct(array $product)
     {
-        $product = Product::findOrFail($id);
+        $product = Product::findOrFail($product['product_id']);
         $product->delete();
+        return $this->success(200, ['message' => __('shop.product.deleted')]);
+
     }
 
     public function CreateProductVariant(array $variantData, $product)
@@ -93,6 +96,8 @@ class ProductRepository extends BaseRepository implements ProductInterface
                 $productVariant->value()->create($values);
             }
         }
+        return $this->success(200, ['message' => __('shop.product.variants.created')]);
+
     }
 
     // public function productVariantCombination($variantValueData)
@@ -122,9 +127,9 @@ class ProductRepository extends BaseRepository implements ProductInterface
 
     public function getProductVariants($product_id)
     {
-        // $combination = ProductCombination::where('product_id', $this->product_id)->value('combination_string');
-        // $variantExploded = explode("-", $combination);
-        return ProductVariant::where('product_id', $product_id)->get();
+        $productVariants= ProductVariant::findOrFail($product_id)->get();
+        return $this->success(200, ['message' => __('shop.product.variants.retrieved'), 'product_variants' => ProductVariantResource::collection($productVariants)]);
+
     }
 
     public function getProductVariantValues($variantData)

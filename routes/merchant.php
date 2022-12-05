@@ -21,11 +21,12 @@ Route::middleware('language')->group(function () {
     Route::post('/shop', 'ShopController@createShop')->middleware(['can:create-shop']);
     Route::put('/shop/{id}', 'ShopController@updateShop')->middleware(['can:update-shop']);
     Route::post('/product', 'ProductController@store')->middleware(['can:add-product']);
-    Route::get('/product', 'ProductController@index');
+    Route::get('/shop/{id}/products', 'ProductController@index');
     Route::get('/product/{id}', 'ProductController@show')->middleware(['can:update-product']);
     Route::put('/product', 'ProductController@update');
-    Route::delete('/product/{id}', 'ProductController@destroy')->middleware(['can:remove-product']);
+    Route::delete('/product', 'ProductController@destroy')->middleware(['can:remove-product']);
     Route::post('product_variant', 'ProductController@productVariants')->middleware(['can:store-variant']);
+    // Route::get('product_variant', 'ProductController@getProductVariant');
     // Route::post('product_variant_combination','ProductController@productVariantCombination');
     // Route::put('product_variant_combination','ProductController@updateProductVariantCombination');
     // Route::get('product_variant_combination/{id}','ProductController@getProductVariantCombinations');

@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Merchant\Product;
 
 use App\Http\Requests\BaseFormRequest;
+use Illuminate\Http\Request;
 
 class VariantFormRequest extends BaseFormRequest
 {
@@ -21,10 +22,11 @@ class VariantFormRequest extends BaseFormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(Request $request)
     {
         return [
-            'product_id'=>'required|exists:products,id,merchant_id,'.auth('merchant')->user()->id,
+            'shop_id'=>'required|exists:shops,id,user_id,'.auth('api')->user()->id,
+            'product_id'=>'required|exists:products,id,shop_id,'.$request->shop_id,
             'variants' => 'required|array',
             'variants.*.*.name' => 'required|string',
         ];

@@ -8,6 +8,7 @@ use App\Http\Requests\Merchant\Product\ProductIdMerchantFormRequest;
 use App\Http\Requests\Merchant\Product\ProductVairantRequest;
 use App\Http\Requests\Merchant\Product\ProductVariantCombinationValidation;
 use App\Http\Requests\Merchant\Product\ProductVariantValuesRequest;
+use App\Http\Requests\Merchant\Product\ShopProductIdFormRequest;
 use App\Http\Requests\Merchant\Product\UpdateProductFormRequest;
 use App\Http\Requests\Merchant\Product\VariantCombinationFormRequest;
 use App\Http\Requests\Merchant\Product\VariantFormRequest;
@@ -64,10 +65,9 @@ class ProductController extends Controller
      *      )
      * )
      */
-    public function index(Request $request)
+    public function index(Request $request,$shopId)
     {
-        $request['merchant_id'] = auth('merchant')->user()->id;
-        return $this->paginateCollection(ProductsResource::collection($this->ProductRepository->index($request['merchant_id'])), $request->limit, 'products');
+        return $this->paginateCollection(ProductsResource::collection($this->ProductRepository->index($shopId)), $request->limit, 'products');
     }
 
     /**
@@ -175,9 +175,8 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $auth = auth('merchant')->user()->id;
-        $product = $this->ProductRepository->show($auth, $id);
-        return $this->dataResponse(['product' => new SingleProductResource($product)], 'success', 200);
+        $result = $this->ProductRepository->show($id);
+        return response()->json($result, $result['status_code']);
     }
 
 
@@ -237,7 +236,7 @@ class ProductController extends Controller
     public function update(UpdateProductFormRequest $request)
     {
         $productData = $request->validated();
-        $result=$this->ProductRepository->update($productData);
+        $result = $this->ProductRepository->update($productData);
         return response()->json($result, $result['status_code']);
     }
 
@@ -283,10 +282,10 @@ class ProductController extends Controller
      *      )
      * )
      */
-    public function destroy(ProductIdMerchantFormRequest $request, $id)
+    public function destroy(ShopProductIdFormRequest $request)
     {
-        $this->ProductRepository->deleteProduct($id);
-        return $this->successResponse('product deleted successful', 200);
+        $result = $this->ProductRepository->deleteProduct($request->validated());
+        return response()->json($result, $result['status_code']);
     }
 
     /**
@@ -329,15 +328,15 @@ class ProductController extends Controller
 
     public function productVariants(VariantFormRequest $request)
     {
-        $this->ProductRepository->CreateProductVariant($request->validated('variants'), $request->product_id);
-        return $this->successResponse('success', 201);
+        $result = $this->ProductRepository->CreateProductVariant($request->validated('variants'), $request->product_id);
+        return response()->json($result, $result['status_code']);
     }
 
-    public function productVariantCombination(VariantCombinationFormRequest $request)
-    {
-        $combination = $this->ProductRepository->productVariantCombination($request->validated());
-        return $this->dataResponse(['product_variant_combination' => new ProductCombinationResource($combination)], 'success', 201);
-    }
+    // public function productVariantCombination(VariantCombinationFormRequest $request)
+    // {
+    //     $combination = $this->ProductRepository->productVariantCombination($request->validated());
+    //     return $this->dataResponse(['product_variant_combination' => new ProductCombinationResource($combination)], 'success', 201);
+    // }
 
 
     /**
@@ -377,10 +376,10 @@ class ProductController extends Controller
      * )
      */
 
-    public function getProductVariant(ProductVairantRequest $request, $product_id)
+    public function getProductVariant($productId)
     {
-        $variants = $this->ProductRepository->getProductVariants($product_id);
-        return $this->dataResponse(['product_variants' => ProductVariantResource::collection($variants)], 'success', 200);
+        $result = $this->ProductRepository->getProductVariants($productId);
+        return response()->json($result, $result['status_code']);
     }
 
     /**
@@ -437,16 +436,16 @@ class ProductController extends Controller
 
 
 
-    public function getProductVariantCombinations($id)
-    {
-        $merchant_id = auth('merchant')->user()->id;
-        return $this->dataResponse(['product_combinations' => ProductCombinationResource::collection($this->ProductRepository->getProductVariantCombinations($id, $merchant_id))], 'success', 200);
-    }
+    // public function getProductVariantCombinations($id)
+    // {
+    //     $merchant_id = auth('merchant')->user()->id;
+    //     return $this->dataResponse(['product_combinations' => ProductCombinationResource::collection($this->ProductRepository->getProductVariantCombinations($id, $merchant_id))], 'success', 200);
+    // }
 
 
-    public function updateProductVariantCombination(ProductVariantCombinationValidation $request)
-    {
-        $this->ProductRepository->updateProductVariantCombinations($request->validated());
-        return $this->successResponse('updated success', 200);
-    }
+    // public function updateProductVariantCombination(ProductVariantCombinationValidation $request)
+    // {
+    //     $this->ProductRepository->updateProductVariantCombinations($request->validated());
+    //     return $this->successResponse('updated success', 200);
+    // }
 }

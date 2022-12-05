@@ -8,9 +8,9 @@ interface ProductInterface
 
     public function create($ProductData);
     public function index($request);
-    public function show($auth, $id);
+    public function show($id);
     public function update(array $ProductData);
-    public function deleteProduct($id);
+    public function deleteProduct(array $product);
 
 
     /**

@@ -35,6 +35,12 @@ return [
         'updated' => "product Updated Successfully",
         'deleted' => "product Deleted Successfully",
         'retrieved' => "product retrieved Successfully",
+        'variants'=>[
+            'created' => "variants created Successfully",
+            'updated' => "variants Updated Successfully",
+            'deleted' => "variants Deleted Successfully",
+            'retrieved' => "variants retrieved Successfully",
+        ],
 
     ],
 
