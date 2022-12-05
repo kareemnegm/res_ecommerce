@@ -18,6 +18,7 @@ return [
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
     'success' => 'User logged successfully!',
     'current_password' => 'Current password does not match!',
+    'password_changed' => 'Password is changed',
     'user' => [
         'created' => "User created Successfully",
         'updated' => "User Updated Successfully",

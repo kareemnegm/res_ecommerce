@@ -26,11 +26,11 @@ class UpdateUserFormRequest extends BaseFormRequest
     public function rules(Request $request)
     {
         return [
-            'full_name' => 'required|string|unique:users,full_name,'.auth('user')->user()->id,
-            'id_number' => ['required','numeric','unique:users,id_number,'.auth('user')->user()->id, new UserIdNumberValidatorRule($request)],
-            'country_code' => 'nullable',
+            'full_name' => 'required|string|unique:users,full_name,'.auth()->user()->id,
+            'id_number' => ['required','numeric','unique:users,id_number,'.auth()->user()->id, new UserIdNumberValidatorRule($request)],
+            'country_code' => 'required',
             'country_id' => 'required|exists:countries,id',
-            'email' => 'nullable|email|unique:users,email,'.auth('user')->user()->id,
+            'email' => 'nullable|email|unique:users,email,'.auth()->user()->id,
             'gender' => 'nullable|in:male,female',
             'mobile' => 'nullable',
             'date_of_birth' =>'required|date_format:Y-m-d|before:today',

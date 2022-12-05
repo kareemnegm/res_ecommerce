@@ -16,7 +16,7 @@ class OrderController extends Controller
 
     public function placeOrder(Request $request)
     {
-        $data['user_id'] = auth('user')->user()->id;
+        $data['user_id'] = auth()->user()->id;
         $this->OrderRepository->placeOrder($data);
     }
 }

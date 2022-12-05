@@ -33,7 +33,7 @@ class RegisterFormRequest extends BaseFormRequest
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8|confirmed',
             'password_confirmation' => 'required|min:8',
-            'date_of_birth' =>[Rule::requiredIf(!auth()->user()),'date_format:Y-m-d|before:today'],
+            'date_of_birth' =>[Rule::requiredIf(!auth()->user()),'date_format:Y-m-d','before:today'],
             'gender' => [Rule::requiredIf(!auth()->user()),'in:male,female'],
             'country_code' => 'nullable',
             'mobile' => 'required|unique:users',

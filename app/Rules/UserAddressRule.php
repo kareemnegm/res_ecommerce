@@ -27,7 +27,7 @@ class UserAddressRule implements Rule
     public function passes($attribute, $value)
     {
 
-        $userId=auth('user')->user()->id;
+        $userId=auth()->user()->id;
         $Address=UserAddress::where('id',$value)->where('user_id',$userId)->first();
 
         if($Address){

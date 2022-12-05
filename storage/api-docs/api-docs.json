@@ -5,6 +5,237 @@
         "version": "0.1"
     },
     "paths": {
+        "/api/user/register": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "register new user",
+                "description": "Returns user data and token",
+                "operationId": "registeruser",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserRegister"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        },
+        "/api/user/login": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Login user",
+                "description": "Returns user data and token",
+                "operationId": "userLogin",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserLogin"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        },
+        "/api/user/change_password": {
+            "put": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "user change password",
+                "description": "change password",
+                "operationId": "changePassword",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserChangePassword"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/user/edit": {
+            "put": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Update new user",
+                "description": "Returns user data and token",
+                "operationId": "Update user",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserUpdate"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/user/deactivate": {
+            "delete": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Delete User",
+                "description": "Deletes a record and returns successfully",
+                "operationId": "deleteAccount",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/admin/merchant": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "create new merchant",
+                "description": "Returns merchant data",
+                "operationId": "createMerchant",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateMerchantByAdmin"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
         "/api/admin/list_merchants": {
             "get": {
                 "tags": [
@@ -104,122 +335,7 @@
                 ]
             }
         },
-        "/api/admin/merchant": {
-            "post": {
-                "tags": [
-                    "SystemAdmin"
-                ],
-                "summary": "create new merchant",
-                "description": "Returns merchant data",
-                "operationId": "createMerchant",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/CreateMerchantByAdmin"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Success"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    },
-                    "401": {
-                        "description": "Unauthenticated"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "422": {
-                        "description": "Validation error"
-                    }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
-            }
-        },
-        "/api/admin/register": {
-            "post": {
-                "tags": [
-                    "SystemAdmin"
-                ],
-                "summary": "register new admin",
-                "description": "Returns admin data and token",
-                "operationId": "registerAdmin",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/AdminRegister"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Success"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    },
-                    "401": {
-                        "description": "Unauthenticated"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "422": {
-                        "description": "Validation error"
-                    }
-                }
-            }
-        },
-        "/api/admin/login": {
-            "post": {
-                "tags": [
-                    "SystemAdmin"
-                ],
-                "summary": "admin login",
-                "description": "Returns admin data and token",
-                "operationId": "adminLogin",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/AdminLogin"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Success"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    },
-                    "401": {
-                        "description": "Unauthenticated"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "422": {
-                        "description": "Validation error"
-                    }
-                }
-            }
-        },
+        
         "/api/admin/category": {
             "get": {
                 "tags": [
@@ -578,43 +694,7 @@
                 }
             }
         },
-        "/api/merchant/login": {
-            "post": {
-                "tags": [
-                    "merchants"
-                ],
-                "summary": "merchant user",
-                "description": "Returns user data and token",
-                "operationId": "merchantLogin",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/MerchantLogin"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Success"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    },
-                    "401": {
-                        "description": "Unauthenticated"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "422": {
-                        "description": "Validation error"
-                    }
-                }
-            }
-        },
+       
         "/api/merchant/change_password": {
             "put": {
                 "tags": [
@@ -1272,195 +1352,7 @@
                 ]
             }
         },
-        "/api/user/register": {
-            "post": {
-                "tags": [
-                    "users"
-                ],
-                "summary": "register new user",
-                "description": "Returns user data and token",
-                "operationId": "registeruser",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/UserRegister"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Success"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    },
-                    "401": {
-                        "description": "Unauthenticated"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "422": {
-                        "description": "Validation error"
-                    }
-                }
-            }
-        },
-        "/api/user/login": {
-            "post": {
-                "tags": [
-                    "users"
-                ],
-                "summary": "Login user",
-                "description": "Returns user data and token",
-                "operationId": "userLogin",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/UserLogin"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Success"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    },
-                    "401": {
-                        "description": "Unauthenticated"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "422": {
-                        "description": "Validation error"
-                    }
-                }
-            }
-        },
-        "/api/user/change_password": {
-            "put": {
-                "tags": [
-                    "users"
-                ],
-                "summary": "user change password",
-                "description": "change password",
-                "operationId": "changePassword",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/UserChangePassword"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Successful operation"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    },
-                    "401": {
-                        "description": "Unauthenticated"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "422": {
-                        "description": "Validation error"
-                    }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
-            }
-        },
-        "/api/user/edit": {
-            "put": {
-                "tags": [
-                    "users"
-                ],
-                "summary": "Update new user",
-                "description": "Returns user data and token",
-                "operationId": "Update user",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/UserUpdate"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Success"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    },
-                    "401": {
-                        "description": "Unauthenticated"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
-            }
-        },
-        "/api/user/deactivate": {
-            "delete": {
-                "tags": [
-                    "users"
-                ],
-                "summary": "Delete User",
-                "description": "Deletes a record and returns successfully",
-                "operationId": "deleteAccount",
-                "responses": {
-                    "200": {
-                        "description": "Successful operation",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthenticated"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
-            }
-        },
+        
         "/api/product/{id}": {
             "get": {
                 "tags": [
@@ -2284,35 +2176,7 @@
                 "title": " Merchant create request",
                 "description": "Some simple request create Merchant",
                 "properties": {
-                    "shop_name": {
-                        "title": "shop_name",
-                        "description": "shop name text field",
-                        "type": "object",
-                        "format": "string",
-                        "example": {
-                            "en": "shopname1",
-                            "ar": "سياسيا1"
-                        }
-                    },
-                    "description": {
-                        "title": "description",
-                        "description": "Some text field",
-                        "type": "object",
-                        "format": "string",
-                        "example": {
-                            "en": "qqq",
-                            "ar": "سياسيا"
-                        }
-                    },
-                    "category_id": {
-                        "description": "category ID",
-                        "type": "object",
-                        "format": "array",
-                        "example": [
-                            2,
-                            3
-                        ]
-                    },
+                   
                     "email": {
                         "title": "email",
                         "description": "email",
@@ -2323,6 +2187,13 @@
                     "password": {
                         "title": "password",
                         "description": "select password",
+                        "type": "string",
+                        "format": "password",
+                        "example": 12345678
+                    },
+                    "password_confirmation": {
+                        "title": "password_confirmation",
+                        "description": "select password_confirmation",
                         "type": "string",
                         "format": "password",
                         "example": 12345678
@@ -2347,6 +2218,20 @@
                         "type": "string",
                         "format": "string",
                         "example": "+966"
+                    },
+                    "full_name": {
+                        "title": "full_name",
+                        "description": "full name",
+                        "type": "string",
+                        "format": "string",
+                        "example": "merchantuser"
+                    },
+                    "id_number": {
+                        "title": "id_number",
+                        "description": "id number",
+                        "type": "string",
+                        "format": "string",
+                        "example": "12365474122"
                     }
                 },
                 "type": "object"
@@ -2548,7 +2433,7 @@
                         "description": "email",
                         "type": "string",
                         "format": "string",
-                        "example": "usertest@test.com"
+                        "example": "merchant@test.com"
                     },
                     "password": {
                         "title": "password",
@@ -2952,6 +2837,13 @@
                         "format": "password",
                         "example": 12345678
                     },
+                    "password_confirmation": {
+                        "title": "password",
+                        "description": "select password confirmation",
+                        "type": "string",
+                        "format": "password",
+                        "example": 12345678
+                    },
                     "mobile": {
                         "title": "mobile",
                         "description": "user mobile",
@@ -3006,7 +2898,7 @@
                         "description": "Some text field",
                         "type": "string",
                         "format": "string",
-                        "example": "user"
+                        "example": "updated name"
                     },
                     "email": {
                         "title": "email",
@@ -3035,7 +2927,29 @@
                         "type": "string",
                         "format": "string",
                         "example": "1998-01-27"
+                    },
+                    "id_number": {
+                        "title": "id_number",
+                        "description": "id number",
+                        "type": "string",
+                        "format": "string",
+                        "example": "12365478952"
+                    },
+                    "country_id": {
+                        "title": "country_id",
+                        "description": "country id ",
+                        "type": "string",
+                        "format": "integer",
+                        "example": 1
+                    },
+                    "country_code": {
+                        "title": "country_code",
+                        "description": "country code ",
+                        "type": "string",
+                        "format": "string",
+                        "example": "+966"
                     }
+                   
                 },
                 "type": "object"
             }

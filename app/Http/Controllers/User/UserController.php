@@ -393,7 +393,7 @@ class UserController extends Controller
      */
     public function myCart(Request $request)
     {
-        $cart = auth('user')->user()->product;
+        $cart = auth()->user()->product;
         return $this->paginateCollection(CartResource::collection($cart), $request->limit, 'cart_products');
     }
 }

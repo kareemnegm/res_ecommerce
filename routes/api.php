@@ -62,10 +62,7 @@ Route::middleware('language')->group(function(){
          */
         Route::post('/register', 'AuthController@register');
     
-        /**
-         * login merchant
-         */
-        Route::post('/login', [AuthController::class,'login']);
+      
     });
     
     Route::get('/category', 'Category\CategoryController@index');

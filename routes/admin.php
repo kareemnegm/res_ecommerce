@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\User\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,8 +21,6 @@ use Illuminate\Support\Facades\Route;
  * merchant
  */
 Route::middleware(['language'])->group(function(){
-    Route::post('/register', [AuthController::class, 'register'])->withoutMiddleware('auth:api');
-    Route::post('/login', [AuthController::class, 'login'])->withoutMiddleware('auth:api');
     Route::group(['middleware' => ['role:admin']], function () {
         Route::apiResource('/category', 'Category\CategoryController');
         Route::apiResource('/payment_method', 'PaymentMethod\PaymentMethodController')->except(['update']);
