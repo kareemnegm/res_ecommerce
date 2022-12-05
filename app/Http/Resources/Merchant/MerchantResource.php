@@ -24,12 +24,12 @@ class MerchantResource extends JsonResource
             'description_en' => $this->getTranslation('description', 'en'),
             'description_ar' => $this->getTranslation('description', 'ar'),
             'email' => $this->email,
-            'mobile' => $this->country_code . $this->mobile,
+            'mobile' => $this->country_code.$this->mobile,
             'approved' => $this->approved,
             'country' => new CountryResource($this->country),
             'shop_logo' => new ImageResource($this->getFirstMedia('shop_logo')) ?? null,
-            'category' =>  CategoryResource::collection($this->category),
-            'admin_id' => $this->admin_id
+            'category' => CategoryResource::collection($this->category),
+            'admin_id' => $this->admin_id,
         ];
     }
 }

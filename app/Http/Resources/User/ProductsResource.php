@@ -16,18 +16,18 @@ class ProductsResource extends JsonResource
     public function toArray($request)
     {
         return[
-            'id'=>$this->id,
-            'merchant_id'=>$this->merchant_id,
+            'id' => $this->id,
+            'merchant_id' => $this->merchant_id,
             'name_en' => $this->getTranslation('name', 'en'),
             'name_ar' => $this->getTranslation('name', 'ar'),
             'description_en' => $this->getTranslation('description', 'en'),
             'description_ar' => $this->getTranslation('description', 'ar'),
-            'price'=>$this->price,
-            'offer_price'=>$this->offer_price,
-            'stock_quantity'=>$this->stock_quantity,
-            'is_published'=>$this->is_published,
-            'product_image'=> new ImageResource($this->getFirstMedia('product_images'))??null,
-            'order'=>$this->order
+            'price' => $this->price,
+            'offer_price' => $this->offer_price,
+            'stock_quantity' => $this->stock_quantity,
+            'is_published' => $this->is_published,
+            'product_image' => new ImageResource($this->getFirstMedia('product_images')) ?? null,
+            'order' => $this->order,
         ];
     }
 }

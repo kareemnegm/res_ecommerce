@@ -10,13 +10,13 @@ use App\Http\Requests\Merchant\UpdateFormRequest;
 use App\Http\Resources\Merchant\MerchantResource;
 use App\Interfaces\Merchant\AuthInterface;
 use App\Models\Merchant;
-use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
     private AuthInterface $AuthRepository;
+
     public function __construct(AuthInterface $AuthRepository)
     {
         $this->AuthRepository = $AuthRepository;
@@ -60,9 +60,9 @@ class AuthController extends Controller
     public function register(RegisterFormRequest $request)
     {
         $this->AuthRepository->register($request->validated());
+
         return $this->successResponse('success', 201);
     }
-
 
     /**
      * @OA\Post(
@@ -99,13 +99,11 @@ class AuthController extends Controller
      *      )
      * )
      */
-
     public function login(LoginFormRequest $request)
     {
         $merchantData = $request->validated();
         $merchant = Merchant::where('email', $merchantData['email'])->first();
-        if (!$merchant || !Hash::check($merchantData['password'], $merchant->password)) {
-
+        if (! $merchant || ! Hash::check($merchantData['password'], $merchant->password)) {
             return $this->errorResponseWithStatus('Credentials not match', 401);
         }
 
@@ -113,9 +111,9 @@ class AuthController extends Controller
             return $this->errorResponse('your account not approved', 422);
         }
         $token = $merchant->createToken('merchantToken')->plainTextToken;
+
         return $this->dataResponse(['merchant' => new MerchantResource($merchant), 'token' => $token], 'success', 200);
     }
-
 
     /**
      * @OA\Put(
@@ -153,16 +151,16 @@ class AuthController extends Controller
      *      )
      * )
      */
-
     public function ChangePassword(ChangePasswordFormRequest $request)
     {
         $merchant = auth('merchant')->user();
 
-        if (!Hash::check($request->current_password, $merchant->password)) {
+        if (! Hash::check($request->current_password, $merchant->password)) {
             return $this->errorResponseWithMessage('Current password does not match!', 400);
         }
         $merchant->password = bcrypt($request->password);
         $merchant->save();
+
         return $this->successResponse('password changed success', 200);
     }
 
@@ -203,8 +201,10 @@ class AuthController extends Controller
         $merchantData = $request->validated();
         $merchantData['id'] = auth('merchant')->user()->id;
         $this->AuthRepository->update($merchantData);
+
         return $this->successResponse('profile updated success', 200);
     }
+
     /**
      * @OA\Get(
      *      path="/api/merchant/profile",
@@ -233,10 +233,10 @@ class AuthController extends Controller
      *      )
      * )
      */
-
     public function myProfile()
     {
         $merchant = $this->AuthRepository->myProfile(auth('merchant')->user()->id);
+
         return $this->dataResponse(['merchant' => new MerchantResource($merchant)], 'success', 200);
     }
 }

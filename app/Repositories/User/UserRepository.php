@@ -4,13 +4,11 @@ namespace App\Repositories\user;
 
 use App\Interfaces\User\UserInterface;
 use App\Models\Favorite;
-use App\Models\Product;
 use App\Models\UserAddress;
 use App\Models\UserCart;
 
 class UserRepository implements UserInterface
 {
-
     public function createAddress(array $data)
     {
         return UserAddress::create($data);
@@ -18,7 +16,6 @@ class UserRepository implements UserInterface
 
     public function updateAddress(array $data)
     {
-
         UserAddress::where('id', $data['id'])->update($data);
     }
 
@@ -38,7 +35,7 @@ class UserRepository implements UserInterface
                 'user_id' => $data['user_id'],
                 'product_id' => $data['product_id'],
                 'merchant_id' => $data['merchant_id'],
-                'quantity' => $quantity
+                'quantity' => $quantity,
             ]);
         }
     }
@@ -48,11 +45,11 @@ class UserRepository implements UserInterface
         $userCart = UserCart::where('user_id', $data['user_id'])->where('product_id', $data['product_id'])->firstOrFail();
         $userCart->delete();
     }
+
     public function addProductToFavorite(array $data)
     {
         Favorite::create($data);
     }
-
 
     public function removeProductFromFavorite(array $data)
     {

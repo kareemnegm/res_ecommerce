@@ -4,23 +4,18 @@ namespace App\Traits;
 
 trait FileTrait
 {
-
-
     /**
      * SaveFile
      */
     public function saveFiles($files, $collection = null, $hasDefault = true, $disk = 'public')
     {
-
         $collection = $collection ?? $this->mediaCollection;
         if (is_array($files)) {
-
             foreach ($files as $key => $file) {
-                $media = $this->addMedia($file)->usingFileName(time() . '.' . $file->extension())->toMediaCollection($collection, $disk);
+                $media = $this->addMedia($file)->usingFileName(time().'.'.$file->extension())->toMediaCollection($collection, $disk);
             }
         } else {
-
-            $media = $this->addMedia($files)->usingFileName(time() . '.' . $files->extension())->toMediaCollection($collection, $disk);
+            $media = $this->addMedia($files)->usingFileName(time().'.'.$files->extension())->toMediaCollection($collection, $disk);
         }
 
         return $media;
@@ -37,14 +32,12 @@ trait FileTrait
         $this->saveFiles($files, $collection, $hasDefault = true, $disk);
     }
 
-
     /**
      * getDefaultImageUrlAttribute
      */
     public function getDefaultImageUrlAttribute(): string
     {
         if ($image = $this->getMedia($this->mediaCollection)->first()) {
-
             return $image->getFullUrl();
         }
 
@@ -52,13 +45,11 @@ trait FileTrait
     }
 
     /**
-     *
      * getImgUrlAttribute
      */
     public function getImgUrlAttribute(): string
     {
         if ($image = $this->getMedia($this->mediaCollection)->first()) {
-
             return $image->getFullUrl();
         }
 

@@ -23,7 +23,7 @@ class ShopResource extends JsonResource
             'description_en' => $this->getTranslation('description', 'en'),
             'description_ar' => $this->getTranslation('description', 'ar'),
             'shop_logo' => new ImageResource($this->getFirstMedia('shop_logo')) ?? null,
-            'category' =>  CategoryResource::collection($this->category),
+            'category' => CategoryResource::collection($this->category),
         ];
     }
 }

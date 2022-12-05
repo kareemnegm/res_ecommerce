@@ -11,7 +11,7 @@ namespace App\Docs;
  */
 class CreateProduct
 {
- /**
+    /**
      * @OA\Property(
      *     title="name",
      *     description="product name text field",
@@ -19,10 +19,10 @@ class CreateProduct
      *     example={"en":"productName", "ar":"سياسيا1"}
      * )
      *
-     *
      * @var object
      */
     public $name;
+
     /**
      * * @OA\Property(
      *     title="description",
@@ -31,11 +31,9 @@ class CreateProduct
      *     example={"en":"description", "ar":"سياسيا"}
      * )
      *
-     *
      * @var object
      */
     public $description;
-
 
     /**
      * @OA\Property(
@@ -68,8 +66,6 @@ class CreateProduct
      *   format="array",
      * example={"tag1","tag2"})
      *
-     *
-     *
      * @var object
      */
     public $tags;
@@ -81,38 +77,29 @@ class CreateProduct
      *   format="integer",
      * example=2)
      *
-     *
-     *
      * @var object
      */
     public $merchant_category_id;
 
-     /**
+    /**
      *    @OA\Property(
      *   property="order",
      *   description="order",
      *   format="integer",
      * example=1)
      *
-     *
-     *
      * @var object
      */
     public $order;
 
-
-     /**
+    /**
      *    @OA\Property(
      *   property="price",
      *   description="price",
      *   format="integer",
      * example=15)
      *
-     *
-     *
      * @var object
      */
     public $price;
-
-
 }

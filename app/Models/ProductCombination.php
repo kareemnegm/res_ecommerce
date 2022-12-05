@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ProductCombination extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'combination_string',
         'sku',

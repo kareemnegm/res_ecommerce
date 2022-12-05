@@ -26,7 +26,6 @@ class RemoveProductCartRule implements Rule
      */
     public function passes($attribute, $value)
     {
-
         $favorite = UserCart::where('user_id', $this->request->user_id)->exists();
         if ($favorite) {
             $product = UserCart::where('user_id', $this->request->user_id)->where('product_id', $this->request->id)->exists();

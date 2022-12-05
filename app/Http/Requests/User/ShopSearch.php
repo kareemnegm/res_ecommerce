@@ -24,7 +24,7 @@ class ShopSearch extends BaseFormRequest
     public function rules()
     {
         return [
-            'search'=>'required|string|min:1'
+            'search' => 'required|string|min:1',
         ];
     }
 }

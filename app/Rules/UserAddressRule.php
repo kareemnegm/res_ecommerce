@@ -14,7 +14,6 @@ class UserAddressRule implements Rule
      */
     public function __construct()
     {
-
     }
 
     /**
@@ -26,13 +25,12 @@ class UserAddressRule implements Rule
      */
     public function passes($attribute, $value)
     {
+        $userId = auth('user')->user()->id;
+        $Address = UserAddress::where('id', $value)->where('user_id', $userId)->first();
 
-        $userId=auth('user')->user()->id;
-        $Address=UserAddress::where('id',$value)->where('user_id',$userId)->first();
-
-        if($Address){
+        if ($Address) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }

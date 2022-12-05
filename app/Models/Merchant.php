@@ -4,17 +4,14 @@ namespace App\Models;
 
 use App\Traits\FileTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Translatable\HasTranslations;
-
-
-
 
 class Merchant extends Authenticatable implements HasMedia
 {
@@ -28,10 +25,10 @@ class Merchant extends Authenticatable implements HasMedia
         'approved',
         'country_id',
         'admin_id',
-        'description'
+        'description',
     ];
-    public $translatable = ['shop_name', 'description'];
 
+    public $translatable = ['shop_name', 'description'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -62,7 +59,6 @@ class Merchant extends Authenticatable implements HasMedia
         return $this->belongsToMany(Category::class);
     }
 
-
     public function merchantCategory()
     {
         return $this->hasMany(MerchantCategory::class);
@@ -75,7 +71,6 @@ class Merchant extends Authenticatable implements HasMedia
             ->height(600)
             ->sharpen(0);
     }
-
 
     public function scopeApproved($query)
     {

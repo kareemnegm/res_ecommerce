@@ -26,7 +26,6 @@ class RemoveProductFavoriteRule implements Rule
      */
     public function passes($attribute, $value)
     {
-
         $favorite = Favorite::where('user_id', $this->request->user_id)->exists();
         if ($favorite) {
             $product = Favorite::where('user_id', $this->request->user_id)->where('product_id', $this->request->id)->exists();

@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Merchant;
 
 use App\Http\Requests\BaseFormRequest;
-use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateMerchantCategoryFormRequest extends BaseFormRequest
 {
@@ -24,12 +23,11 @@ class UpdateMerchantCategoryFormRequest extends BaseFormRequest
      */
     public function rules()
     {
-
         return [
             'name.en' => 'required|string',
             'name.ar' => 'required|string',
-            'name.*' => 'unique:categories,name,' . $this->route('category'),
-            'merchant_category_id' => 'nullable|exists:merchant_categories,id,merchant_id,' . auth('merchant')->user()->id,
+            'name.*' => 'unique:categories,name,'.$this->route('category'),
+            'merchant_category_id' => 'nullable|exists:merchant_categories,id,merchant_id,'.auth('merchant')->user()->id,
         ];
     }
 }

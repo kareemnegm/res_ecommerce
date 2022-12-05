@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Docs;
 
 /**
@@ -21,6 +22,7 @@ class MerchantChangePassword
      * @var string
      */
     public $current_password;
+
     /**
      * @OA\Property(
      *     title="password",

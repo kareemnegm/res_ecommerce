@@ -9,7 +9,7 @@ namespace App\Docs;
  *     title=" User update request",
  * )
  */
-class  UserUpdate
+class UserUpdate
 {
     /**
      * @OA\Property(
@@ -47,9 +47,7 @@ class  UserUpdate
      */
     public $email;
 
-
     /**
-     *
      * @var string
      */
 
@@ -76,6 +74,4 @@ class  UserUpdate
      * @var string
      */
     public $gender;
-
-
 }

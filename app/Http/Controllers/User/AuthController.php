@@ -15,12 +15,13 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-
     private AuthInterface $AuthRepository;
+
     public function __construct(AuthInterface $AuthRepository)
     {
         $this->AuthRepository = $AuthRepository;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -30,6 +31,7 @@ class AuthController extends Controller
     {
         //
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -72,8 +74,8 @@ class AuthController extends Controller
      */
     public function register(RegisterFormRequest $request)
     {
-
         $user = $this->AuthRepository->register($request->validated());
+
         return $this->dataResponse(['user' => new UserResource($user['user']), 'token' => $user['token']], 'success', 201);
     }
 
@@ -123,11 +125,11 @@ class AuthController extends Controller
     {
         $userData = $request->validated();
         $user = User::where('email', $userData['email'])->first();
-        if (!$user || !Hash::check($userData['password'], $user->password)) {
-
+        if (! $user || ! Hash::check($userData['password'], $user->password)) {
             return $this->errorResponse('Credentials not match', 401);
         }
         $token = $user->createToken('userToken')->plainTextToken;
+
         return $this->dataResponse(['user' => new UserResource($user), 'token' => $token], 'success', 200);
     }
 
@@ -177,14 +179,14 @@ class AuthController extends Controller
     {
         $user = auth('user')->user();
 
-        if (!Hash::check($request->current_password, $user->password)) {
+        if (! Hash::check($request->current_password, $user->password)) {
             return $this->errorResponseWithMessage('Current password does not match!', 400);
         }
         $user->password = bcrypt($request->password);
         $user->save();
+
         return $this->successResponse('password changed success', 200);
     }
-
 
     /**
      * Update the specified resource in storage.
@@ -230,6 +232,7 @@ class AuthController extends Controller
         $userData = $request->validated();
         $userData['id'] = auth('user')->user()->id;
         $this->AuthRepository->updateUser($userData);
+
         return $this->successResponse('updated success', 200);
     }
 
@@ -272,6 +275,7 @@ class AuthController extends Controller
     {
         $id = auth('user')->user()->id;
         $this->AuthRepository->softDelete($id);
+
         return $this->successResponse('deleted success', 200);
     }
 }

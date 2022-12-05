@@ -11,19 +11,18 @@ class AdminRepository implements AdminInterface
      * register user
      *
      * @param [type] $request
-     *
      * @return void
      */
-
     public function merchantsList($request)
     {
         if (isset($request['approved'])) {
             $approved = $request['approved'] == 'true' ? 1 : 0;
+
             return Merchant::where('approved', $approved)->get();
         }
+
         return Merchant::all();
     }
-
 
     public function approveMerchant($id)
     {
@@ -39,6 +38,7 @@ class AdminRepository implements AdminInterface
             $merchant->saveFiles($data['shop_logo'], 'shop_logo');
         }
         $merchant->category()->sync($data['category_id']);
+
         return $merchant;
     }
 }

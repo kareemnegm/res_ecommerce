@@ -4,7 +4,5 @@ namespace App\Interfaces\User;
 
 interface ProductInterface
 {
-
- public function getProduct($id);
-
+    public function getProduct($id);
 }

@@ -43,17 +43,17 @@ return [
 
         'merchant' => [
             'driver' => 'sanctum',
-            'provider' => 'merchants'
+            'provider' => 'merchants',
         ],
 
         'user' => [
             'driver' => 'sanctum',
-            'provider' => 'users'
+            'provider' => 'users',
         ],
 
         'admin' => [
             'driver' => 'sanctum',
-            'provider' => 'admins'
+            'provider' => 'admins',
         ],
     ],
 

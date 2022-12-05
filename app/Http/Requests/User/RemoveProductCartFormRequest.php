@@ -25,11 +25,10 @@ class RemoveProductCartFormRequest extends BaseFormRequest
      */
     public function rules(Request $request)
     {
-
         $request['user_id'] = auth('user')->user()->id;
 
         return [
-            'id' => ['required', 'exists:products,id', new RemoveProductCartRule($request)]
+            'id' => ['required', 'exists:products,id', new RemoveProductCartRule($request)],
         ];
     }
 }

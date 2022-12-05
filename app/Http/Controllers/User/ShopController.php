@@ -12,12 +12,13 @@ use Illuminate\Http\Request;
 
 class ShopController extends Controller
 {
-
     private ShopInterface $ShopRepository;
+
     public function __construct(ShopInterface $ShopRepository)
     {
         $this->ShopRepository = $ShopRepository;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -67,10 +68,10 @@ class ShopController extends Controller
      *      )
      * )
      */
-
     public function shops(Request $request)
     {
         $shops = $this->ShopRepository->shops();
+
         return $this->paginateCollection(ShopResource::collection($shops), $request->limit, 'shops');
     }
 
@@ -133,10 +134,10 @@ class ShopController extends Controller
      *      )
      * )
      */
-
     public function shopsByCategories(CategoryIdRequest $request)
     {
         $shops = $this->ShopRepository->shopsByCategories($request->category_id);
+
         return $this->paginateCollection(ShopResource::collection($shops), $request->limit, 'shops');
     }
 
@@ -202,6 +203,7 @@ class ShopController extends Controller
     public function ShopProduct(Request $request, $id)
     {
         $products = $this->ShopRepository->shopProducts($id);
+
         return $this->paginateCollection(ProductsResource::collection($products), $request->limit, 'products');
     }
 
@@ -255,13 +257,14 @@ class ShopController extends Controller
     public function searchShop(ShopSearch $request)
     {
         $search = $this->ShopRepository->searchShop($request->validated());
+
         return $this->paginateCollection(ShopResource::collection($search), $request->limit, 'shop');
     }
-
 
     public function shopCategories($id)
     {
         $categories = $this->ShopRepository->shopCategories($id);
+
         return $this->dataResponse(['shop_categories' => $categories], 'success', 200);
     }
 

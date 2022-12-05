@@ -27,7 +27,6 @@ class CartProductFormRequest extends BaseFormRequest
      */
     public function rules(Request $request)
     {
-
         $request['user_id'] = auth('user')->user()->id;
 
         return [
@@ -37,13 +36,14 @@ class CartProductFormRequest extends BaseFormRequest
                 Rule::exists('products', 'merchant_id')
                     ->where('id', $request->product_id)->where('merchant_id', $request->merchant_id),
 
-                new ShopInCartRule($request)
+                new ShopInCartRule($request),
             ],
             'product_id' => 'required|exists:products,id',
-            'quantity' => ['required', 'integer', new ProductStockRule($request)]
+            'quantity' => ['required', 'integer', new ProductStockRule($request)],
 
         ];
     }
+
     /**
      * Get the validation rules that apply to the request.
      *

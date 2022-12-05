@@ -18,7 +18,7 @@ class SubCategoryResource extends JsonResource
             'id' => $this->id,
             'name_en' => $this->getTranslation('name', 'en'),
             'name_ar' => $this->getTranslation('name', 'ar'),
-            'subCategory' => SubCategoryResource::collection($this->subs)
+            'subCategory' => SubCategoryResource::collection($this->subs),
         ];
     }
 }

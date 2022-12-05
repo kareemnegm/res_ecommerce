@@ -9,14 +9,14 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-
     private ProductInterface $ProductRepository;
+
     public function __construct(ProductInterface $ProductRepository)
     {
         $this->ProductRepository = $ProductRepository;
     }
 
-       /**
+    /**
      * @OA\Get(
      *      path="/api/product/{id}",
      *      operationId="getProduct",
@@ -51,7 +51,6 @@ class ProductController extends Controller
      *      )
      * )
      */
-
     public function getProduct($id)
     {
         return $this->dataResponse(['product' => new ProductResource($this->ProductRepository->getProduct($id))], 'success', 200);

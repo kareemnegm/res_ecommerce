@@ -9,9 +9,8 @@ namespace App\Docs;
  *     title=" Merchant Register request",
  * )
  */
-class  MerchantRegister
+class MerchantRegister
 {
-
     /**
      *@OA\Property(
      *     title="shop_name",
@@ -20,10 +19,10 @@ class  MerchantRegister
      *     example={"en":"shopname1", "ar":"سياسيا1"}
      * )
      *
-     *
      * @var object
      */
     public $shop_name;
+
     /**
      * * @OA\Property(
      *     title="description",
@@ -32,18 +31,16 @@ class  MerchantRegister
      *     example={"en":"qqq", "ar":"سياسيا"}
      * )
      *
-     *
      * @var object
      */
     public $description;
+
     /**
      *    @OA\Property(
      *   property="category_id",
      *   description="category ID",
      *   format="array",
      * example={2,3})
-     *
-     *
      *
      * @var object
      */
@@ -74,7 +71,6 @@ class  MerchantRegister
     public $password;
 
     /**
-     *
      * @var string
      */
 

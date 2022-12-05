@@ -26,7 +26,7 @@ class ProductVariantCombinationValidation extends BaseFormRequest
     {
         return [
             'product_id' => ['required', 'exists:products,id', new ProductVairantRule()],
-            'product_combination_id' => 'required|exists:product_combinations,id,product_id,' . request()->product_id,
+            'product_combination_id' => 'required|exists:product_combinations,id,product_id,'.request()->product_id,
             'stock' => 'sometimes|required|numeric',
             'price' => 'sometimes|required|numeric',
         ];

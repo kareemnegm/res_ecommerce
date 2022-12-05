@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Docs;
 
 /**
@@ -21,6 +22,7 @@ class AdminLogin
      * @var string
      */
     public $email;
+
     /**
      * @OA\Property(
      *     title="password",

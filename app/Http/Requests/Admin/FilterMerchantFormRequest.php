@@ -24,7 +24,7 @@ class FilterMerchantFormRequest extends BaseFormRequest
     public function rules()
     {
         return [
-            'approved'=>'nullable|in:true,false',
+            'approved' => 'nullable|in:true,false',
         ];
     }
 }

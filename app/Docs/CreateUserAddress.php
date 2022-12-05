@@ -9,9 +9,8 @@ namespace App\Docs;
  *     title=" user address request",
  * )
  */
-class  CreateUserAddress
+class CreateUserAddress
 {
-
     /**
      *@OA\Property(
      *     title="address",
@@ -20,10 +19,10 @@ class  CreateUserAddress
      *     example="address details"
      * )
      *
-     *
      * @var object
      */
     public $address;
+
     /**
      * * @OA\Property(
      *     title="street",
@@ -31,7 +30,6 @@ class  CreateUserAddress
      *     format="string",
      *     example="street_details"
      * )
-     *
      *
      * @var object
      */
@@ -49,7 +47,7 @@ class  CreateUserAddress
      */
     public $nearest_landmark;
 
-   /**
+    /**
      * @OA\Property(
      *     title="notes",
      *     description="notes field",
@@ -62,7 +60,6 @@ class  CreateUserAddress
     public $notes;
 
     /**
-     *
      * @var string
      */
 
@@ -78,7 +75,7 @@ class  CreateUserAddress
      */
     public $longitude;
 
-      /**
+    /**
      * @OA\Property(
      *     title="latitude",
      *     description="latitude ",

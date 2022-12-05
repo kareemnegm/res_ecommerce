@@ -12,24 +12,23 @@ use Illuminate\Routing\Controller as BaseController;
 
 class Controller extends BaseController
 {
-
-     /**
+    /**
      * @OA\Info(title="Ecommerce Api", version="0.1")
      * @OA\SecurityScheme(
      *securityScheme="Bearer",
-    *type="http",
-    *scheme="bearer",
-    *bearerFormat="JWT"
-    *)
-    */
-        /*@CrossOrigin(origins = "http://127.0.0.1:8000/", maxAge = 3600)
-        @RestController
+     *type="http",
+     *scheme="bearer",
+     *bearerFormat="JWT"
+     *)
+     */
+    /*@CrossOrigin(origins = "http://127.0.0.1:8000/", maxAge = 3600)
+    @RestController
     */
 
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
     public function dataResponse($data, $message = null, $code = null)
     {
-
         $success = [
             'code' => $code ? $code : 200,
             'message' => $message ? $message : 'success',
@@ -44,7 +43,7 @@ class Controller extends BaseController
     {
         $success = [
             'code' => $code ? $code : 200,
-            'message' => $message ? $message : 'success'
+            'message' => $message ? $message : 'success',
         ];
 
         return response()->json($success, 200);
@@ -54,7 +53,7 @@ class Controller extends BaseController
     {
         $error = [
             'code' => $code,
-            'message' => $message
+            'message' => $message,
         ];
 
         return response()->json($error, 401);
@@ -64,40 +63,41 @@ class Controller extends BaseController
     {
         $error = [
             'code' => $code,
-            'message' => $message
+            'message' => $message,
         ];
 
         return response()->json($error, $code);
     }
-    public function paginateCollection($items, $perPage ,$key , $options = [],$page = null)
-{
-    $key=$key?$key:'data';
-    $perPage=$perPage ? $perPage:10;
 
-	$page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+    public function paginateCollection($items, $perPage, $key, $options = [], $page = null)
+    {
+        $key = $key ? $key : 'data';
+        $perPage = $perPage ? $perPage : 10;
 
-	$items = $items instanceof Collection ? $items : Collection::make($items);
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
 
-    $lap = new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
+        $items = $items instanceof Collection ? $items : Collection::make($items);
 
-    return [
-        "status"=> 200,
-        "message"=>"success",
-        "data"=>[
-            "result"=>[
-        'current_page' => $lap->currentPage(),
-         $key => $lap ->values(),
-        'first_page_url' => $lap ->url(1),
-        'from' => $lap->firstItem(),
-        'last_page' => $lap->lastPage(),
-        'last_page_url' => $lap->url($lap->lastPage()),
-        'next_page_url' => $lap->nextPageUrl(),
-        'per_page' => $lap->perPage(),
-        'prev_page_url' => $lap->previousPageUrl(),
-        'to' => $lap->lastItem(),
-        'total' => $lap->total(),
-        ]
-        ]
-    ];
-}
+        $lap = new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
+
+        return [
+            'status' => 200,
+            'message' => 'success',
+            'data' => [
+                'result' => [
+                    'current_page' => $lap->currentPage(),
+                    $key => $lap->values(),
+                    'first_page_url' => $lap->url(1),
+                    'from' => $lap->firstItem(),
+                    'last_page' => $lap->lastPage(),
+                    'last_page_url' => $lap->url($lap->lastPage()),
+                    'next_page_url' => $lap->nextPageUrl(),
+                    'per_page' => $lap->perPage(),
+                    'prev_page_url' => $lap->previousPageUrl(),
+                    'to' => $lap->lastItem(),
+                    'total' => $lap->total(),
+                ],
+            ],
+        ];
+    }
 }

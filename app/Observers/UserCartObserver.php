@@ -15,8 +15,8 @@ class UserCartObserver
      */
     public function created(UserCart $userCart)
     {
-        $product=Product::findOrFail($userCart->product_id);
-        $product->stock_quantity=$product->stock_quantity-$userCart->quantity;
+        $product = Product::findOrFail($userCart->product_id);
+        $product->stock_quantity = $product->stock_quantity - $userCart->quantity;
         $product->save();
     }
 
@@ -39,8 +39,8 @@ class UserCartObserver
      */
     public function deleting(UserCart $userCart)
     {
-        $product=Product::findOrFail($userCart['product_id']);
-        $product->stock_quantity=$product->stock_quantity+$userCart->quantity;
+        $product = Product::findOrFail($userCart['product_id']);
+        $product->stock_quantity = $product->stock_quantity + $userCart->quantity;
         $product->save();
     }
 

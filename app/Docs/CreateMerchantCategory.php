@@ -9,9 +9,8 @@ namespace App\Docs;
  *     title=" create merchant category request",
  * )
  */
-class  CreateMerchantCategory
+class CreateMerchantCategory
 {
-
     /**
      *@OA\Property(
      *     title="name",
@@ -20,10 +19,10 @@ class  CreateMerchantCategory
      *     example={"en":"categoryExample", "ar":"سياسيا1"}
      * )
      *
-     *
      * @var object
      */
     public $name;
+
     /**
      *    @OA\Property(
      *   property="merchant_category_id",
@@ -31,11 +30,7 @@ class  CreateMerchantCategory
      *   format="integer",
      * example=2)
      *
-     *
-     *
      * @var object
      */
     public $merchant_category_id;
-
-
 }

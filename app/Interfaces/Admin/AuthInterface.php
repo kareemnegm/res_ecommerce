@@ -4,7 +4,6 @@ namespace App\Interfaces\Admin;
 
 interface AuthInterface
 {
-
     /**
      * register admin function
      *
@@ -13,8 +12,4 @@ interface AuthInterface
      * @return void
      */
     public function register($adminData);
-
-
-
-    
 }

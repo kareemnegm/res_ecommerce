@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,7 +34,6 @@ Route::group(['namespace' => 'User'], function () {
     Route::get('/category_shops', 'ShopController@shopsByCategories');
     Route::get('/shop/{id}/products', 'ShopController@ShopProduct');
 
-
     /**
      * product
      */
@@ -47,11 +45,7 @@ Route::group(['namespace' => 'User'], function () {
     Route::get('/search/shop', 'ShopController@searchShop');
 });
 
-
-
-
 /**
- *
  * merchant
  */
 Route::group(['prefix' => 'merchant', 'namespace' => 'Merchant'], function () {

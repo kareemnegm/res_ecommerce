@@ -3,10 +3,7 @@
 namespace App\Http\Requests\User;
 
 use App\Http\Requests\BaseFormRequest;
-use App\Models\Product;
 use App\Rules\ProductInFavoriteRule;
-use App\Rules\ProductStockRule;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 
 class FavoriteProductFormRequest extends BaseFormRequest
@@ -29,9 +26,10 @@ class FavoriteProductFormRequest extends BaseFormRequest
     public function rules(Request $request)
     {
         $request['user_id'] = auth('user')->user()->id;
+
         return [
             'merchant_id' => 'required|exists:merchants,id',
-            'product_id' => ['required','exists:products,id,merchant_id,'.$request->merchant_id,new ProductInFavoriteRule($request)]
+            'product_id' => ['required', 'exists:products,id,merchant_id,'.$request->merchant_id, new ProductInFavoriteRule($request)],
         ];
     }
 }

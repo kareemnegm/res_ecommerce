@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Merchant\Product;
 
 use App\Http\Requests\BaseFormRequest;
-use Illuminate\Foundation\Http\FormRequest;
 
 class ProductFormRequest extends BaseFormRequest
 {
@@ -24,7 +23,8 @@ class ProductFormRequest extends BaseFormRequest
      */
     public function rules()
     {
-        $auth=auth('merchant')->user()->id;
+        $auth = auth('merchant')->user()->id;
+
         return [
             'name.en' => 'required|string',
             'name.ar' => 'required|string',
@@ -38,7 +38,7 @@ class ProductFormRequest extends BaseFormRequest
             'tags' => 'sometimes|required|array',
             'tags.*' => 'required|string|distinct|min:3',
             'product_images' => 'nullable|array',
-            'product_images.*'=>'image|mimes:jpeg,png,jpg,gif,svg|max:20000',
+            'product_images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:20000',
             'weight' => 'nullable|numeric',
             'order' => 'nullable|numeric',
             'merchant_category_id' => 'required|exists:merchant_categories,id,merchant_id,'.$auth,

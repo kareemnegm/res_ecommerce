@@ -11,7 +11,7 @@ namespace App\Docs;
  */
 class UpdateProduct
 {
- /**
+    /**
      * @OA\Property(
      *     title="name",
      *     description="product name text field",
@@ -19,10 +19,10 @@ class UpdateProduct
      *     example={"en":"productNameUpdated", "ar":"سياسيا1"}
      * )
      *
-     *
      * @var object
      */
     public $name;
+
     /**
      * * @OA\Property(
      *     title="description",
@@ -31,11 +31,9 @@ class UpdateProduct
      *     example={"en":"description", "ar":"سياسيا"}
      * )
      *
-     *
      * @var object
      */
     public $description;
-
 
     /**
      * @OA\Property(
@@ -68,8 +66,6 @@ class UpdateProduct
      *   format="array",
      * example={"tag1","tag2"})
      *
-     *
-     *
      * @var object
      */
     public $tags;
@@ -81,51 +77,40 @@ class UpdateProduct
      *   format="integer",
      * example=2)
      *
-     *
-     *
      * @var object
      */
     public $merchant_category_id;
 
-     /**
+    /**
      *    @OA\Property(
      *   property="order",
      *   description="order",
      *   format="integer",
      * example=1)
      *
-     *
-     *
      * @var object
      */
     public $order;
 
-
-     /**
+    /**
      *    @OA\Property(
      *   property="price",
      *   description="price",
      *   format="integer",
      * example=15)
      *
-     *
-     *
      * @var object
      */
     public $price;
 
-
-  /**
+    /**
      *    @OA\Property(
      *   property="deleted_tags",
      *   description="deleted tags",
      *   format="array",
      * example={"tag1","tag2"})
      *
-     *
-     *
      * @var object
      */
     public $deleted_tags;
-
 }

@@ -19,7 +19,7 @@ class SingleProductResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'merchant_id'=>$this->merchant_id,
+            'merchant_id' => $this->merchant_id,
             'name_en' => $this->getTranslation('name', 'en'),
             'name_ar' => $this->getTranslation('name', 'ar'),
             'description_en' => $this->getTranslation('description', 'en'),
@@ -31,7 +31,7 @@ class SingleProductResource extends JsonResource
             'category' => new MerchantCategoryResource($this->merchantCategory),
             'tags' => TagsResource::collection($this->tags),
             'product_images' => ImageResource::collection($this->getMedia('product_images')) ?? null,
-            'order' => $this->order
+            'order' => $this->order,
 
         ];
     }

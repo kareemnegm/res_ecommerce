@@ -25,7 +25,7 @@ class ProductIdMerchantFormRequest extends BaseFormRequest
     public function rules()
     {
         return [
-            'id' => ['required','exists:products,id',new MerchantProductValidationRule()],
+            'id' => ['required', 'exists:products,id', new MerchantProductValidationRule()],
         ];
     }
 }

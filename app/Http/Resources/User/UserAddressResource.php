@@ -15,15 +15,15 @@ class UserAddressResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'=>$this->id,
-            'address'=>$this->address,
-            'street'=>$this->street,
-            'nearest_landmark'=>$this->nearest_landmark,
-            'notes'=>$this->notes,
-            'latitude'=>$this->latitude,
-            'longitude'=>$this->longitude,
-            'user_id'=>$this->user_id,
-            'is_default'=>$this->is_default,
+            'id' => $this->id,
+            'address' => $this->address,
+            'street' => $this->street,
+            'nearest_landmark' => $this->nearest_landmark,
+            'notes' => $this->notes,
+            'latitude' => $this->latitude,
+            'longitude' => $this->longitude,
+            'user_id' => $this->user_id,
+            'is_default' => $this->is_default,
         ];
     }
 }

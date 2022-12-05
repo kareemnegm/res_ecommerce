@@ -24,7 +24,7 @@ class VariantFormRequest extends BaseFormRequest
     public function rules()
     {
         return [
-            'product_id'=>'required|exists:products,id,merchant_id,'.auth('merchant')->user()->id,
+            'product_id' => 'required|exists:products,id,merchant_id,'.auth('merchant')->user()->id,
             'variants' => 'required|array',
             'variants.*.*.name' => 'required|string',
         ];

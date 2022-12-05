@@ -27,7 +27,7 @@ class VariantCombinationFormRequest extends BaseFormRequest
             'variant_value.*' => 'required|exists:variant_values,id',
             'stock' => 'required|integer',
             'price' => 'required',
-            'product_id' => 'required|exists:products,id'
+            'product_id' => 'required|exists:products,id',
         ];
     }
 }

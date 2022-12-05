@@ -11,9 +11,8 @@ use Illuminate\Http\Request;
 
 class MerchantCategoryController extends Controller
 {
-
-
     private MerchantCategoryInterface $MerchantCategoryRepository;
+
     public function __construct(MerchantCategoryInterface $MerchantCategoryRepository)
     {
         $this->MerchantCategoryRepository = $MerchantCategoryRepository;
@@ -50,11 +49,11 @@ class MerchantCategoryController extends Controller
      *      )
      * )
      */
-
     public function index(Request $request)
     {
         $request['merchant_id'] = Auth('merchant')->user()->id;
         $categories = $this->MerchantCategoryRepository->index($request);
+
         return $this->paginateCollection(MerchantCategoryResource::collection($categories), $request->limit, 'categories');
     }
 
@@ -115,6 +114,7 @@ class MerchantCategoryController extends Controller
         $categoryData = $request->validated();
         $categoryData['merchant_id'] = Auth('merchant')->user()->id;
         $this->MerchantCategoryRepository->create($categoryData);
+
         return $this->successResponse('success', 201);
     }
 
@@ -124,7 +124,7 @@ class MerchantCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-        /**
+    /**
      * @OA\Get(
      *      path="/api/merchant/category/{id}",
      *      operationId="getMerchantCategory",
@@ -167,7 +167,6 @@ class MerchantCategoryController extends Controller
         return $this->dataResponse(['category' => new MerchantCategoryResource($category)], 'success', 200);
     }
 
-
     /**
      * Update the specified resource in storage.
      *
@@ -175,7 +174,7 @@ class MerchantCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-     /**
+    /**
      * @OA\Put(
      *
      *      path="/api/merchant/category/{id}",
@@ -220,12 +219,12 @@ class MerchantCategoryController extends Controller
      *      )
      * )
      */
-
     public function update(UpdateMerchantCategoryFormRequest $request, $id)
     {
         $categoryData = $request->validated();
         $categoryData['merchant_id'] = Auth('merchant')->user()->id;
         $this->MerchantCategoryRepository->update($categoryData, $id);
+
         return $this->successResponse('updated successful', 200);
     }
 
@@ -236,7 +235,7 @@ class MerchantCategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-      /**
+    /**
      * @OA\Delete(
      *      path="/api/merchant/category/{id}",
      *      operationId="deleteMerchantCategory",
@@ -275,6 +274,7 @@ class MerchantCategoryController extends Controller
     public function destroy($id)
     {
         $this->MerchantCategoryRepository->delete($id, auth('merchant')->user()->id);
+
         return $this->successResponse('deleted successful', 200);
     }
 }

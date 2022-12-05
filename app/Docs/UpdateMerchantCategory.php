@@ -9,9 +9,8 @@ namespace App\Docs;
  *     title=" update merchant category request",
  * )
  */
-class  UpdateMerchantCategory
+class UpdateMerchantCategory
 {
-
     /**
      *@OA\Property(
      *     title="name",
@@ -20,10 +19,10 @@ class  UpdateMerchantCategory
      *     example={"en":"categoryExampleUpdate", "ar":"سياسيا1"}
      * )
      *
-     *
      * @var object
      */
     public $name;
+
     /**
      *    @OA\Property(
      *   property="merchant_category_id",
@@ -31,11 +30,7 @@ class  UpdateMerchantCategory
      *   format="integer",
      * example=2)
      *
-     *
-     *
      * @var object
      */
     public $merchant_category_id;
-
-
 }

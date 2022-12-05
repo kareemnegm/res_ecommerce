@@ -4,7 +4,6 @@ namespace App\Interfaces\User;
 
 interface UserInterface
 {
-
     public function createAddress(array $data);
 
     public function updateAddress(array $data);
@@ -18,6 +17,4 @@ interface UserInterface
     public function removeProductFromFavorite(array $data);
 
     public function removeProductFromCart(array $data);
-
-
 }

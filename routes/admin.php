@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,13 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-
 /**
- *
  * merchant
  */
-
 Route::post('/register', 'AuthController@register')->withoutMiddleware('auth:admin');
 Route::post('/login', 'AuthController@login')->withoutMiddleware('auth:admin');
 Route::apiResource('/category', 'Category\CategoryController');

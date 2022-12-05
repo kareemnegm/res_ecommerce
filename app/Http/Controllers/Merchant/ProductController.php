@@ -14,7 +14,6 @@ use App\Http\Requests\Merchant\Product\VariantFormRequest;
 use App\Http\Resources\Merchant\Product\ProductCombinationResource;
 use App\Http\Resources\Merchant\Product\ProductsResource;
 use App\Http\Resources\Merchant\Product\ProductVariantResource;
-use App\Http\Resources\Merchant\Product\ProductVariantWithVAluesResource;
 use App\Http\Resources\Merchant\Product\SingleProductResource;
 use App\Http\Resources\Merchant\Product\VariantValueResource;
 use App\Interfaces\Merchant\ProductInterface;
@@ -22,23 +21,19 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-
-
-
-
     private ProductInterface $ProductRepository;
+
     public function __construct(ProductInterface $ProductRepository)
     {
         $this->ProductRepository = $ProductRepository;
     }
-
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-     /**
+    /**
      * @OA\Get(
      *      path="/api/merchant/product",
      *      operationId="MerchantProductList",
@@ -67,6 +62,7 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $request['merchant_id'] = auth('merchant')->user()->id;
+
         return $this->paginateCollection(ProductsResource::collection($this->ProductRepository->index($request['merchant_id'])), $request->limit, 'products');
     }
 
@@ -87,7 +83,7 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     /**
+    /**
      * @OA\Post(
      *
      *      path="/api/merchant/product",
@@ -123,12 +119,12 @@ class ProductController extends Controller
      *      )
      * )
      */
-
     public function store(ProductFormRequest $request)
     {
         $productData = $request->validated();
         $productData['merchant_id'] = auth('merchant')->user()->id;
         $this->ProductRepository->create($productData);
+
         return $this->successResponse('success', 201);
     }
 
@@ -138,7 +134,7 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-      /**
+    /**
      * @OA\Get(
      *      path="/api/merchant/Product/{id}",
      *      operationId="getMerchantProduct",
@@ -178,9 +174,9 @@ class ProductController extends Controller
     {
         $auth = auth('merchant')->user()->id;
         $product = $this->ProductRepository->show($auth, $id);
+
         return $this->dataResponse(['product' => new SingleProductResource($product)], 'success', 200);
     }
-
 
     /**
      * Update the specified resource in storage.
@@ -189,7 +185,7 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-         /**
+    /**
      * @OA\Put(
      *
      *      path="/api/merchant/product/{id}",
@@ -234,12 +230,12 @@ class ProductController extends Controller
      *      )
      * )
      */
-
     public function update(UpdateProductFormRequest $request, $id)
     {
         $productData = $request->validated();
         $productData['merchant_id'] = auth('merchant')->user()->id;
         $this->ProductRepository->update($productData, $id);
+
         return $this->successResponse('product updated successful', 200);
     }
 
@@ -288,10 +284,11 @@ class ProductController extends Controller
     public function destroy(ProductIdMerchantFormRequest $request, $id)
     {
         $this->ProductRepository->deleteProduct($id);
+
         return $this->successResponse('product deleted successful', 200);
     }
 
- /**
+    /**
      * @OA\Post(
      *
      *      path="/api/merchant/product_variant",
@@ -327,20 +324,19 @@ class ProductController extends Controller
      *      )
      * )
      */
-
-
     public function productVariants(VariantFormRequest $request)
     {
         $this->ProductRepository->CreateProductVariant($request->validated('variants'), $request->product_id);
+
         return $this->successResponse('success', 201);
     }
 
     public function productVariantCombination(VariantCombinationFormRequest $request)
     {
         $combination = $this->ProductRepository->productVariantCombination($request->validated());
+
         return $this->dataResponse(['product_variant_combination' => new ProductCombinationResource($combination)], 'success', 201);
     }
-
 
     /**
      * @OA\get(
@@ -378,14 +374,14 @@ class ProductController extends Controller
      *      )
      * )
      */
-
     public function getProductVariant(ProductVairantRequest $request, $product_id)
     {
         $variants = $this->ProductRepository->getProductVariants($product_id);
+
         return $this->dataResponse(['product_variants' => ProductVariantResource::collection($variants)], 'success', 200);
     }
 
-/**
+    /**
      * @OA\get(
      *
      *      path="/api/merchant/product_variant_values",
@@ -434,21 +430,21 @@ class ProductController extends Controller
     public function getProductVariantValues(ProductVariantValuesRequest $request)
     {
         $values = $this->ProductRepository->getProductVariantValues($request->validated());
+
         return $this->paginateCollection(VariantValueResource::collection($values), $request->limit, 'values');
     }
-
-
 
     public function getProductVariantCombinations($id)
     {
         $merchant_id = auth('merchant')->user()->id;
+
         return $this->dataResponse(['product_combinations' => ProductCombinationResource::collection($this->ProductRepository->getProductVariantCombinations($id, $merchant_id))], 'success', 200);
     }
-
 
     public function updateProductVariantCombination(ProductVariantCombinationValidation $request)
     {
         $this->ProductRepository->updateProductVariantCombinations($request->validated());
+
         return $this->successResponse('updated success', 200);
     }
 }

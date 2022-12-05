@@ -4,7 +4,6 @@ namespace App\Interfaces\Merchant;
 
 interface AuthInterface
 {
-
     /**
      * register merchant function
      *
@@ -14,7 +13,7 @@ interface AuthInterface
      */
     public function register($MerchantData);
 
-     /**
+    /**
      * update merchant function
      *
      * @param [type] $request
@@ -23,13 +22,10 @@ interface AuthInterface
      */
     public function update($merchantData);
 
-
-     /**
+    /**
      * merchant profile using auth
      *
      * @return void
      */
     public function myProfile($id);
-
-
 }

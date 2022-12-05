@@ -15,12 +15,12 @@ class ProductCombinationResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'=>$this->id,
-            'combination_string'=>$this->combination_string,
-            'sku'=>$this->sku,
-            'product_id'=>$this->product_id,
-            'stock'=>$this->productStock->stock,
-            'price'=>$this->productStock->price,
+            'id' => $this->id,
+            'combination_string' => $this->combination_string,
+            'sku' => $this->sku,
+            'product_id' => $this->product_id,
+            'stock' => $this->productStock->stock,
+            'price' => $this->productStock->price,
         ];
     }
 }

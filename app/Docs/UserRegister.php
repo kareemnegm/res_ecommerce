@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Docs;
+
 /**
  * @OA\Schema(
  *     description="Some simple request Register User",
@@ -8,7 +9,7 @@ namespace App\Docs;
  *     title=" User Register request",
  * )
  */
-class  UserRegister
+class UserRegister
 {
     /**
      * @OA\Property(
@@ -47,7 +48,6 @@ class  UserRegister
     public $password;
 
     /**
-     *
      * @var string
      */
 

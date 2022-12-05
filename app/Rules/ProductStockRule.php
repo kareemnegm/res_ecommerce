@@ -3,7 +3,6 @@
 namespace App\Rules;
 
 use App\Models\Product;
-use App\Models\UserCart;
 use Illuminate\Contracts\Validation\Rule;
 
 class ProductStockRule implements Rule
@@ -27,7 +26,6 @@ class ProductStockRule implements Rule
      */
     public function passes($attribute, $value)
     {
-
         $product = Product::where('id', $this->request->product_id)->where('stock_quantity', '>=', $this->request->quantity)->exists();
 
         if ($product) {

@@ -11,8 +11,8 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-
     private CategoryInterface $CategoryRepository;
+
     public function __construct(CategoryInterface $CategoryRepository)
     {
         $this->CategoryRepository = $CategoryRepository;
@@ -22,7 +22,6 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
 
     /**
      * @OA\Get(
@@ -51,10 +50,10 @@ class CategoryController extends Controller
      *      )
      * )
      */
-
     public function index(Request $request)
     {
         $categories = $this->CategoryRepository->index();
+
         return $this->paginateCollection(CategoryResource::collection($categories), $request->limit, 'categories');
     }
 
@@ -103,6 +102,7 @@ class CategoryController extends Controller
     public function store(categoryFormRequest $request)
     {
         $category = $this->CategoryRepository->create($request->validated());
+
         return $this->dataResponse(['category' => new CategoryResource($category)], 'success', 201);
     }
 
@@ -148,14 +148,10 @@ class CategoryController extends Controller
      *      )
      * )
      */
-
     public function show($id)
     {
-
         return $this->dataResponse(['category' => new CategoryResource($this->CategoryRepository->show($id))], 'success', 200);
     }
-
-
 
     /**
      * Update the specified resource in storage.
@@ -210,10 +206,10 @@ class CategoryController extends Controller
      *      )
      * )
      */
-
     public function update(UpdateCategoryFormRequest $request, $id)
     {
         $this->CategoryRepository->update($request->validated(), $id);
+
         return $this->successResponse('updated success', 200);
     }
 
@@ -262,6 +258,7 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $this->CategoryRepository->delete($id);
+
         return $this->successResponse('deleted success', 200);
     }
 }

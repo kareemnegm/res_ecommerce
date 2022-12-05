@@ -26,7 +26,6 @@ class UserIdNumberValidatorRule implements Rule
      */
     public function passes($attribute, $value)
     {
-
         $country = Country::where('id', $this->request->country_id)->firstOrFail();
         $length = strlen($this->request->id_number);
         if ($country->id_limit == $length) {

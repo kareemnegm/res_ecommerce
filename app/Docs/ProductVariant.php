@@ -12,40 +12,29 @@ namespace App\Docs;
 class ProductVariant
 {
 }
-    /**
-     *    @OA\Property(
-     *   property="variants",
-     *   description="variants",
-     *   type="array",
-     *   example="[
-     * ["size"][0]["name"]:"largee",
-     * ["color"][0]["name"]:"yellow",
-     * ]"
-     *
-     *
-     *
-     *
-     *
-     * @var object
-     */
-    // public $variants;
+/**
+ *    @OA\Property(
+ *   property="variants",
+ *   description="variants",
+ *   type="array",
+ *   example="[
+ * ["size"][0]["name"]:"largee",
+ * ["color"][0]["name"]:"yellow",
+ * ]"
+ *
+ * @var object
+ */
+// public $variants;
 
-
-
-
-    /**
-     *    @OA\Property(
-     *   property="product_id",
-     *   description="product ID",
-     *   format="integer",
-     * example=8)
-     *
-     *
-     *
-     * @var object
-     */
-    // public $product_id;
-
-
+/**
+ *    @OA\Property(
+ *   property="product_id",
+ *   description="product ID",
+ *   format="integer",
+ * example=8)
+ *
+ * @var object
+ */
+// public $product_id;
 
 // }

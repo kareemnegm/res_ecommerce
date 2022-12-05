@@ -17,7 +17,7 @@ class VariantValueResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'product_variant_id' => $this->product_variant_id
+            'product_variant_id' => $this->product_variant_id,
         ];
     }
 }

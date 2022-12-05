@@ -24,7 +24,7 @@ class CategoryIdRequest extends BaseFormRequest
     public function rules()
     {
         return [
-            'category_id'=>'required|exists:categories,id'
+            'category_id' => 'required|exists:categories,id',
         ];
     }
 }

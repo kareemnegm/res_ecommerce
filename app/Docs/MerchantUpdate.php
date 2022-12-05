@@ -9,9 +9,8 @@ namespace App\Docs;
  *     title=" merchant update request",
  * )
  */
-class  MerchantUpdate
+class MerchantUpdate
 {
-
     /**
      *@OA\Property(
      *     title="description",
@@ -19,7 +18,6 @@ class  MerchantUpdate
      *     format="string",
      *     example={"en":"shopname2updated", "ar":"سياسياتحديث1"}
      * )
-     *
      *
      * @var object
      */
@@ -32,7 +30,6 @@ class  MerchantUpdate
      *     format="string",
      *     example={"en":"description updated ", "ar":"سياسيا"}
      * )
-     *
      *
      * @var object
      */
@@ -50,9 +47,7 @@ class  MerchantUpdate
      */
     public $email;
 
-
     /**
-     *
      * @var string
      */
 
@@ -74,8 +69,6 @@ class  MerchantUpdate
      *   description="category ID",
      *   format="array",
      * example={4,3})
-     *
-     *
      *
      * @var object
      */

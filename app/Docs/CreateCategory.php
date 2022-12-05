@@ -9,9 +9,8 @@ namespace App\Docs;
  *     title=" create category request",
  * )
  */
-class  CreateCategory
+class CreateCategory
 {
-
     /**
      *@OA\Property(
      *     title="name",
@@ -20,10 +19,10 @@ class  CreateCategory
      *     example={"en":"categoryExample", "ar":"سياسيا1"}
      * )
      *
-     *
      * @var object
      */
     public $name;
+
     /**
      *    @OA\Property(
      *   property="category_id",
@@ -31,11 +30,7 @@ class  CreateCategory
      *   format="integer",
      * example=2)
      *
-     *
-     *
      * @var object
      */
     public $category_id;
-
-   
 }

@@ -15,6 +15,7 @@ use Spatie\Translatable\HasTranslations;
 class Product extends Model implements HasMedia
 {
     use HasFactory, HasTags, InteractsWithMedia, FileTrait, HasTranslations, SoftDeletes;
+
     protected $fillable = [
         'name',
         'description',
@@ -25,8 +26,9 @@ class Product extends Model implements HasMedia
         'stock_quantity',
         'merchant_category_id',
         'merchant_id',
-        'is_published'
+        'is_published',
     ];
+
     protected $appends = ['Tags'];
 
     public $translatable = ['name', 'description'];
@@ -58,6 +60,7 @@ class Product extends Model implements HasMedia
             ->height(600)
             ->sharpen(0);
     }
+
     public function getTagsAttribute()
     {
         return $this->tags()->get();
@@ -67,5 +70,4 @@ class Product extends Model implements HasMedia
     {
         return $query->where('is_published', 1);
     }
-
 }

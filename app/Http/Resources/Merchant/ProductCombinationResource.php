@@ -19,6 +19,6 @@ class ProductCombinationResource extends JsonResource
             'combination_string' => $this->combination_string,
             'sku' => $this->sku,
             'product_id' => $this->product_id,
-    ];
+        ];
     }
 }

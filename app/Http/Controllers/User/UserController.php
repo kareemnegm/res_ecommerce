@@ -16,12 +16,15 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     private UserInterface $UserRepository;
+
     private $auth;
+
     public function __construct(UserInterface $UserRepository)
     {
         $this->UserRepository = $UserRepository;
         $this->auth = auth('user')->user()->id;
     }
+
     /**
      * @OA\Post(
      *
@@ -58,13 +61,12 @@ class UserController extends Controller
      *      )
      * )
      */
-
-
     public function createAddress(UserAddressFormRequest $request)
     {
         $data = $request->validated();
         $data['user_id'] = $this->auth;
         $address = $this->UserRepository->createAddress($data);
+
         return $this->dataResponse(['address' => new UserAddressResource($address)], 'success', 201);
     }
 
@@ -113,10 +115,10 @@ class UserController extends Controller
      *      )
      * )
      */
-
     public function updateAddress(UserAddressUpdateFormRequest $request, $addressId)
     {
         $this->UserRepository->updateAddress($request->validated());
+
         return $this->successResponse('updated success', 200);
     }
 
@@ -151,9 +153,9 @@ class UserController extends Controller
     public function myAddresses()
     {
         $addresses = $this->UserRepository->myAddresses($this->auth);
+
         return $this->dataResponse(['address' => UserAddressResource::collection($addresses)], 'success', 200);
     }
-
 
     /**
      * @OA\Post(
@@ -209,13 +211,12 @@ class UserController extends Controller
      *      )
      * )
      */
-
-
     public function addProductsToCart(CartProductFormRequest $request)
     {
         $data = $request->validated();
         $data['user_id'] = $this->auth;
         $this->UserRepository->addProductsToCart($data);
+
         return $this->successResponse('added to cart successful', 200);
     }
 
@@ -255,14 +256,15 @@ class UserController extends Controller
      *      )
      * )
      */
-
     public function removeProductFromCart(RemoveProductCartFormRequest $request, $id)
     {
         $data['product_id'] = $id;
         $data['user_id'] = $this->auth;
         $this->UserRepository->removeProductFromCart($data);
+
         return $this->successResponse('product removed from successfully', 200);
     }
+
     /**
      * @OA\Post(
      *      path="/api/user/favorite",
@@ -314,6 +316,7 @@ class UserController extends Controller
         $data = $request->validated();
         $data['user_id'] = $this->auth;
         $this->UserRepository->addProductToFavorite($data);
+
         return $this->successResponse('added to favorite successful', 200);
     }
 
@@ -353,12 +356,12 @@ class UserController extends Controller
      *      )
      * )
      */
-
     public function removeProductFromFavorite(RemoveFavoriteProductFormRequest $request, $id)
     {
         $data['product_id'] = $id;
         $data['user_id'] = $this->auth;
         $this->UserRepository->removeProductFromFavorite($data);
+
         return $this->successResponse('product removed successful', 200);
     }
 }

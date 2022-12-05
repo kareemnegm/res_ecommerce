@@ -18,6 +18,7 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     public const HOME = '/home';
+
     protected $namespace = 'App\\Http\\Controllers';
 
     /**
@@ -39,17 +40,15 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/web.php'));
 
             Route::middleware('auth:merchant')->prefix('api/merchant')
-                ->namespace($this->namespace . '\Merchant')
+                ->namespace($this->namespace.'\Merchant')
                 ->group(base_path('routes/merchant.php'));
 
-
             Route::middleware('auth:user')->prefix('api/user')
-                ->namespace($this->namespace . '\User')
+                ->namespace($this->namespace.'\User')
                 ->group(base_path('routes/user.php'));
 
-
             Route::middleware('auth:admin')->prefix('api/admin')
-                ->namespace($this->namespace . '\Admin')
+                ->namespace($this->namespace.'\Admin')
                 ->group(base_path('routes/admin.php'));
         });
     }

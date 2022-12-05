@@ -9,9 +9,10 @@ use Spatie\Translatable\HasTranslations;
 class Category extends Model
 {
     use HasFactory, HasTranslations;
+
     protected $fillable = [
         'name',
-        'category_id'
+        'category_id',
     ];
 
     public $translatable = ['name'];
@@ -20,10 +21,12 @@ class Category extends Model
     {
         return $this->belongsTo(static::class, 'category_id');
     }
+
     public function children()
     {
         return $this->hasMany(static::class, 'category_id');
     }
+
     public function subs()
     {
         return $this->children()->with(['subs']);

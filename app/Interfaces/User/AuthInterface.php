@@ -4,7 +4,6 @@ namespace App\Interfaces\User;
 
 interface AuthInterface
 {
-
     /**
      * register user function
      *
@@ -17,5 +16,4 @@ interface AuthInterface
     public function updateUser($userData);
 
     public function softDelete($id);
-
 }

@@ -14,7 +14,6 @@ class MerchantProductValidationRule implements Rule
      */
     public function __construct()
     {
-
     }
 
     /**
@@ -26,11 +25,11 @@ class MerchantProductValidationRule implements Rule
      */
     public function passes($attribute, $value)
     {
-        $merchantId=auth('merchant')->user()->id;
-        $product=Product::where('id',$value)->where('merchant_id',$merchantId)->exists();
-        if($product){
+        $merchantId = auth('merchant')->user()->id;
+        $product = Product::where('id', $value)->where('merchant_id', $merchantId)->exists();
+        if ($product) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }

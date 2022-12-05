@@ -13,13 +13,14 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     private AdminInterface $AdminRepository;
+
     private $auth;
+
     public function __construct(AdminInterface $AdminRepository)
     {
         $this->AdminRepository = $AdminRepository;
         $this->auth = auth('admin')->user()->id;
     }
-
 
     /**
      * @OA\Get(
@@ -76,15 +77,14 @@ class AdminController extends Controller
      *      )
      * )
      */
-
     public function listMerchants(FilterMerchantFormRequest $request)
     {
         $merchants = $this->AdminRepository->merchantsList($request->validated());
+
         return $this->paginateCollection(MerchantResource::collection($merchants), $request->limit, 'merchants');
     }
 
-
-     /**
+    /**
      * @OA\Put(
      *      path="/api/admin/approve/merchant/{id}",
      *      operationId="approveMerchant",
@@ -124,8 +124,10 @@ class AdminController extends Controller
     public function approveMerchant(MerchantIdApprovalFormRequest $request, $id)
     {
         $this->AdminRepository->approveMerchant($id);
+
         return $this->successResponse('merchant approved', 200);
     }
+
     /**
      * @OA\Post(
      *
@@ -167,6 +169,7 @@ class AdminController extends Controller
         $data = $request->validated();
         $data['admin_id'] = $this->auth;
         $merchant = $this->AdminRepository->createMerchant($data);
+
         return $this->dataResponse(['merchant' => new MerchantResource($merchant)], 'created successful', 201);
     }
 }

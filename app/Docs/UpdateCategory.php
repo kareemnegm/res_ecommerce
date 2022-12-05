@@ -9,9 +9,8 @@ namespace App\Docs;
  *     title=" update category request",
  * )
  */
-class  UpdateCategory
+class UpdateCategory
 {
-
     /**
      *@OA\Property(
      *     title="name",
@@ -20,10 +19,10 @@ class  UpdateCategory
      *     example={"en":"categoryExampleUpdate", "ar":"سياسيا1"}
      * )
      *
-     *
      * @var object
      */
     public $name;
+
     /**
      *    @OA\Property(
      *   property="category_id",
@@ -31,11 +30,7 @@ class  UpdateCategory
      *   format="integer",
      * example=2)
      *
-     *
-     *
      * @var object
      */
     public $category_id;
-
-
 }

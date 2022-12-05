@@ -24,14 +24,14 @@ class UserAddressFormRequest extends BaseFormRequest
     public function rules()
     {
         return [
-            'address'=>'required|string',
-            'street'=>'required|string',
-            'nearest_landmark'=>'required|string',
-            'mobile'=>'required|numeric',
-            'latitude'=>'required|numeric',
-            'longitude'=>'required|numeric',
-            'notes'=>'nullable|string',
-            'is_default'=>'required|in:1,0',
+            'address' => 'required|string',
+            'street' => 'required|string',
+            'nearest_landmark' => 'required|string',
+            'mobile' => 'required|numeric',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
+            'notes' => 'nullable|string',
+            'is_default' => 'required|in:1,0',
 
         ];
     }

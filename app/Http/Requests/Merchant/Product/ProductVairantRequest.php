@@ -4,7 +4,6 @@ namespace App\Http\Requests\Merchant\Product;
 
 use App\Http\Requests\BaseFormRequest;
 use App\Rules\ProductVairantRule;
-use Illuminate\Foundation\Http\FormRequest;
 
 class ProductVairantRequest extends BaseFormRequest
 {
@@ -26,7 +25,7 @@ class ProductVairantRequest extends BaseFormRequest
     public function rules()
     {
         return [
-            'id' => ['required','exists:products,id',new ProductVairantRule()],
+            'id' => ['required', 'exists:products,id', new ProductVairantRule()],
         ];
     }
 }

@@ -9,8 +9,8 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-
     private CategoryInterface $CategoryRepository;
+
     public function __construct(CategoryInterface $CategoryRepository)
     {
         $this->CategoryRepository = $CategoryRepository;
@@ -20,7 +20,6 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
 
     /**
      * @OA\Get(
@@ -48,10 +47,10 @@ class CategoryController extends Controller
      *      )
      * )
      */
-
     public function index(Request $request)
     {
         $categories = $this->CategoryRepository->index();
+
         return $this->paginateCollection(CategoryResource::collection($categories), $request->limit, 'categories');
     }
 
@@ -61,7 +60,7 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-   /**
+    /**
      * @OA\Get(
      *      path="/api/category/{id}",
      *      operationId="getCategoryIdHome",
@@ -96,15 +95,8 @@ class CategoryController extends Controller
      *      )
      * )
      */
-
     public function show($id)
     {
-
         return $this->dataResponse(['category' => new CategoryResource($this->CategoryRepository->show($id))], 'success', 200);
     }
-
-
-
-
-
 }

@@ -23,15 +23,16 @@ class UpdateFormRequest extends BaseFormRequest
      */
     public function rules()
     {
-        $auth_id=auth('merchant')->user()->id;
+        $auth_id = auth('merchant')->user()->id;
+
         return [
             'email' => 'required|email|unique:merchants,email,'.$auth_id,
             'shop_name.en' => 'required|string',
             'shop_name.ar' => 'required|string',
             'shop_name.*' => 'unique_translation:merchants,shop_name,'.$auth_id,
             'description.*' => 'unique_translation:merchants,description,'.$auth_id,
-            "description.en" => 'required|string',
-            "description.ar" => 'required|string',
+            'description.en' => 'required|string',
+            'description.ar' => 'required|string',
             'country_id' => 'nullable|exists:countries,id',
             'category_id' => 'required|array',
             'category_id.*' => 'required|exists:categories,id',

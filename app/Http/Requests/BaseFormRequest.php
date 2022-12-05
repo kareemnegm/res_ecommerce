@@ -2,22 +2,18 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
 class BaseFormRequest extends FormRequest
 {
-
-
-    /**
-     * 
-     */
     protected function prepareForValidation()
     {
         $this->merge(['id' => $this->route('id')]);
     }
-      /**
+
+    /**
      * Handle a failed validation attempt.
      *
      * @param  \Illuminate\Contracts\Validation\Validator  $validator
@@ -25,24 +21,20 @@ class BaseFormRequest extends FormRequest
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-
     protected function failedValidation(Validator $validator)
     {
-        $errors=[];
-        foreach($validator->errors()->toArray() as $key=>$value){
-            $errors[$key]=$value[0];
+        $errors = [];
+        foreach ($validator->errors()->toArray() as $key => $value) {
+            $errors[$key] = $value[0];
         }
 
-        $res=[
-            'status'=>422, //code error
-            'message'=>'Validation error', //Massage Return in Response Data field
+        $res = [
+            'status' => 422, //code error
+            'message' => 'Validation error', //Massage Return in Response Data field
             'error' => $validator->errors()->all(), //Validator Errors
-            'data'=>null
+            'data' => null,
         ];
         //   return response()->json($res,200,JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
-          throw new HttpResponseException(response()->json($res
-          , 422));
+        throw new HttpResponseException(response()->json($res, 422));
     }
-
-
 }

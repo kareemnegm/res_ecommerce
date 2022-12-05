@@ -9,10 +9,11 @@ use Spatie\Translatable\HasTranslations;
 class MerchantCategory extends Model
 {
     use HasFactory, HasTranslations;
+
     protected $fillable = [
         'name',
         'merchant_category_id',
-        'merchant_id'
+        'merchant_id',
     ];
 
     public $translatable = ['name'];
@@ -21,10 +22,12 @@ class MerchantCategory extends Model
     {
         return $this->belongsTo(static::class, 'merchant_category_id');
     }
+
     public function children()
     {
         return $this->hasMany(static::class, 'merchant_category_id');
     }
+
     public function subs()
     {
         return $this->children()->with(['subs']);
@@ -35,7 +38,8 @@ class MerchantCategory extends Model
         return $this->belongsTo(Merchant::class);
     }
 
-    public function scopeParentOnly($query){
+    public function scopeParentOnly($query)
+    {
         return $query->where('merchant_category_id', null);
     }
 }

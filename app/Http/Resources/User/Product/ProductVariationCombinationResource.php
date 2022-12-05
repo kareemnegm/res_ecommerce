@@ -18,7 +18,7 @@ class ProductVariationCombinationResource extends JsonResource
             'id' => $this->id,
             'combination_string' => $this->combination_string,
             'sku' => $this->sku,
-            'stock' => new ProductStockResource($this->productStock)
+            'stock' => new ProductStockResource($this->productStock),
         ];
     }
 }

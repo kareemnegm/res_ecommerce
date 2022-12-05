@@ -9,9 +9,8 @@ namespace App\Docs;
  *     title=" Merchant create request",
  * )
  */
-class  CreateMerchantByAdmin
+class CreateMerchantByAdmin
 {
-
     /**
      *@OA\Property(
      *     title="shop_name",
@@ -20,10 +19,10 @@ class  CreateMerchantByAdmin
      *     example={"en":"shopname1", "ar":"سياسيا1"}
      * )
      *
-     *
      * @var object
      */
     public $shop_name;
+
     /**
      * * @OA\Property(
      *     title="description",
@@ -32,18 +31,16 @@ class  CreateMerchantByAdmin
      *     example={"en":"qqq", "ar":"سياسيا"}
      * )
      *
-     *
      * @var object
      */
     public $description;
+
     /**
      *    @OA\Property(
      *   property="category_id",
      *   description="category ID",
      *   format="array",
      * example={2,3})
-     *
-     *
      *
      * @var object
      */
@@ -74,7 +71,6 @@ class  CreateMerchantByAdmin
     public $password;
 
     /**
-     *
      * @var string
      */
 

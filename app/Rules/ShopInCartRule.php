@@ -26,7 +26,6 @@ class ShopInCartRule implements Rule
      */
     public function passes($attribute, $value)
     {
-
         $user = UserCart::where('user_id', $this->request->user_id)->exists();
         if ($user) {
             $merchant = UserCart::where('user_id', $this->request->user_id)->where('merchant_id', $this->request->merchant_id)->exists();

@@ -9,9 +9,8 @@ namespace App\Docs;
  *     title=" admin Register request",
  * )
  */
-class  AdminRegister
+class AdminRegister
 {
-
     /**
      *@OA\Property(
      *     title="name",
@@ -19,7 +18,6 @@ class  AdminRegister
      *     format="string",
      *     example={"en":"name", "ar":"سياسيا1"}
      * )
-     *
      *
      * @var object
      */

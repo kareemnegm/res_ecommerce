@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-
 class UpdateCategoryFormRequest extends BaseFormRequest
 {
     /**
@@ -25,7 +24,7 @@ class UpdateCategoryFormRequest extends BaseFormRequest
         return [
             'name.en' => 'required|string',
             'name.ar' => 'required|string',
-            'name.*' => 'unique_translation:categories,name,'. $this->route('category'),
+            'name.*' => 'unique_translation:categories,name,'.$this->route('category'),
             'category_id' => 'nullable|exists:categories,id',
         ];
     }

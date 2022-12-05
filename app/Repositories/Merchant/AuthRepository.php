@@ -11,10 +11,8 @@ class AuthRepository implements AuthInterface
      * register user
      *
      * @param [type] $request
-     *
      * @return void
      */
-
     public function register($merchantData)
     {
         $merchantData['password'] = bcrypt($merchantData['password']);
@@ -25,14 +23,11 @@ class AuthRepository implements AuthInterface
         $merchant->category()->sync($merchantData['category_id']);
     }
 
-
     public function update($merchantData)
     {
         $merchant = Merchant::findOrFail($merchantData['id']);
         if (isset($merchantData['shop_logo'])) {
-
             if ($merchant->getMedia('shop_logo')) {
-
                 $merchant->clearMediaCollectionExcept('shop_logo');
             }
 
@@ -42,8 +37,6 @@ class AuthRepository implements AuthInterface
         $merchant->update($merchantData);
         $merchant->category()->sync($merchantData['category_id']);
     }
-
-
 
     public function myProfile($id)
     {

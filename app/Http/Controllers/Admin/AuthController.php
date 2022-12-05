@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-
     private AuthInterface $AuthRepository;
+
     public function __construct(AuthInterface $AuthRepository)
     {
         $this->AuthRepository = $AuthRepository;
@@ -58,10 +58,11 @@ class AuthController extends Controller
     public function register(RegisterFormRequest $request)
     {
         $admin = $this->AuthRepository->register($request->validated());
+
         return $this->dataResponse(['admin' => new AdminResource($admin['admin']), 'token' => $admin['token']], 'success', 201);
     }
 
-     /**
+    /**
      * @OA\Post(
      *
      *      path="/api/admin/login",
@@ -96,18 +97,15 @@ class AuthController extends Controller
      *      )
      * )
      */
-
-
     public function login(LoginFormRequest $request)
     {
         $adminData = $request->validated();
         $admin = Admin::where('email', $adminData['email'])->first();
-        if (!$admin || !Hash::check($adminData['password'], $admin->password)) {
-
+        if (! $admin || ! Hash::check($adminData['password'], $admin->password)) {
             return $this->errorResponse('Credentials not match', 401);
         }
         $token = $admin->createToken('adminToken')->plainTextToken;
+
         return $this->dataResponse(['admin' => new AdminResource($admin), 'token' => $token], 'success', 200);
     }
-
 }

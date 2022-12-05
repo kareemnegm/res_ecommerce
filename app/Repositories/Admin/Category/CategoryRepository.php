@@ -7,9 +7,9 @@ use App\Models\Category;
 
 class CategoryRepository implements CategoryInterface
 {
-
-    public function index(){
-        return Category::where('category_id',null)->get();
+    public function index()
+    {
+        return Category::where('category_id', null)->get();
     }
 
     /**
@@ -23,6 +23,7 @@ class CategoryRepository implements CategoryInterface
     {
         return Category::create($categoryData);
     }
+
     /**
      * update Category
      *
@@ -34,6 +35,7 @@ class CategoryRepository implements CategoryInterface
     {
         Category::where('id', $id)->update($categoryData);
     }
+
     /**
      * delete Category
      *
@@ -45,6 +47,7 @@ class CategoryRepository implements CategoryInterface
         $category = Category::findOrFail($id);
         $category->delete();
     }
+
     /**
      * show Category
      *
@@ -55,6 +58,7 @@ class CategoryRepository implements CategoryInterface
     {
         return Category::findOrFail($id);
     }
+
     /**
      * show subCategory
      *

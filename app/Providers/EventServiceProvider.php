@@ -29,7 +29,7 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-     UserCart::observe(UserCartObserver::class);
+        UserCart::observe(UserCartObserver::class);
     }
 
     /**

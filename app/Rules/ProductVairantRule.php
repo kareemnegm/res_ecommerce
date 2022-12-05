@@ -14,7 +14,6 @@ class ProductVairantRule implements Rule
      */
     public function __construct()
     {
-
     }
 
     /**
@@ -26,13 +25,12 @@ class ProductVairantRule implements Rule
      */
     public function passes($attribute, $value)
     {
+        $merchantId = auth('merchant')->user()->id;
+        $product = Product::where('id', $value)->where('merchant_id', $merchantId)->first();
 
-        $merchantId=auth('merchant')->user()->id;
-        $product=Product::where('id',$value)->where('merchant_id',$merchantId)->first();
-
-        if($product){
+        if ($product) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
