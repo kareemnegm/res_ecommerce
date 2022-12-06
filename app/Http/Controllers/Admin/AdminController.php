@@ -134,7 +134,7 @@ class AdminController extends Controller
      *
      *      path="/api/admin/merchant",
      *      operationId="createMerchant",
-     *      tags={"SystemAdmin"},
+     *      tags={"authentication"},
      *      summary="create new merchant",
      *      description="Returns merchant data",
      *      security={{"Bearer": {}}},

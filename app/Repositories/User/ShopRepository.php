@@ -7,7 +7,7 @@ use App\Models\Category;
 use App\Models\Merchant;
 use App\Models\Product;
 
-class ShopRepository implements ShopInterface
+class ShopRepository
 {
 
     // public function shops()

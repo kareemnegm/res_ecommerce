@@ -46,6 +46,17 @@ class UserRegister
      * @var string
      */
     public $password;
+     /**
+     * @OA\Property(
+     *     title="password_confirmation",
+     *     description="select password_confirmation",
+     *     format="password",
+     *     example=12345678
+     * )
+     *
+     * @var string
+     */
+    public $password_confirmation;
 
     /**
      * @var string

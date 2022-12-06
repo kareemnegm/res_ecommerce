@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\User\AuthController;
+use App\Http\Controllers\User\PasswordController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,11 @@ Route::middleware('language')->group(function(){
          * login user
          */
         Route::post('/login', [AuthController::class,'login']);
+
+        Route::post('/forget-password', [PasswordController::class,'forgetPassword']);
+        Route::post('/verify-code', [PasswordController::class,'verifyCode']);
+        Route::post('/reset-password', [PasswordController::class,'resetPassword']);
+
     });
     Route::group(['namespace' => 'User'], function () {
         /**

@@ -13,6 +13,7 @@ use App\Interfaces\Merchant\ShopInterface as MerchantShopInterface;
 use App\Repositories\Admin\Category\CategoryRepository;
 use App\Interfaces\User\AuthInterface as UserAuthInterface;
 use App\Interfaces\User\OrderInterface;
+use App\Interfaces\User\PasswordInterface;
 use App\Interfaces\User\ProductInterface as UserProductInterface;
 use App\Interfaces\User\ShopInterface as UserShopInterface;
 use App\Interfaces\User\UserInterface;
@@ -25,6 +26,7 @@ use App\Repositories\Merchant\ProductRepository as MerchantProductRepository;
 use App\Repositories\Merchant\ShopRepository as MerchantShopRepository;
 use App\Repositories\User\AuthRepository as UserAuthRepository;
 use App\Repositories\User\orderRepository;
+use App\Repositories\User\PasswordRepository;
 use App\Repositories\User\ProductRepository as UserProductRepository;
 use App\Repositories\User\ShopRepository as UserShopRepository;
 use App\Repositories\User\UserRepository;
@@ -40,6 +42,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(UserAuthInterface::class, UserAuthRepository::class);
+        $this->app->bind(PasswordInterface::class, PasswordRepository::class);
         $this->app->bind(MerchantAuthInterface::class, MerchantAuthRepository::class);
         $this->app->bind(CategoryInterface::class, CategoryRepository::class);
         $this->app->bind(MerchantCategoryInterface::class, MerchantCategoryRepository::class);

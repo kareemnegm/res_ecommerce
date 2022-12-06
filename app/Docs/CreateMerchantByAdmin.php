@@ -12,40 +12,27 @@ namespace App\Docs;
 class CreateMerchantByAdmin
 {
     /**
-     *@OA\Property(
-     *     title="shop_name",
-     *     description="shop name text field",
+     * @OA\Property(
+     *     title="full_name",
+     *     description="full_name",
      *     format="string",
-     *     example={"en":"shopname1", "ar":"سياسيا1"}
+     *     example="new merchant"
      * )
      *
-     * @var object
+     * @var string
      */
-    public $shop_name;
-
-    /**
-     * * @OA\Property(
-     *     title="description",
-     *     description="Some text field",
+    public $full_name;
+     /**
+     * @OA\Property(
+     *     title="id_number",
+     *     description="id_number",
      *     format="string",
-     *     example={"en":"qqq", "ar":"سياسيا"}
+     *     example="12345678944"
      * )
      *
-     * @var object
+     * @var string
      */
-    public $description;
-
-    /**
-     *    @OA\Property(
-     *   property="category_id",
-     *   description="category ID",
-     *   format="array",
-     * example={2,3})
-     *
-     * @var object
-     */
-    public $category_id;
-
+    public $id_number;
     /**
      * @OA\Property(
      *     title="email",
@@ -69,6 +56,17 @@ class CreateMerchantByAdmin
      * @var string
      */
     public $password;
+     /**
+     * @OA\Property(
+     *     title="password_confirmation",
+     *     description="select password confirmation",
+     *     format="password",
+     *     example=12345678
+     * )
+     *
+     * @var string
+     */
+    public $password_confirmation;
 
     /**
      * @var string

@@ -42,7 +42,7 @@ class AuthController extends Controller
      *
      *      path="/api/user/register",
      *      operationId="registeruser",
-     *      tags={"users"},
+     *      tags={"authentication"},
      *      summary="register new user",
      *      description="Returns user data and token",
      *     @OA\RequestBody(
@@ -90,7 +90,7 @@ class AuthController extends Controller
      *
      *      path="/api/user/login",
      *      operationId="userLogin",
-     *      tags={"users"},
+     *      tags={"authentication"},
      *      summary="Login user",
      *      description="Returns user data and token",
      *     @OA\RequestBody(
@@ -137,7 +137,7 @@ class AuthController extends Controller
      * @OA\Put(
      *      path="/api/user/change_password",
      *      operationId="changePassword",
-     *      tags={"users"},
+     *      tags={"authentication"},
      *      summary="user change password",
      *      description="change password",
      *      security={{"Bearer": {}}},

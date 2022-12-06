@@ -107,7 +107,7 @@
         "/api/admin/merchant": {
             "post": {
                 "tags": [
-                    "SystemAdmin"
+                    "authentication"
                 ],
                 "summary": "create new merchant",
                 "description": "Returns merchant data",
@@ -1275,7 +1275,7 @@
         "/api/user/register": {
             "post": {
                 "tags": [
-                    "users"
+                    "authentication"
                 ],
                 "summary": "register new user",
                 "description": "Returns user data and token",
@@ -1312,7 +1312,7 @@
         "/api/user/login": {
             "post": {
                 "tags": [
-                    "users"
+                    "authentication"
                 ],
                 "summary": "Login user",
                 "description": "Returns user data and token",
@@ -1349,7 +1349,7 @@
         "/api/user/change_password": {
             "put": {
                 "tags": [
-                    "users"
+                    "authentication"
                 ],
                 "summary": "user change password",
                 "description": "change password",
@@ -1459,6 +1459,117 @@
                         "Bearer": []
                     }
                 ]
+            }
+        },
+        "/api/user/forget-password": {
+            "post": {
+                "tags": [
+                    "authentication"
+                ],
+                "summary": "forget user password",
+                "description": "return otp code",
+                "operationId": "forgetpassword",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ForgetPassword"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        },
+        "/api/user/verify-code": {
+            "post": {
+                "tags": [
+                    "authentication"
+                ],
+                "summary": "verify user code",
+                "description": "return verifying response",
+                "operationId": "verifycode",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/VerifyCode"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        },
+        "/api/user/reset-password": {
+            "post": {
+                "tags": [
+                    "authentication"
+                ],
+                "summary": "reset user password",
+                "description": "return user token and user resource",
+                "operationId": "resetpassword",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ResetPassword"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
             }
         },
         "/api/product/{id}": {
@@ -2284,34 +2395,19 @@
                 "title": " Merchant create request",
                 "description": "Some simple request create Merchant",
                 "properties": {
-                    "shop_name": {
-                        "title": "shop_name",
-                        "description": "shop name text field",
-                        "type": "object",
+                    "full_name": {
+                        "title": "full_name",
+                        "description": "full_name",
+                        "type": "string",
                         "format": "string",
-                        "example": {
-                            "en": "shopname1",
-                            "ar": "سياسيا1"
-                        }
+                        "example": "new merchant"
                     },
-                    "description": {
-                        "title": "description",
-                        "description": "Some text field",
-                        "type": "object",
+                    "id_number": {
+                        "title": "id_number",
+                        "description": "id_number",
+                        "type": "string",
                         "format": "string",
-                        "example": {
-                            "en": "qqq",
-                            "ar": "سياسيا"
-                        }
-                    },
-                    "category_id": {
-                        "description": "category ID",
-                        "type": "object",
-                        "format": "array",
-                        "example": [
-                            2,
-                            3
-                        ]
+                        "example": "12345678944"
                     },
                     "email": {
                         "title": "email",
@@ -2323,6 +2419,13 @@
                     "password": {
                         "title": "password",
                         "description": "select password",
+                        "type": "string",
+                        "format": "password",
+                        "example": 12345678
+                    },
+                    "password_confirmation": {
+                        "title": "password_confirmation",
+                        "description": "select password confirmation",
                         "type": "string",
                         "format": "password",
                         "example": 12345678
@@ -2511,6 +2614,27 @@
                 },
                 "type": "object"
             },
+            "ForgetPassword": {
+                "title": " user forget password request",
+                "description": "Some simple request for forget password",
+                "properties": {
+                    "email": {
+                        "title": "email",
+                        "description": "email",
+                        "type": "string",
+                        "format": "string",
+                        "example": "customer@test.com"
+                    },
+                    "phone_number": {
+                        "title": "password",
+                        "description": "select password",
+                        "type": "string",
+                        "format": "string",
+                        "example": 12345678
+                    }
+                },
+                "type": "object"
+            },
             "MerchantChangePassword": {
                 "title": " merchant change password",
                 "description": "Some simple request change password merchant",
@@ -2684,6 +2808,41 @@
             "ProductVariant": {
                 "title": " create merchant product variant request",
                 "description": "Some simple request create merchant product variant ",
+                "type": "object"
+            },
+            "ResetPassword": {
+                "title": " user reset password request",
+                "description": "Some simple request for reset password",
+                "properties": {
+                    "email": {
+                        "title": "email",
+                        "description": "email",
+                        "type": "string",
+                        "format": "string",
+                        "example": "customer@test.com"
+                    },
+                    "phone_number": {
+                        "title": "password",
+                        "description": "select password",
+                        "type": "string",
+                        "format": "string",
+                        "example": 12345678
+                    },
+                    "password": {
+                        "title": "password",
+                        "description": "select password",
+                        "type": "string",
+                        "format": "string",
+                        "example": 12345678
+                    },
+                    "password_confirmation": {
+                        "title": "password_confirmation",
+                        "description": "select password confirmation",
+                        "type": "string",
+                        "format": "string",
+                        "example": 12345678
+                    }
+                },
                 "type": "object"
             },
             "UpdateCategory": {
@@ -2952,6 +3111,13 @@
                         "format": "password",
                         "example": 12345678
                     },
+                    "password_confirmation": {
+                        "title": "password_confirmation",
+                        "description": "select password_confirmation",
+                        "type": "string",
+                        "format": "password",
+                        "example": 12345678
+                    },
                     "mobile": {
                         "title": "mobile",
                         "description": "user mobile",
@@ -3035,6 +3201,34 @@
                         "type": "string",
                         "format": "string",
                         "example": "1998-01-27"
+                    }
+                },
+                "type": "object"
+            },
+            "VerifyCode": {
+                "title": " user forget password request",
+                "description": "Some simple request for forget password",
+                "properties": {
+                    "email": {
+                        "title": "email",
+                        "description": "email",
+                        "type": "string",
+                        "format": "string",
+                        "example": "customer@test.com"
+                    },
+                    "phone_number": {
+                        "title": "password",
+                        "description": "select password",
+                        "type": "string",
+                        "format": "string",
+                        "example": 12345678
+                    },
+                    "code": {
+                        "title": "code",
+                        "description": "otp code",
+                        "type": "string",
+                        "format": "string",
+                        "example": 0
                     }
                 },
                 "type": "object"
