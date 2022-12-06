@@ -23,18 +23,11 @@ class BaseFormRequest extends FormRequest
      */
     protected function failedValidation(Validator $validator)
     {
-        $errors = [];
-        foreach ($validator->errors()->toArray() as $key => $value) {
-            $errors[$key] = $value[0];
-        }
-
-        $res = [
-            'status' => 422, //code error
-            'message' => 'Validation error', //Massage Return in Response Data field
-            'error' => $validator->errors()->all(), //Validator Errors
-            'data' => null,
-        ];
-        //   return response()->json($res,200,JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
-        throw new HttpResponseException(response()->json($res, 422));
+        throw new HttpResponseException(response()->json([
+            'status_code' => 422,
+            'code' => 1422,
+            'hint' => 'Unprocessable Entity',
+            'errors' => $validator->errors(),
+            'success' => false, ], 422));
     }
 }

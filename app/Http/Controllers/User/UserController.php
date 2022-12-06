@@ -9,6 +9,7 @@ use App\Http\Requests\User\RemoveFavoriteProductFormRequest;
 use App\Http\Requests\User\RemoveProductCartFormRequest;
 use App\Http\Requests\User\UserAddressFormRequest;
 use App\Http\Requests\User\UserAddressUpdateFormRequest;
+use App\Http\Resources\User\CartResource;
 use App\Http\Resources\User\UserAddressResource;
 use App\Interfaces\User\UserInterface;
 use Illuminate\Http\Request;
@@ -22,7 +23,7 @@ class UserController extends Controller
     public function __construct(UserInterface $UserRepository)
     {
         $this->UserRepository = $UserRepository;
-        $this->auth = auth('user')->user()->id;
+        $this->auth = auth('api')->user()->id?? null;
     }
 
     /**
@@ -215,9 +216,8 @@ class UserController extends Controller
     {
         $data = $request->validated();
         $data['user_id'] = $this->auth;
-        $this->UserRepository->addProductsToCart($data);
-
-        return $this->successResponse('added to cart successful', 200);
+       $result= $this->UserRepository->addProductsToCart($data);
+       return response()->json($result, $result['status_code']);
     }
 
     /**
@@ -260,9 +260,8 @@ class UserController extends Controller
     {
         $data['product_id'] = $id;
         $data['user_id'] = $this->auth;
-        $this->UserRepository->removeProductFromCart($data);
-
-        return $this->successResponse('product removed from successfully', 200);
+        $result=$this->UserRepository->removeProductFromCart($data);
+        return response()->json($result, $result['status_code']);
     }
 
     /**
@@ -363,5 +362,39 @@ class UserController extends Controller
         $this->UserRepository->removeProductFromFavorite($data);
 
         return $this->successResponse('product removed successful', 200);
+    }
+
+     /**
+     * @OA\Get(
+     *      path="/api/user/cart",
+     *      operationId="UserCart",
+     *      tags={"users"},
+     *      summary="user cart  ",
+     *      security={{"Bearer": {}}},
+     *      description="Returns user cart products",
+     *     @OA\MediaType(mediaType="application/json"),
+
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad Request"
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     * )
+     */
+    public function myCart(Request $request)
+    {
+        $cart = auth('api')->user()->product;
+        return $this->paginateCollection(CartResource::collection($cart), $request->limit, 'cart_products');
     }
 }

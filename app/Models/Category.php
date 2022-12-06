@@ -32,8 +32,8 @@ class Category extends Model
         return $this->children()->with(['subs']);
     }
 
-    public function merchant()
+    public function shop()
     {
-        return $this->belongsToMany(Merchant::class);
+        return $this->belongsToMany(Shop::class);
     }
 }

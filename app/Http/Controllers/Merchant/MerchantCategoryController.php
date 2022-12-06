@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Merchant;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Merchant\MerchantCategoryFormRequest;
+use App\Http\Requests\Merchant\ShopCategory\ShopCategoryIdValidation;
 use App\Http\Requests\Merchant\UpdateMerchantCategoryFormRequest;
 use App\Http\Resources\Merchant\MerchantCategoryResource;
 use App\Interfaces\Merchant\MerchantCategoryInterface;
@@ -112,10 +113,8 @@ class MerchantCategoryController extends Controller
     public function store(MerchantCategoryFormRequest $request)
     {
         $categoryData = $request->validated();
-        $categoryData['merchant_id'] = Auth('merchant')->user()->id;
-        $this->MerchantCategoryRepository->create($categoryData);
-
-        return $this->successResponse('success', 201);
+        $result = $this->MerchantCategoryRepository->create($categoryData);
+        return response()->json($result, $result['status_code']);
     }
 
     /**
@@ -160,11 +159,10 @@ class MerchantCategoryController extends Controller
      *      )
      * )
      */
-    public function show($id)
+    public function show(ShopCategoryIdValidation $shopCategory)
     {
-        $category = $this->MerchantCategoryRepository->show($id, auth('merchant')->user()->id);
-
-        return $this->dataResponse(['category' => new MerchantCategoryResource($category)], 'success', 200);
+        $result = $this->MerchantCategoryRepository->show($shopCategory->validated());
+        return response()->json($result, $result['status_code']);
     }
 
     /**
@@ -219,13 +217,12 @@ class MerchantCategoryController extends Controller
      *      )
      * )
      */
-    public function update(UpdateMerchantCategoryFormRequest $request, $id)
+
+    public function update(MerchantCategoryFormRequest $request)
     {
         $categoryData = $request->validated();
-        $categoryData['merchant_id'] = Auth('merchant')->user()->id;
-        $this->MerchantCategoryRepository->update($categoryData, $id);
-
-        return $this->successResponse('updated successful', 200);
+       $result= $this->MerchantCategoryRepository->update($categoryData);
+        return response()->json($result, $result['status_code']);
     }
 
     /**

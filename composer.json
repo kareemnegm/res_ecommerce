@@ -8,11 +8,13 @@
         "php": "^8.0.2",
         "codezero/laravel-unique-translation": "^3.5",
         "darkaonline/l5-swagger": "^8.4",
+        "doctrine/dbal": "^3.5",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "spatie/laravel-medialibrary": "^10.7",
+        "spatie/laravel-permission": "^5.7",
         "spatie/laravel-tags": "^4.3",
         "spatie/laravel-translatable": "^6.1"
     },

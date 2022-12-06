@@ -17,4 +17,6 @@ interface UserInterface
     public function removeProductFromFavorite(array $data);
 
     public function removeProductFromCart(array $data);
+
+    public function myCart($userId);
 }

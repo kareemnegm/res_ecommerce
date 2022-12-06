@@ -5,6 +5,7 @@ namespace App\Http\Resources\User;
 use App\Http\Resources\ImageResource;
 use App\Http\Resources\Merchant\MerchantCategoryResource;
 use App\Http\Resources\TagsResource;
+use App\Http\Resources\User\Product\ProductVariantWithValuesResource;
 use App\Http\Resources\User\Product\ProductVariationCombinationResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -33,7 +34,7 @@ class ProductResource extends JsonResource
             'tags' => TagsResource::collection($this->tags),
             'product_images' => ImageResource::collection($this->getMedia('product_images')) ?? null,
             'order' => $this->order,
-            'variations' => ProductVariationCombinationResource::collection($this->ProductCombination),
+            'variants' => ProductVariantWithValuesResource::collection($this->variant)
         ];
     }
 }

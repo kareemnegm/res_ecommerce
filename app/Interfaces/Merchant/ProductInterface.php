@@ -7,10 +7,9 @@ interface ProductInterface
     public function create($ProductData);
 
     public function index($request);
-
-    public function show($auth, $id);
-
-    public function update($ProductData, $id);
+    public function show($id);
+    public function update(array $ProductData);
+    public function deleteProduct(array $product);
 
     public function deleteProduct($id);
 
@@ -23,9 +22,10 @@ interface ProductInterface
 
     public function getProductVariantValues($variant_id);
 
-    public function productVariantCombination($variantValueData);
+    // public function productVariantCombination($variantValueData);
 
-    public function getProductVariantCombinations($product_id, $merchant_id);
+    // public function getProductVariantCombinations($product_id,$merchant_id);
 
-    public function updateProductVariantCombinations($variantCombinationData);
+    // public function updateProductVariantCombinations($variantCombinationData);
+
 }

@@ -16,10 +16,9 @@ class MerchantCategoryResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name_en' => $this->getTranslation('name', 'en'),
-            'name_ar' => $this->getTranslation('name', 'ar'),
+            'name' => $this->name,
             'subCategory' => MerchantSubCategoryResource::collection($this->children),
-            'merchant_id' => $this->merchant_id,
+            'shop_id'=>$this->shop_id
         ];
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Requests\User;
 use App\Http\Requests\BaseFormRequest;
 use App\Rules\UserIdNumberValidatorRule;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class RegisterFormRequest extends BaseFormRequest
 {
@@ -29,12 +30,13 @@ class RegisterFormRequest extends BaseFormRequest
             'full_name' => 'required|string|unique:users',
             'id_number' => ['required', 'numeric', 'unique:users', new UserIdNumberValidatorRule($request)],
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:8',
-            'date_of_birth' => 'required|date_format:Y-m-d|before:today',
-            'gender' => 'required|in:male,female',
+            'password' => 'required|min:8|confirmed',
+            'password_confirmation' => 'required|min:8',
+            'date_of_birth' =>[Rule::requiredIf(!auth()->user()),'date_format:Y-m-d|before:today'],
+            'gender' => [Rule::requiredIf(!auth()->user()),'in:male,female'],
             'country_code' => 'nullable',
-            'mobile' => 'required|numeric|unique:users',
-            'country_id' => 'required|exists:countries,id',
+            'mobile' => 'required|unique:users',
+            'country_id' => 'required|exists:countries,id'
         ];
     }
 }

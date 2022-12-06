@@ -25,8 +25,8 @@ class ProductVariantValuesRequest extends BaseFormRequest
     public function rules()
     {
         return [
-            'product_id' => ['required', 'exists:products,id', new ProductVairantRule()],
-            'variant_id' => 'required|exists:product_variants,id,product_id,'.request()->product_id,
+            'product_id' => ['required', 'exists:products,id'],
+            'variant_id' => 'required|exists:product_variants,id,product_id,' . request()->product_id
         ];
     }
 }

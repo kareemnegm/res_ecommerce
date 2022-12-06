@@ -16,5 +16,12 @@ return [
     'failed' => 'These credentials do not match our records.',
     'password' => 'The provided password is incorrect.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'success' => 'User logged successfully!',
+    'current_password' => 'Current password does not match!',
+    'user' => [
+        'created' => "User created Successfully",
+        'updated' => "User Updated Successfully",
+        'deleted' => "User Deleted Successfully",
+    ],
 
 ];

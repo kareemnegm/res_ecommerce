@@ -64,6 +64,11 @@ class Merchant extends Authenticatable implements HasMedia
         return $this->hasMany(MerchantCategory::class);
     }
 
+    public function merchantPaymentMethods()
+    {
+        return $this->belongsToMany(PaymentMethod::class,'merchant_payment_methods');
+    }
+
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumb')

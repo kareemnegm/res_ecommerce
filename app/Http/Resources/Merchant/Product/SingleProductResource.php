@@ -19,11 +19,9 @@ class SingleProductResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'merchant_id' => $this->merchant_id,
-            'name_en' => $this->getTranslation('name', 'en'),
-            'name_ar' => $this->getTranslation('name', 'ar'),
-            'description_en' => $this->getTranslation('description', 'en'),
-            'description_ar' => $this->getTranslation('description', 'ar'),
+            'merchant_id'=>$this->merchant_id,
+            'name' => $this->name,
+            'description_en' => $this->description,
             'price' => $this->price,
             'offer_price' => $this->offer_price,
             'stock_quantity' => $this->stock_quantity,
@@ -32,6 +30,7 @@ class SingleProductResource extends JsonResource
             'tags' => TagsResource::collection($this->tags),
             'product_images' => ImageResource::collection($this->getMedia('product_images')) ?? null,
             'order' => $this->order,
+            'variant'=> ProductVariantWithValues::collection($this->variant)
 
         ];
     }

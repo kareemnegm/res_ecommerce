@@ -15,4 +15,6 @@ interface ShopInterface
     public function searchShop($request);
 
     public function shopCategories($id);
+    public function searchProductInShop($search,$id);
+
 }

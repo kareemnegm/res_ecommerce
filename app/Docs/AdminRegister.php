@@ -16,7 +16,7 @@ class AdminRegister
      *     title="name",
      *     description="admin name text field",
      *     format="string",
-     *     example={"en":"name", "ar":"سياسيا1"}
+     *     example="admin"
      * )
      *
      * @var object

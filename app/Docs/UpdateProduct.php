@@ -81,7 +81,22 @@ class UpdateProduct
      */
     public $merchant_category_id;
 
-    /**
+
+
+      /**
+     *    @OA\Property(
+     *   property="is_published",
+     *   description="is published in 1 , 0",
+     *   format="integer",
+     *
+     * example=1)
+     *
+     *
+     *
+     * @var object
+     */
+    public $is_published;
+     /**
      *    @OA\Property(
      *   property="order",
      *   description="order",

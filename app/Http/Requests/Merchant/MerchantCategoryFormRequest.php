@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Merchant;
 
 use App\Http\Requests\BaseFormRequest;
+use Illuminate\Http\Request;
 
 class MerchantCategoryFormRequest extends BaseFormRequest
 {
@@ -21,13 +22,13 @@ class MerchantCategoryFormRequest extends BaseFormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(Request $request)
     {
+        $auth_id = auth('api')->user()->id;
         return [
-            'name.en' => 'required|string',
-            'name.ar' => 'required|string',
-            'name.*' => 'unique_translation:categories,name',
-            'merchant_category_id' => 'nullable|exists:merchant_categories,id',
+            'shop_id' => 'required|exists:shops,id,user_id,' . $auth_id,
+            'name' => 'required|string|unique:shop_categories,name,' . $request->shop_id,
+            'shop_category_id' => 'nullable|exists:shop_categories,id,shop_id,' . $request->shop_id,
         ];
     }
 }

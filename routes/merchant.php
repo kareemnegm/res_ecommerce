@@ -13,19 +13,31 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::apiResource('/category', 'MerchantCategoryController');
-Route::post('/product', 'ProductController@store');
-Route::get('/product', 'ProductController@index');
-Route::get('/product/{id}', 'ProductController@show');
-Route::put('/product/{id}', 'ProductController@update');
-Route::delete('/product/{id}', 'ProductController@destroy');
-Route::post('product_variant', 'ProductController@productVariants');
-Route::post('product_variant_combination', 'ProductController@productVariantCombination');
-Route::put('product_variant_combination', 'ProductController@updateProductVariantCombination');
-Route::get('product_variant_combination/{id}', 'ProductController@getProductVariantCombinations');
-Route::get('product_variant_values', 'ProductController@getProductVariantValues');
-Route::get('product/{id}/product_variants', 'ProductController@getProductVariant');
 
-Route::put('/change_password', 'AuthController@ChangePassword');
-Route::get('/profile', 'AuthController@myProfile');
-Route::put('/profile', 'AuthController@update');
+Route::middleware('language')->group(function () {
+    Route::post('/category', 'MerchantCategoryController@store')->middleware(['can:create-category']);
+    Route::get('/category', 'MerchantCategoryController@show');
+    Route::put('/category', 'MerchantCategoryController@update');
+    Route::post('/shop', 'ShopController@createShop')->middleware(['can:create-shop']);
+    Route::put('/shop/{id}', 'ShopController@updateShop')->middleware(['can:update-shop']);
+    Route::post('/product', 'ProductController@store')->middleware(['can:add-product']);
+    Route::get('/shop/{id}/products', 'ProductController@index');
+    Route::get('/product/{id}', 'ProductController@show')->middleware(['can:update-product']);
+    Route::put('/product', 'ProductController@update');
+    Route::delete('/product', 'ProductController@destroy')->middleware(['can:remove-product']);
+    Route::post('product_variant', 'ProductController@productVariants')->middleware(['can:store-variant']);
+    // Route::get('product_variant', 'ProductController@getProductVariant');
+    // Route::post('product_variant_combination','ProductController@productVariantCombination');
+    // Route::put('product_variant_combination','ProductController@updateProductVariantCombination');
+    // Route::get('product_variant_combination/{id}','ProductController@getProductVariantCombinations');
+    Route::get('product_variant_values', 'ProductController@getProductVariantValues');
+    Route::get('product/{id}/product_variants', 'ProductController@getProductVariant');
+
+    Route::put('/change_password', 'AuthController@ChangePassword');
+    Route::get('/profile', 'AuthController@myProfile');
+    Route::put('/profile', 'AuthController@update');
+
+
+    Route::post('/payment_method', 'ShopController@assignPaymentMethod')->middleware(['can:add-paymentMethod']);
+    Route::get('/payment_method/shop/{id}', 'ShopController@retrievePaymentMethods');
+});

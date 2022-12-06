@@ -2,6 +2,8 @@
 
 namespace App\Interfaces\Admin;
 
+use Illuminate\Support\Collection;
+
 interface AdminInterface
 {
     /**
@@ -14,5 +16,5 @@ interface AdminInterface
 
     public function approveMerchant($id);
 
-    public function createMerchant(array $data);
+    public function createMerchant(Collection $data);
 }
