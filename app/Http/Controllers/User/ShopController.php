@@ -8,7 +8,7 @@ use App\Http\Requests\User\CategoryIdRequest;
 use App\Http\Requests\User\ShopSearch;
 use App\Http\Resources\User\ProductsResource;
 use App\Http\Resources\User\ShopResource;
-use App\Interfaces\User\ShopInterface;
+use App\Interfaces\Merchant\ShopInterface;
 use Illuminate\Http\Request;
 
 class ShopController extends Controller
@@ -250,7 +250,8 @@ class ShopController extends Controller
      */
     public function show($id)
     {
-        return $this->dataResponse(['shop' => new ShopResource($this->ShopRepository->showShop($id))], 'success', 200);
+        $result=$this->ShopRepository->showShop($id);
+        return response()->json($result, $result['status_code']);
     }
 
 
@@ -459,10 +460,10 @@ class ShopController extends Controller
      *      )
      * )
      */
-    public function shopCategories($id)
+    public function shopCategories(Request $request,$id)
     {
         $categories = $this->ShopRepository->shopCategories($id);
-        return $this->dataResponse(['shop_categories' => $categories], 'success', 200);
+        return $this->paginateCollection($categories, $request->limit, 'shop_categories');
     }
 
     /**

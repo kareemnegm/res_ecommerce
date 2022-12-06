@@ -21,7 +21,7 @@ class UserController extends Controller
     public function __construct(UserInterface $UserRepository)
     {
         $this->UserRepository = $UserRepository;
-        $this->auth = auth()->user()->id?? null;
+        $this->auth = auth('api')->user()->id?? null;
     }
     /**
      * @OA\Post(
@@ -216,8 +216,8 @@ class UserController extends Controller
     {
         $data = $request->validated();
         $data['user_id'] = $this->auth;
-        $this->UserRepository->addProductsToCart($data);
-        return $this->successResponse('added to cart successful', 200);
+       $result= $this->UserRepository->addProductsToCart($data);
+       return response()->json($result, $result['status_code']);
     }
 
     /**
@@ -261,8 +261,8 @@ class UserController extends Controller
     {
         $data['product_id'] = $id;
         $data['user_id'] = $this->auth;
-        $this->UserRepository->removeProductFromCart($data);
-        return $this->successResponse('product removed from successfully', 200);
+        $result=$this->UserRepository->removeProductFromCart($data);
+        return response()->json($result, $result['status_code']);
     }
     /**
      * @OA\Post(
@@ -393,7 +393,7 @@ class UserController extends Controller
      */
     public function myCart(Request $request)
     {
-        $cart = auth('user')->user()->product;
+        $cart = auth('api')->user()->product;
         return $this->paginateCollection(CartResource::collection($cart), $request->limit, 'cart_products');
     }
 }

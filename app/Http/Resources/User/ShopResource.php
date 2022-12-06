@@ -18,10 +18,8 @@ class ShopResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'shop_name_en' => $this->getTranslation('shop_name', 'en'),
-            'shop_name_ar' => $this->getTranslation('shop_name', 'ar'),
-            'description_en' => $this->getTranslation('description', 'en'),
-            'description_ar' => $this->getTranslation('description', 'ar'),
+            'shop_name' => $this->shop_name,
+            'description' => $this->description,
             'shop_logo' => new ImageResource($this->getFirstMedia('shop_logo')) ?? null,
             'category' =>  CategoryResource::collection($this->category),
         ];

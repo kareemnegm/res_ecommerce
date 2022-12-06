@@ -24,7 +24,7 @@ class ProductSearchFormRequest extends BaseFormRequest
     public function rules()
     {
         return [
-            'id' => 'required|exists:merchants,id',
+            'id' => 'required|exists:shops,id',
             'search' => 'required|string|min:1',
             'filter' => 'in:name,price,order',
             'sortBy' => 'in:desc,asc',

@@ -28,10 +28,10 @@ class FavoriteProductFormRequest extends BaseFormRequest
      */
     public function rules(Request $request)
     {
-        $request['user_id'] = auth('user')->user()->id;
+        $request['user_id'] = auth('api')->user()->id;
         return [
-            'merchant_id' => 'required|exists:merchants,id',
-            'product_id' => ['required','exists:products,id,merchant_id,'.$request->merchant_id,new ProductInFavoriteRule($request)]
+            'shop_id' => 'required|exists:shops,id',
+            'product_id' => ['required','exists:products,id,shop_id,'.$request->shop_id,new ProductInFavoriteRule($request)]
         ];
     }
 }

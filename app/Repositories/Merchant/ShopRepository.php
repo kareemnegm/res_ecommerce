@@ -3,7 +3,10 @@
 namespace App\Repositories\Merchant;
 
 use App\Http\Resources\ShopResource;
+use App\Http\Resources\User\ShopResource as UserShopResource;
 use App\Interfaces\Merchant\ShopInterface;
+use App\Models\Category;
+use App\Models\Product;
 use App\Models\Shop;
 use App\Repositories\BaseRepository;
 use Illuminate\Support\Collection;
@@ -105,8 +108,78 @@ class ShopRepository extends BaseRepository implements ShopInterface
     {
         $shop = Shop::find($shopId);
 
-        
-        return $shop->shopPaymentMethods;
 
+        return $shop->shopPaymentMethods;
+    }
+
+
+
+
+    /***************************************************************
+     *
+     * user
+     */
+
+
+
+    public function searchProductInShop($search, $id)
+    {
+        $products = Product::active()->where('name', 'like', '%' . $search['search'] . '%')->where('shop_id', $id);
+
+
+        if (isset($search->sortBy) && isset($search->filter)) {
+            $collection = $products->orderBy($search->filter, $search->sortBy)->get();
+        } else {
+            $collection = $products->orderBy('order', 'ASC')->get();
+        }
+
+        return $collection;
+    }
+
+
+
+
+    public function shopCategories($id)
+    {
+        $shop = Shop::where('id', $id)->approved()->firstOrFail();
+        $shopCategories = $shop->shopCategory()->parentOnly()->get();
+        return $shopCategories;
+        // return $this->success(200, ['message' => __('shop.category.retrieved'), 'shop_categories' => ($shopCategories)]);
+    }
+
+
+
+    public function shopProducts($shopId)
+    {
+        return Product::where('shop_id', $shopId)->active()->get();
+    }
+
+    public function showShop($shopId)
+    {
+        $shop = Shop::where('id', $shopId)->approved()->firstOrFail();
+        return $this->success(200, ['message' => __('shop.shop.retrieved'), 'shop' => (new UserShopResource($shop))]);
+    }
+
+    public function searchShop($request)
+    {
+        $shops = Shop::orderBy('shop_name', 'Desc')->where('shop_name', 'like', '%' . $request['search'] . '%')->approved()->get();
+        return $shops;
+    }
+
+
+
+
+
+    public function shops()
+    {
+        return Shop::approved()->get();
+    }
+
+
+
+    public function shopsByCategories($categoryId)
+    {
+        $category = Category::findOrFail($categoryId);
+        return $category->shop;
     }
 }

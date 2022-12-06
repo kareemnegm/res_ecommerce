@@ -24,10 +24,10 @@ Route::middleware('language')->group(function(){
 
 
 
-    Route::post('/cart', 'UserController@addProductsToCart');
+    Route::post('/cart', 'UserController@addProductsToCart')->middleware(['can:add-product-cart']);
     Route::post('/place_order', 'OrderController@placeOrder');
-    Route::get('/cart', 'UserController@myCart');
-    Route::delete('/cart/remove_product/{id}', 'UserController@removeProductFromCart');
-    Route::post('/favorite', 'UserController@addProductToFavorite');
-    Route::delete('/favorite/{id}', 'UserController@removeProductFromFavorite');
+    Route::get('/cart', 'UserController@myCart')->middleware(['can:show-product-cart']);
+    Route::delete('/cart/remove_product/{id}', 'UserController@removeProductFromCart')->middleware(['can:remove-product-cart']);
+    Route::post('/favorite', 'UserController@addProductToFavorite')->middleware(['can:add-product-favorite']);
+    Route::delete('/favorite/{id}', 'UserController@removeProductFromFavorite')->middleware(['can:remove-product-favorite']);
 });

@@ -17,6 +17,8 @@ return [
         'created' => "shop created Successfully",
         'updated' => "shop Updated Successfully",
         'deleted' => "shop Deleted Successfully",
+        'retrieved' => "shop retrieved Successfully",
+
     ],
     'payment_method' => [
         'added' => "payment methods added Successfully",
@@ -35,7 +37,7 @@ return [
         'updated' => "product Updated Successfully",
         'deleted' => "product Deleted Successfully",
         'retrieved' => "product retrieved Successfully",
-        'variants'=>[
+        'variants' => [
             'created' => "variants created Successfully",
             'updated' => "variants Updated Successfully",
             'deleted' => "variants Deleted Successfully",

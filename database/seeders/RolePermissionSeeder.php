@@ -21,6 +21,17 @@ class RolePermissionSeeder extends Seeder
         // Reset cached roles and permissions
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
+        $customerPermissions = [
+            'add-product-cart',
+            'remove-product-cart',
+            'update-product-cart',
+            'show-product-cart',
+            'add-product-favorite',
+            'remove-product-favorite',
+            'update-product-favorite',
+            'show-product-favorite',
+
+        ];
         $adminPermissions = [
             'create-merchant',
             'list-merchants',
@@ -48,6 +59,12 @@ class RolePermissionSeeder extends Seeder
             'release-order',
             'export-payments'
         ];
+        foreach ($customerPermissions as $item) {
+            Permission::insert([
+                'name' => $item,
+                'guard_name' => 'api',
+            ]);
+        }
         foreach ($adminPermissions as $item) {
             Permission::insert([
                 'name' => $item,
@@ -70,6 +87,14 @@ class RolePermissionSeeder extends Seeder
         // find permissions ids
         $permissionIdsByName = fn ($_permissions) => Permission::whereIn('name', $_permissions)->pluck('id')->toArray();
         $roleHasPermission = DB::table('role_has_permissions');
+
+        $roleHasPermission
+            ->insert(
+                collect($permissionIdsByName($customerPermissions))->map(fn ($id) => [
+                    'role_id' => $customer_role_id,
+                    'permission_id' => $id,
+                ])->toArray()
+            );
 
         $roleHasPermission
             ->insert(
