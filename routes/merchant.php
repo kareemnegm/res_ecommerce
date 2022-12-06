@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('language')->group(function () {
     Route::post('/category', 'MerchantCategoryController@store')->middleware(['can:create-category']);
+    Route::get('/shop_categories/{id}', 'MerchantCategoryController@index');
     Route::get('/category', 'MerchantCategoryController@show');
     Route::put('/category', 'MerchantCategoryController@update');
     Route::post('/shop', 'ShopController@createShop')->middleware(['can:create-shop']);

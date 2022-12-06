@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Merchant;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Merchant\MerchantCategoryFormRequest;
 use App\Http\Requests\Merchant\ShopCategory\ShopCategoryIdValidation;
+use App\Http\Requests\Merchant\ShopIdRequestValidation;
 use App\Http\Requests\Merchant\UpdateMerchantCategoryFormRequest;
 use App\Http\Resources\Merchant\MerchantCategoryResource;
 use App\Interfaces\Merchant\MerchantCategoryInterface;
@@ -50,10 +51,9 @@ class MerchantCategoryController extends Controller
      *      )
      * )
      */
-    public function index(Request $request)
+    public function index(ShopIdRequestValidation $request,$id)
     {
-        $request['merchant_id'] = Auth('merchant')->user()->id;
-        $categories = $this->MerchantCategoryRepository->index($request);
+        $categories = $this->MerchantCategoryRepository->index($id);
 
         return $this->paginateCollection(MerchantCategoryResource::collection($categories), $request->limit, 'categories');
     }

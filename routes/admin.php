@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('language')->group(function(){
     Route::post('/register', [AuthController::class, 'register'])->withoutMiddleware('auth:api');
     Route::post('/login', [AuthController::class, 'login'])->withoutMiddleware('auth:api');
-    Route::apiResource('/category', 'Category\CategoryController');
+    Route::apiResource('/category', 'Category\CategoryController')->withoutMiddleware('auth:api');
     Route::apiResource('/payment_method', 'PaymentMethod\PaymentMethodController')->except(['update'])->middleware(['can:payment-methods-resource']);
     Route::put('/payment_method/{id}', 'PaymentMethod\PaymentMethodController@update')->middleware(['can:payment-method-update']);
     Route::get('/list_merchants', 'AdminController@listMerchants')->middleware(['can:list-merchants']);

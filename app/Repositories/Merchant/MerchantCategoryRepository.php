@@ -28,9 +28,9 @@ class MerchantCategoryRepository extends BaseRepository implements MerchantCateg
 
     }
 
-    public function index($request)
+    public function index($shopId)
     {
-        $categories = MerchantCategory::where('merchant_id', $request['merchant_id'])->whereNull('merchant_category_id')->orderBy('id', 'desc')->get();
+        $categories = ShopCategory::where('shop_id', $shopId)->whereNull('shop_category_id')->orderBy('id', 'desc')->get();
 
         return $categories;
     }
